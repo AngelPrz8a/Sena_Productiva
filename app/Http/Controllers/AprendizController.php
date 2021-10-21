@@ -14,35 +14,27 @@ use Illuminate\Http\Request;
 
 class AprendizController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+//
     public function index()
     {
         return view('aprendices.index')
         ->with('aprendices',Aprendiz::paginate(5));
     }
+//
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+//
     public function create()
     {
         return view('aprendices.create')
         ->with('roles', Rol::all())
         ->with('fichas', Ficha::all());
     }
+//
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+//
     public function store(storeAprendiz $request)
     {
         $newUsuario = new Usuario();
@@ -81,27 +73,24 @@ class AprendizController extends Controller
         return redirect('aprendices')
         ->with('msg', "Se registro correctamente");
     }
+//
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Aprendiz  $aprendiz
-     * @return \Illuminate\Http\Response
-     */
-    public function show(/*Aprendiz*/ $aprendiz)
+
+
+//
+    public function show($aprendiz)
     {
         $aprendiz = Aprendiz::find($aprendiz);
+
         return view('aprendices.show')
         ->with('aprendiz',$aprendiz);
     }
+//
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Aprendiz  $aprendiz
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(/*Aprendiz*/ $usuario)
+
+
+//
+    public function edit($usuario)
     {
         $usu = $usuario;
 
@@ -113,14 +102,11 @@ class AprendizController extends Controller
         ->with('a', $aprendiz)
         ->with('fichas', Ficha::all());
     }
+//
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Aprendiz  $aprendiz
-     * @return \Illuminate\Http\Response
-     */
+
+
+//
     public function update(updateAprendiz $request, /*Aprendiz*/ $aprendiz)
     {
         $apre = $aprendiz;
@@ -148,13 +134,11 @@ class AprendizController extends Controller
         return redirect('aprendices')
         ->with('msg', 'Se actualizo correctamente');
     }
+//
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Aprendiz  $aprendiz
-     * @return \Illuminate\Http\Response
-     */
+
+
+//
     public function destroy(/*Aprendiz*/ $aprendiz)
     {
         $a = $aprendiz;
@@ -163,4 +147,5 @@ class AprendizController extends Controller
         return redirect('aprendices')
         ->msg('msg', 'Se actualizo correctamente');
     }
+//
 }

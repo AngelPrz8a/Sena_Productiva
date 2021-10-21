@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="./assets/css/styleLogin.css">
     <link rel="shortcut icon" href="assets/images/iconoo.png" type="image/png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
 
     <meta name="description" content="">
@@ -96,9 +97,7 @@
                         <div class="form-element form-submit">
 
                             <button id="signUp" class="signup" type="submit" name="signup">Enviar</button>
-                            <a class="aLogin" href="{{ url('Landing')}}">
-                             <i class="lni lni-chevron-left-circle"></i>
-                                volver</a>
+                            <button id="goLeft" class="arrowL"><i class="fas fa-arrow-right"></i></button>
                         </div>
                     </form>
                 </div>
@@ -109,26 +108,44 @@
                 <img src="./assets/images/logooo.png" class="logoV" alt="">
                 <div class="content">
                     <h2><strong>Iniciar Sesión</strong></h2>
-                    <form  action="{{url('login')}}"" id="form-login" method="post" onsubmit="return false;">
+                    <form id="form-login" method="POST" action="{{url('login')}}" >
+                    @csrf
                         <div class="form-element form-stack">
-                            <label for="username-login" class="form-label">Número de Identificación</label>
-                            <input value="{{old('number')}}"  id="username-login" type="text" name="number">
-                            @error('number') {{$message}}    @enderror
+                            <label for="username-login" class="form-label">Usuario</label>
+                            <input id="username-login" value="{{old('number')}}" type="text" name="number">
+                            @error('number')
+                               {{$message}}
+                                   @enderror
                         </div>
                         <div class="form-element form-stack">
                             <label for="password-login" class="form-label">Contraseña</label>
-                            <input value="{{old('clave')}}"  id="password-login" type="password" name="clave">
-                            @error('clave') {{$message}}    @enderror
+                            <input value="{{old('clave')}}" id="password-login" type="password" name="clave">
+                            @error('clave')
+                               {{$message}}
+                                   @enderror
+
                         </div>
                         <div class="form-element form-submit">
-                            <button id="goRight" class="login off" name="signup">¿Olvidaste tu contraseña?</button>
+
+                            <a id="goRight" class="login off" name="signup">¿Olvidaste tu contraseña?</a>
                             <button id="logIn" class="login" type="submit" name="login">Ingresar</button>
+
+
 
                         </div>
                     </form>
+
+
+
                     <a class="aLogin" href="{{ url('Landing')}}">
                     <i class="lni lni-chevron-left-circle"></i>
                     volver</a>
+
+                    @if (session('msg'))
+                    <div style=" margin-top:1rem;" class="alert alert-danger">
+                      {{session('msg')}}
+                    </div>
+                    @endif
                 </div>
             </div>
 
@@ -136,24 +153,19 @@
     </div>
 
     <!--
-
 Remixed from "Sliding Login Form" Codepen by
 C-Rodg (github.com/C-Rodg)
 https://codepen.io/crodg/pen/yNKxej
-
 Remixed from "Paper.js - Animated Shapes Header" Codepen by
 Connor Hubeny (@cooper_hu)
 https://codepen.io/cooper_hu/pen/ybxoev
-
 Custom Checkbox based on the blog post by
 Mik Ted (@inserthtml):
 https://www.inserthtml.com/2012/06/custom-form-radio-checkbox/
-
 HTML5 Form Validation based on the blog post by
 Thoriq Firdaus (@tfirdaus):
 https://webdesign.tutsplus.com/tutorials/
 html5-form-validation-with-the-pattern-attribute--cms-25145
-
 -->
     <!-- partial -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
@@ -202,3 +214,52 @@ html5-form-validation-with-the-pattern-attribute--cms-25145
 </body>
 
 </html>
+
+
+
+<!--
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+<form method="POST" action="{{url('login')}}">
+    @csrf
+    <fieldset>
+
+    <legend>Login</legend>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="">Usuario</label>
+      <div class="col-md-4">
+      <input id=""  value="{{old('number')}}" name="number" type="text" placeholder="Usuario" class="form-control input-md">
+        @error('number')
+            {{$message}}
+        @enderror
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="">Contraseña</label>
+      <div class="col-md-4">
+        <input value="{{old('clave')}}" id="" name="clave" type="password" placeholder="Contraseña" class="form-control input-md">
+        @error('clave')
+            {{$message}}
+        @enderror
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for=""></label>
+      <div class="col-md-4">
+        <button id="" name="" class="btn btn-primary">Ingresar</button>
+      </div>
+    </div>
+    </fieldset>
+</form>
+@if (session('msg'))
+{{session('msg')}}
+@endif
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+</body>
+ -->

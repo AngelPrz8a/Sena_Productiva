@@ -26,4 +26,11 @@ class Aprendiz extends Model
     public function fichas(){
         return $this->belongsTo('App\Models\Ficha', 'id_ficha', 'IdFicha');
     }
+
+    public function empresas(){
+        return $this->belongsTo(
+            'App\Models\Empresa',
+            'id_empresa',
+        );
+    }
 }

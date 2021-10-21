@@ -1,161 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-<style>
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap');
-	*{
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-		font-family: 'Montserrat Alternates', sans-serif;
-	}
-	body{
-		background: url(https://www.xtrafondos.com/wallpapers/montanas-con-nieve-en-el-bosque-3934.jpg);
-		background-size: 100vw 100vh;
-		background-repeat: no-repeat;
-	}
-	.capa{
-		position: fixed;
-		width: 100%;
-		height: 100vh;
-		background: rgba(0,0,0,0.6);
-		z-index: -1;
-		top: 0;left: 0;
-	}
-	/*Estilos para el encabezado*/
-	.header{
-		width: 100%;
-		height: 100px;
-		position: fixed;
-		top: 0;left: 0;
-	}
-	.container{
-		width: 90%;
-		max-width: 1200px;
-		margin: auto;
-	}
-	.container .btn-menu, .logo{
-		float: left;
-		line-height:100px;
-	}
-	.container .btn-menu label{
-		color: #fff;
-		font-size: 25px;
-		cursor: pointer;
-	}
-	 h1{
-		color: black;
-		font-weight: 400;
-		font-size: 40px;
-		margin-left: 10px;
-	}
-	.container .menu{
-		float: right;
-		line-height: 100px;
-	}
-	.container .menu a{
-		display: inline-block;
-		padding: 15px;
-		line-height: normal;
-		text-decoration: none;
-		color: #fff;
-		transition: all 0.3s ease;
-		border-bottom: 2px solid transparent;
-		font-size: 15px;
-		margin-right: 5px;
-	}
-	.container .menu a:hover{
-		border-bottom: 2px solid #c7c7c7;
-		padding-bottom: 5px;
-	}
-	/*Fin de Estilos para el encabezado*/
-
-	/*Menù lateral*/
-	#btn-menu{
-		display: none;
-	}
-	.container-menu{
-		position: absolute;
-		background: rgba(0,0,0,0.5);
-		width: 100%;
-		height: 100vh;
-		top: 0;left: 0;
-		transition: all 500ms ease;
-		opacity: 0;
-		visibility: hidden;
-	}
-	#btn-menu:checked ~ .container-menu{
-		opacity: 1;
-		visibility: visible;
-	}
-	.cont-menu{
-		width: 100%;
-		max-width: 250px;
-		background: #1c1c1c;
-		height: 100vh;
-		position: relative;
-		transition: all 500ms ease;
-		transform: translateX(-100%);
-	}
-	#btn-menu:checked ~ .container-menu .cont-menu{
-		transform: translateX(0%);
-	}
-	.cont-menu nav{
-		transform: translateY(15%);
-	}
-	.cont-menu nav a{
-		display: block;
-		text-decoration: none;
-		padding: 20px;
-		color: #c7c7c7;
-		border-left: 5px solid transparent;
-		transition: all 400ms ease;
-	}
-	.cont-menu nav a:hover{
-		border-left: 5px solid #c7c7c7;
-		background: #1f1f1f;
-	}
-	.cont-menu label{
-		position: absolute;
-		right: 5px;
-		top: 10px;
-		color: #fff;
-		cursor: pointer;
-		font-size: 18px;
-	}
-</style>
-    <title>Usuarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
 </head>
 <body>
 
-
-<header class="header">
-		<div class="container">
-		<div class="btn-menu">
-			<label for="btn-menu">☰</label>
-		</div>
-
-<!-- ///////////////////////////////////// -->
-
-
-<div class="container p-3 my-3 bg-white text-white">
-
-
 <center><h1>Lista Reuniones</h1></center>
 
-<button type="button" class="btn btn-primary"><a style=" color: white;" href="{{     url('reunionAprendiz/create')    }}">+</a></button>
+<button type="button" class="btn btn-primary">
+    <a style=" color: white;" href="{{     url('reunionAprendiz/create')    }}">
+        +
+    </a>
+</button>
 
 <table class="table table-striped">
     <thead>
         <th>Titulo</th>
         <th>Descripcion</th>
         <th>Fecha Citacion</th>
-        <th>HoraCitacion</th>}
+        <th>HoraCitacion</th>
         <th>Modalidad</th>
         <th>Fecha Creacion</th>
         <th>Mometo</th>
@@ -226,43 +87,10 @@
     </tbody>
 </table>
 
-</div>
+{{$reuniones->links()}}
 
-<!--{{$reuniones->links()}}-->
-
-
-
-
-
-
-<!-- ///////////////////////////////////// -->
-
-
-
-		</div>
-	</header>
-	<div class="capa"></div>
-<!--	--------------->
-<input type="checkbox" id="btn-menu">
-<div class="container-menu">
-	<div class="cont-menu">
-		<nav>
-			<a href="{{ url('usuarios') }}">Usuarios</a>
-			<a href="{{ url('aprendices') }}">Aprendices</a>
-			<a href="{{ url('fichas') }}">Fichas</a>
-			<a href="{{ url('centros') }}">Centros</a>
-			<a href="{{ url('entregables') }}">Entregables</a>
-			<a href="{{ url('instructor') }}">instructores</a>
-            <a href="{{ url('programas') }}">programas</a>
-            <a href="{{ url('reunionAprendiz') }}">Reuniones</a>
-            <a href="{{ url('Landing') }}">Landing</a>
-		</nav>
-		<label for="btn-menu">✖️</label>
-	</div>
-</div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 </body>
-</html>
 
 
 

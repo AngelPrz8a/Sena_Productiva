@@ -63,6 +63,7 @@ class Usuario extends Model
         )
         //->select('usuariorol.id_usuario', 'rol.tipoRol')
         ;
-     }
+    }
+    //end function
 
 }//end class

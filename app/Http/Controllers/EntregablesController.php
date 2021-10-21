@@ -5,63 +5,54 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EntregablesStoreRequest;
 use App\Http\Requests\storeEntregables;
 use App\Models\Entregables;
+use App\Models\Instructor;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class EntregablesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+
+//
     public function index()
     {
-        //
         return view('entregables.index')
-        ->with('entregables', Entregables::paginate(3));
+        ->with('entregables', Entregables::paginate(15));
     }
+//
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+
     public function create()
     {
-        //
-        return view('entregables.create');
+        return view('entregables.create')
+        ->with('instructores',Instructor::all());
     }
+//
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+
+//
     public function store( storeEntregables  $request)
     {
-        //
-
         //Seleccinar el id max que exista en los centros
-
         $maxentregables=Entregables::all()->max('IdEntregables');
 
+        $carbon = Carbon::now();
 
         //Crear el nuevo recurso cliente
-
         $nuevoentregable = new Entregables();
-        $nuevoentregable ->IdEntregables = $maxentregables + 1;
         $nuevoentregable ->Titulo = $request->input("titulo");
-        $nuevoentregable ->Descripción = $request->input("descripcion");
-        $nuevoentregable ->FechaHoraInicial= $request->input("fechainicial");
-        $nuevoentregable ->FechaHoraEntrega= $request->input("fechaentrega");
-        $nuevoentregable ->HoraInicial= $request->input("horainicial");
+        $nuevoentregable ->Descripcion = $request->input("descripcion");
+        $nuevoentregable ->FechaInicial= $carbon->toDateString();       //carbon
+        $nuevoentregable ->FechaFinal= $request->input("fechaentrega");
+        $nuevoentregable ->HoraInicial= $carbon->toTimeString();       //carbon
         $nuevoentregable ->HoraEntrega= $request->input("horaentrega");
         $nuevoentregable ->Acta= $request->input("acta");
-        $nuevoentregable ->Estado= $request->input("estado");
-
-
-
+        $nuevoentregable ->Estado='Activo';
+        $nuevoentregable ->IdInstructor=$request->input('id_instructor');
         $nuevoentregable ->save();
 
 
@@ -69,74 +60,59 @@ class EntregablesController extends Controller
         ->with('msg', 'Se registro correctamente');
 
 
-
-
-        //
     }
+//
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Entregables  $entregables
-     * @return \Illuminate\Http\Response
-     */
+
+
+//
     public function show(Entregables $entregables)
     {
         //
         return view('entregables.show')
         ->with('entregables', $entregables);
     }
+//
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Entregables  $entregables
-     * @return \Illuminate\Http\Response
-     */
+
+
+//
     public function edit(/*Entregables*/ $entregables)
     {
-        //
         $entregables = Entregables::find($entregables);
-        return view('entregables.edit')->with('entregables' , $entregables);
+        return view('entregables.edit')
+        ->with('entregables' , $entregables);
 
     }
+//
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Entregables  $entregables
-     * @return \Illuminate\Http\Response
-     */
-    public function update( storeEntregables $request, /*Entregables*/ $entregables)
+
+
+
+//
+    public function update( storeEntregables $request, $entregables)
     {
-        //
         $entregables = Entregables::find($entregables);
         $entregables ->Titulo = $request->input("titulo");
-        $entregables ->Descripción = $request->input("descripcion");
+        $entregables ->Descripcion = $request->input("descripcion");
         $entregables ->FechaHoraInicial= $request->input("fechainicial");
         $entregables ->FechaHoraEntrega= $request->input("fechaentrega");
         $entregables ->HoraInicial= $request->input("horainicial");
         $entregables ->HoraEntrega= $request->input("horaentrega");
         $entregables ->Acta= $request->input("acta");
         $entregables ->Estado= $request->input("estado");
-
-
-
+        $entregables ->IdInstructor=$request->input('id_instructor');
         $entregables ->save();
 
 
         return redirect('entregables')
         ->with('msg', 'Se actualizo correctamente');
-
     }
+//
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Entregables  $entregables
-     * @return \Illuminate\Http\Response
-     */
+
+
+//
     public function destroy(Entregables $entregables)
     {
         //
@@ -144,7 +120,11 @@ class EntregablesController extends Controller
 
 
     }
+//
 
+
+
+//
     public function habilitar ($entregables){
 
          $entregables= Entregables::find($entregables);
@@ -172,5 +152,6 @@ class EntregablesController extends Controller
 
         return redirect('entregables');
     }
+//
 }
 

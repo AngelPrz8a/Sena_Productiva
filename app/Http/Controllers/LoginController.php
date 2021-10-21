@@ -2,53 +2,60 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuario;
+use App\Models\User;
 use App\Http\Requests\loginLogin;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+
+//
     public function showLogin(){
         return view('login.index');
     }
+//
 
-    public function showLandin(){
-        return view('h/basic-free-lite/index');
-    }
 
+
+//
     public function login(loginLogin $request){
+        $usuario = User::where('NumeroIdentificacion','=',$request->input('number') )->first();
 
-        $number =  $request->input('number');
-        $clave =  $request->input('clave');
+        if($usuario->Contraseña)    //si la contraseña es diferente a null o no esta encriptada con hash
+        {
+            $usuario_contraseña =   //revisa si la contraseña que ingreso el usuario es la misma que en la BD
+                Hash::check(
+                $request->input('clave'),
+                $usuario->Contraseña);
 
-        //query
-        $user = Usuario::
-        where('NumeroIdentificacion','=',$number)
-        ->where('Contraseña','=',$clave)
-        ->get();  //return array ,NOT MODIFY
+            if ($usuario_contraseña) {  //si el usuario existe
+                Auth::login($usuario);  //se crea la sesion
 
-
-        //si existe = recoga los datos -> use la funcion rol() -> segun su rol, envielo
-        if (count($user) != 0) {
-            foreach($user as $u){
-                $roles= $u->rol()->get();
-                foreach($roles as $r){
-                    $rol = $r->tipoRol;
-                }//end foreach
-            }//end foreach
-
-            return redirect('login/'.$rol)
-            ->with('rol', $rol);
-
-        }else{
-            return redirect('login')->with('msg', "Usuario no encontrado, intentelo de nuevo");
+                return redirect('home');    //se retorna a la vista home
+            }
+            //end if
         }
+        //end if
 
-        /*
-        1000000000
-        12345
-        */
+        //si nada de lo anterior se ejecuta , es por que no se hallo al usuario
+        return redirect('login')
+        ->with('msg','Usuario no encontrado');
 
     }
+//
 
+
+
+//
+    public function logout(){
+        Auth::logout();
+
+        return redirect('login')
+        ->with('msg', 'Se cerro sesión de forma exitosa');
+    }
+//
 
 }
+//end class

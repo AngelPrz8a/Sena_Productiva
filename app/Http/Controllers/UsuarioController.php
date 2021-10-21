@@ -1,20 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Rol;
+use App\Models\User;
 use App\Models\Usuario;
+use App\Models\UsuarioRol;
+use Illuminate\Http\Request;
 use App\Http\Requests\storeUsuario;
 use App\Http\Requests\updateUsuario;
-use Illuminate\Http\Request;
-use App\Models\Rol;
-use App\Models\UsuarioRol;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+//
     public function index()
     {
 
@@ -24,26 +22,21 @@ class UsuarioController extends Controller
         ;
 
     }
+//
 
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+//
     public function create()
     {
         return view('usuarios.create')
         ->with('roles', Rol::all());
     }
+//
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+
+//
     public function store(storeUsuario $request)
     {
         $newUsuario = new Usuario();
@@ -73,41 +66,37 @@ class UsuarioController extends Controller
         return redirect('usuarios')
          ->with('msg', "Se registro correctamente");
     }
+//
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Usuario $usuario)
+
+
+//
+    public function show( $usuario)
     {
+        $usuario = Usuario::find($usuario);
         return view('usuarios.show')
         ->with('usuario', $usuario);
     }
+//
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Usuario $usuario)
+
+
+//
+    public function edit( $usuario)
     {
+        $usuario = Usuario::find($usuario);
         return view('usuarios.edit')
         ->with('usuario', $usuario)
         ->with('roles', Rol::all());
     }
+//
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(updateUsuario $request, Usuario $usuario)
+
+
+//
+    public function update(updateUsuario $request,  $usuario)
     {
+        $usuario = Usuario::find($usuario);
         $usuario->Nombre = $request->input('nombre');
         $usuario->Apellido = $request->input('apellido');
         $usuario->FechaNacimiento = $request->input('fechaNacimiento');
@@ -131,13 +120,11 @@ class UsuarioController extends Controller
         return redirect('usuarios')
         ->with('msg', "Se actualizo correctamente");
     }
+//
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+
+//
     public function destroy(/*Usuario*/ $usuario)
     {
         $usuario = Usuario::find($usuario);
@@ -146,9 +133,11 @@ class UsuarioController extends Controller
         return redirect('usuarios')
         ->with('msg', "Se modifico a Inactivo correctamente");
     }
+//
 
 
-    ////////////////////////////
+
+//
     public function habilitar($usuario){
         $usuario = Usuario::find($usuario);
         switch($usuario->Estado){
@@ -171,7 +160,45 @@ class UsuarioController extends Controller
         return redirect('usuarios');
         //echo $usuario->Estado;
     }//end function
-    ////////////////////////////
+//
+
+
+//
+  /**
+     * ver perfil
+     * unicamente del usuario logueado
+     *
+     * $perfil = los datos personales y especifica los datos de usuario
+     */
+    public function perfil(){
+
+        $auth = Auth::user();   //solo el usuario logueado
+
+        if($auth){
+            //si el usuario logueado, es el mismo que mira el perfil, continua
+            $datos = new UsuarioController();
+            return $datos->showPerfil($auth->IdUsuario);
+        }
+        //else retornar al home y muestra msg
+        return redirect('home')
+        ->with('msg','Error al ver perfil.');
+    }
+//
+
+
+
+//
+    public function showPerfil($id){
+        $user = User::find($id);
+
+        if($user == Auth::user()){
+            return view('usuarios.perfil')
+            ->with('usuario',$user);
+        }
+        return redirect('home')
+        ->with('msg','Error al ver perfil.');
+    }
+//
 
 
 }//end class

@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 namespace App\Http\Controllers;
 
@@ -11,34 +11,27 @@ use App\Http\Requests\updateReunionAprendiz;
 
 class ReunionAprendizController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+//
     public function index()
     {
         return view('reunionAprendiz.index')
-        ->with('reuniones', ReunionAprendiz::paginate(5));
+        ->with('reuniones', ReunionAprendiz::paginate(25));
     }
+//
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+//
     public function create()
     {
         return view('reunionAprendiz.create')
         ->with('instructores', Instructor::all() );
     }
+//
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+
+//
     public function store(storeReunionAprendiz $request)
     {
         $new = new ReunionAprendiz();
