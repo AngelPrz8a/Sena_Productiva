@@ -1,9 +1,8 @@
+@extends('plantilla.plantilla')
+@section('contenido')
 
 
 <h1>Lista de Entregables</h1>
-
-
-
 
 
 <h1>{{$entregables->Titulo}}</h1>
@@ -17,3 +16,5 @@
 
 
 <a type="submit" class=" btn btn-success" href="{{url('entregables')}}" >Regresar</a>
+
+@endsection

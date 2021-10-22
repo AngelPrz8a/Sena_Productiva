@@ -1,3 +1,6 @@
+@extends('plantilla.plantilla')
+@section('contenido')
+
 <ul>
     <li>
         {{$reunion->Titulo}}
@@ -26,3 +29,5 @@
          @endforeach
      </li>
 </ul>
+
+@endsection

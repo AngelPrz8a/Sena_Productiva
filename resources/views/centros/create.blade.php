@@ -1,3 +1,5 @@
+@extends('plantilla.plantilla')
+@section('contenido')
 
 <form  method="POST" action="{{ url('centros') }}" class="form-horizontal">
     @csrf
@@ -80,3 +82,4 @@
     </fieldset>
     </form>
 
+@endsection

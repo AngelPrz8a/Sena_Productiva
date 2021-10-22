@@ -176,25 +176,9 @@ class UsuarioController extends Controller
 
         if($auth){
             //si el usuario logueado, es el mismo que mira el perfil, continua
-            $datos = new UsuarioController();
-            return $datos->showPerfil($auth->IdUsuario);
+            return redirect('perfil');
         }
         //else retornar al home y muestra msg
-        return redirect('home')
-        ->with('msg','Error al ver perfil.');
-    }
-//
-
-
-
-//
-    public function showPerfil($id){
-        $user = User::find($id);
-
-        if($user == Auth::user()){
-            return view('usuarios.perfil')
-            ->with('usuario',$user);
-        }
         return redirect('home')
         ->with('msg','Error al ver perfil.');
     }

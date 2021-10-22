@@ -1,7 +1,6 @@
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-</head>
-<body>
+@extends('plantilla.plantilla')
+@section('contenido')
+
 
 <center><h1>Lista Reuniones</h1></center>
 
@@ -10,6 +9,29 @@
         +
     </a>
 </button>
+
+
+<!-------------------------------------------------------------------------------->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-body b-l calender-sidebar">
+                                <div id="calendar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!----------------------------------------------------------------------------------------------->
+
+
 
 <table class="table table-striped">
     <thead>
@@ -89,8 +111,6 @@
 
 {{$reuniones->links()}}
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
-</body>
-
+@endsection
 
 

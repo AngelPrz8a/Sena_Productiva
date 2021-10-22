@@ -1,8 +1,6 @@
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-</head>
+@extends('plantilla.plantilla')
+@section('contenido')
 
-<body>
 
 <form method="POST" action="{{url('instructores/'.$instructor->IdInstructor)}}" class="form-horizontal">
     @csrf
@@ -70,4 +68,4 @@
 </div>
 
 
-</body>
+@endsection

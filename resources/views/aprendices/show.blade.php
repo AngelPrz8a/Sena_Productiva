@@ -1,3 +1,6 @@
+@extends('plantilla.plantilla')
+@section('contenido')
+
 <h1>
     @foreach ($aprendiz->usuarios()->get() as $usuario)
     {{$usuario->Nombre}}
@@ -15,3 +18,5 @@
 
         </li>
     </ul>
+
+@endsection

@@ -1,3 +1,7 @@
+@extends('plantilla.plantilla')
+@section('contenido')
+
+
 <form method="POST" action="{{url('programas/'.$programa->IdPrograma)}}" class="form-horizontal">
     @method('PUT')
     @csrf
@@ -51,3 +55,5 @@
 
     </fieldset>
 </form>
+
+@endsection

@@ -1,4 +1,6 @@
 
+@extends('plantilla.plantilla')
+@section('contenido')
 
 <form  method="POST" action="{{ url('centros/' . $centro->IdCentro) }}" class="form-horizontal">
     @method('PUT')
@@ -83,3 +85,4 @@
 
     </fieldset>
     </form>
+@endsection

@@ -1,3 +1,6 @@
+@extends('plantilla.plantilla')
+@section('contenido')
+
 <form method="POST" action="{{url('programas')}}" class="form-horizontal">
     @csrf
     <fieldset>
@@ -30,7 +33,7 @@
       </div>
       @error('nivel')    {{$message}}        @enderror
     </div>
-    
+
 
 
     <!-- Button -->
@@ -43,3 +46,5 @@
 
     </fieldset>
 </form>
+
+@endsection

@@ -1,3 +1,7 @@
+@extends('plantilla.plantilla')
+@section('contenido')
+
+
 <form method="post" action="{{url('reunionAprendiz/'.$reunion->IdReunionAprendices)}}" class="form-horizontal">
     @csrf
     @method('PUT')
@@ -121,3 +125,4 @@
 
     </fieldset>
     </form>
+@endsection
