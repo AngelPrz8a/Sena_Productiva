@@ -26,39 +26,53 @@ use App\Http\Middleware\login;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('Landing');
+})
+->middleware('login');
+
+
+
+//plantilla
+Route::get('plantilla', function(){
+    return view('plantilla.plantilla');
+})
+->middleware('login');
 
 
 
 //APRENDICES
 Route::resource(
     'aprendices', AprendizController::class
-);
+)
+->middleware('login');
 
 
 
 //INSTRUCTORES
 Route::resource(
     'instructores', InstructorController::class
-);
+)
+->middleware('login');
 
 
 
 //PROGRAMAS
 Route::resource(
     'programas', ProgramaController::class
-);
+)
+->middleware('login');
 Route::get(
     'programas/habilitar/{id}', 'App\Http\Controllers\ProgramaController@habilitar'::class
-);
+)
+->middleware('login');
 
 
 
 //FICHAS
 Route::resource(
     'fichas', FichaController::class
-);
+)
+->middleware('login');
 
 
 
@@ -66,19 +80,19 @@ Route::resource(
 //CRUD
 Route::resource(
     'usuarios', UsuarioController::class
-);
+)
+->middleware('login');
 //Modificar estado
 Route::get(
     'usuarios/habilitar/{id}', 'App\Http\Controllers\UsuarioController@habilitar'::class
-);
-//verificar perfil
-Route::get(
-    'perfil', 'App\Http\Controllers\UsuarioController@perfil'::class
-);
+)
+->middleware('login');
 //ver perfil
 Route::get(
-    'perfil/{id}', 'App\Http\Controllers\UsuarioController@showPerfil'::class
-);
+    'perfil', 'App\Http\Controllers\UsuarioController@perfil'::class
+)
+->middleware('login');
+
 
 
 
@@ -86,33 +100,40 @@ Route::get(
 //CRUD
 Route::resource(
     'entregables', EntregablesController::class
-);
+)
+->middleware('login');
 //Modificar estado
-Route::get('entregables/habilitar/{h}' , 'App\Http\Controllers\EntregablesController@habilitar'::class);
+Route::get('entregables/habilitar/{h}' , 'App\Http\Controllers\EntregablesController@habilitar'::class)
+->middleware('login');
 
 
 
 //EMPRESA
-Route::resource('empresas', EmpresaController::class);
+Route::resource('empresas', EmpresaController::class)
+->middleware('login');
 
-Route::get('empresas/aprendiz/{id}', [EmpresaController::class, 'aprendiz']);
+Route::get('empresas/aprendiz/{id}', [EmpresaController::class, 'aprendiz'])
+->middleware('login');
 
 
 
 //CENTROS
 Route::resource(
     'centros', CentroController::class
-);
+)
+->middleware('login');
 
 
 
 //REUNION APRENDIZ
 Route::resource(
     'reunionAprendiz', ReunionAprendizController::class
-);
+)
+->middleware('login');
 Route::get(
     'reunionAprendiz/habilitar/{id}', 'App\Http\Controllers\ReunionAprendizController@habilitar'::class
-);
+)
+->middleware('login');
 
 
 
@@ -138,7 +159,8 @@ Route::get('logout','App\Http\Controllers\LoginController@logout'::class)
 //Landing
 Route::get('Landing', function(){
     return view('Landing.Landing');
-});
+})
+->middleware('guest');
 
 
 //////////////////////
