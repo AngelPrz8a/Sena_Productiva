@@ -23,7 +23,7 @@ class LoginController extends Controller
     public function login(loginLogin $request){
         $usuario = User::where('NumeroIdentificacion','=',$request->input('number') )->first();
 
-        if($usuario->Contraseña)    //si la contraseña es diferente a null o no esta encriptada con hash
+        if($usuario != null || $usuario != '')    //si la contraseña es diferente a null o no esta encriptada con hash
         {
             $usuario_contraseña =   //revisa si la contraseña que ingreso el usuario es la misma que en la BD
                 Hash::check(
@@ -41,7 +41,7 @@ class LoginController extends Controller
 
         //si nada de lo anterior se ejecuta , es por que no se hallo al usuario
         return redirect('login')
-        ->with('msg','Usuario no encontrado');
+        ->with('msg','Usuario o Contraseña Incorrectas.');
 
     }
 //

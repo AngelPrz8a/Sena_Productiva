@@ -21,23 +21,10 @@ class loginLogin extends FormRequest
     public function rules()
     {
         return [
-            'number' => 'required|numeric|integer|digits:10',
+            'number' => 'required',
             'clave' => 'required'
         ];
     }
 //
 
-
-
-//
-    public function messages(){
-        return [
-        'required' => 'Campo Requerido',
-        'numeric' => 'Solo tipo numerico',
-        'integer' => 'Solo enteros',
-        'digits' => 'Deben ser de :digits'
-        ];
-
-    }
-//
 }

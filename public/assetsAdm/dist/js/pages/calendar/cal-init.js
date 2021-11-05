@@ -1,9 +1,10 @@
-! function($) {
+
+  ! function($) {
     "use strict";
 
     var CalendarApp = function() {
         this.$body = $("body")
-        this.$calendar = $('#calendar'),
+        this.$calendar = $('#calendario'),
         this.$event = ('#calendar-events div.calendar-events'),
         this.$categoryForm = $('#add-new-event form'),
         this.$extEvents = $('#calendar-events'),
@@ -13,7 +14,7 @@
     };
 
 
-    /* on drop */
+    // on drop
     CalendarApp.prototype.onDrop = function(eventObj, date) {
             var $this = this;
             // retrieve the dropped element's stored Event Object
@@ -51,10 +52,10 @@
                 });
             });
         }
-    /* Initializing */
+    // Initializing
     CalendarApp.prototype.init = function() {
             this.enableDrag();
-            /*  Initialize the calendar  */
+            //  Initialize the calendar
             var date = new Date();
             var d = date.getDate();
             var m = date.getMonth();
@@ -104,8 +105,9 @@
 
             var $this = this;
             $this.$calendarObj = $this.$calendar.fullCalendar({
+
                 slotDuration: '00:15:00',
-                /* If we want to split day time each 15minutes */
+                // If we want to split day time each 15minutes
                 minTime: '08:00:00',
                 maxTime: '19:00:00',
                 defaultView: 'month',
@@ -114,8 +116,11 @@
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
+                    right: 'month,agendaWeek,agendaDay',
                 },
+
+                locale: 'es',
+
                 events: defaultEvents,
                 editable: true,
                 droppable: true, // this allows things to be dropped onto the calendar !!!
@@ -126,7 +131,7 @@
                 eventClick: function(calEvent, jsEvent, view) { $this.onEventClick(calEvent, jsEvent, view); }
 
             });
-            
+
         },
 
         //init CalendarApp

@@ -13,13 +13,10 @@
     <title>ProductivA - Usuarios</title>
     <!-- This page css -->
     <!-- Custom CSS -->
-    <link href="./assetsAdm/assets/libs/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet" />
-    <!-- Custom CSS -->
-    <link href="./assetsAdm/dist/css/style.min.css" rel="stylesheet">
     <link href="./assetsAdm/dist/css/style.min.css" rel="stylesheet">
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
 </head>
 
@@ -88,102 +85,7 @@ integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChi
                     <!-- toggle and nav items -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
-                        <!-- Notification -->
-                        <!--
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle pl-md-3 position-relative" href="javascript:void(0)"
-                                id="bell" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <span><i data-feather="bell" class="svg-icon"></i></span>
-                                <span class="badge badge-primary notify-no rounded-circle">5</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-left mailbox animated bounceInDown">
-                                <ul class="list-style-none">
-                                    <li>
-                                        <div class="message-center notifications position-relative">
-                                            <!-- Message
-                                            <a href="javascript:void(0)"
-                                                class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <div class="btn btn-danger rounded-circle btn-circle"><i
-                                                        data-feather="airplay" class="text-white"></i></div>
-                                                <div class="w-75 d-inline-block v-middle pl-2">
-                                                    <h6 class="message-title mb-0 mt-1">Luanch Admin</h6>
-                                                    <span class="font-12 text-nowrap d-block text-muted">Just see
-                                                        the my new
-                                                        admin!</span>
-                                                    <span class="font-12 text-nowrap d-block text-muted">9:30 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message
-                                            <a href="javascript:void(0)"
-                                                class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <span class="btn btn-success text-white rounded-circle btn-circle"><i
-                                                        data-feather="calendar" class="text-white"></i></span>
-                                                <div class="w-75 d-inline-block v-middle pl-2">
-                                                    <h6 class="message-title mb-0 mt-1">Event today</h6>
-                                                    <span
-                                                        class="font-12 text-nowrap d-block text-muted text-truncate">Just
-                                                        a reminder that you have event</span>
-                                                    <span class="font-12 text-nowrap d-block text-muted">9:10 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message
-                                            <a href="javascript:void(0)"
-                                                class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <span class="btn btn-info rounded-circle btn-circle"><i
-                                                        data-feather="settings" class="text-white"></i></span>
-                                                <div class="w-75 d-inline-block v-middle pl-2">
-                                                    <h6 class="message-title mb-0 mt-1">Settings</h6>
-                                                    <span
-                                                        class="font-12 text-nowrap d-block text-muted text-truncate">You
-                                                        can customize this template
-                                                        as you want</span>
-                                                    <span class="font-12 text-nowrap d-block text-muted">9:08 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message
-                                            <a href="javascript:void(0)"
-                                                class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <span class="btn btn-primary rounded-circle btn-circle"><i
-                                                        data-feather="box" class="text-white"></i></span>
-                                                <div class="w-75 d-inline-block v-middle pl-2">
-                                                    <h6 class="message-title mb-0 mt-1">Pavan kumar</h6> <span
-                                                        class="font-12 text-nowrap d-block text-muted">Just
-                                                        see the my admin!</span>
-                                                    <span class="font-12 text-nowrap d-block text-muted">9:02 AM</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link pt-3 text-center text-dark" href="javascript:void(0);">
-                                            <strong>Check all notifications</strong>
-                                            <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        -->
 
-                        <!-- End Notification -->
-                        <!-- ============================================================== -->
-                        <!-- create new -->
-                        <!-- ============================================================== -->
-                        <!--
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i data-feather="settings" class="svg-icon"></i>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
-                        -->
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
@@ -219,27 +121,12 @@ integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChi
                                 <a class="dropdown-item" href="{{'perfil'}}"><i data-feather="user"
                                         class="svg-icon mr-2 ml-1"></i>
                                     Mi perfil</a>
-                                <!--
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="credit-card"
-                                        class="svg-icon mr-2 ml-1"></i>
-                                    My Balance</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="mail"
-                                        class="svg-icon mr-2 ml-1"></i>
-                                    Inbox</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="settings"
-                                        class="svg-icon mr-2 ml-1"></i>
-                                    Account Setting</a>
-                                -->
+
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{  url('logout')  }}"><i data-feather="power"
                                         class="svg-icon mr-2 ml-1"></i>
                                     Cerrar Sesión</a>
-                                <!--
-                                <div class="dropdown-divider"></div>
-                                <div class="pl-4 p-3"><a href="javascript:void(0)" class="btn btn-sm btn-info">View
-                                        Profile</a></div>
-                                -->
+
                             </div>
                         </li>
                         <!-- ============================================================== -->
@@ -268,120 +155,10 @@ integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChi
                                 <i data-feather="home" class="feather-icon"></i>
                                 <span class="hide-menu">Página Principal</span>
                             </a>
+
+
+                        @include('plantilla.menu')
                         </li>
-
-@switch(Auth::user()->rol()->first()->tipoRol)
-    @case('Aprendiz')
-    <ul>
-        <li class="sidebar-item">
-            <a class="sidebar-link sidebar-link" href="{{url('entregables')}}" aria-expanded="false">
-                <i data-feather="home" class="feather-icon"></i>
-                <span class="hide-menu">Entregables</span>
-            </a>
-        </li>
-        <li class="sidebar-item">
-            <a class="sidebar-link sidebar-link" href="{{  url('reunionAprendiz')  }}" aria-expanded="false">
-                <i data-feather="home" class="feather-icon"></i>
-                <span class="hide-menu">Reuniones</span>
-            </a>
-        </li>
-    </ul>
-    @break
-
-    @case('Administrador')
-    <ul>
-        <li class="sidebar-item">
-            <a class="sidebar-link sidebar-link" href="{{  url('programas')  }}" aria-expanded="false">
-                <i data-feather="home" class="feather-icon"></i>
-                <span class="hide-menu">Programas</span>
-            </a>
-        </li>
-
-        <li class="sidebar-item">
-            <a class="sidebar-link sidebar-link" href="{{  url('fichas')  }}" aria-expanded="false">
-                <i data-feather="home" class="feather-icon"></i>
-                <span class="hide-menu">Fichas</span>
-            </a>
-        </li>
-
-        <li class="sidebar-item">
-            <a class="sidebar-link sidebar-link" href="{{  url('usuarios')  }}" aria-expanded="false">
-                <i data-feather="home" class="feather-icon"></i>
-                <span class="hide-menu">Usuarios</span>
-            </a>
-        </li>
-    </ul>
-    @break
-
-@endswitch
-
-
-{{--
-
-                        <li class="list-divider"></li>
-
-                        <!-- ------------------------------------------------ -->
-                        <li class="nav-small-cap"><span class="hide-menu">Modulos</span></li>
-                        <!-- ------------------------------------------------ -->
-
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{url('usuarios')}}" aria-expanded="false">
-                                <i class="fas fa-users"></i>
-                                <span class="hide-menu">Usuarios
-                                </span>
-                            </a>
-                        </li>
-                        <!-- ------------------------------------------------ -->
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{url('instructores')}}"
-                                aria-expanded="false"><i class="fas fa-user-tie"></i><span
-                                    class="hide-menu">Instructores</span></a>
-                        </li>
-                        <!-- ------------------------------------------------ -->
-                        <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link" href="{{url('aprendices')}}" aria-expanded="false">
-                                <i class="fas fa-user-graduate"></i>
-                                <span class="hide-menu">Aprendices</span>
-                            </a>
-                        </li>
-                        <!-- -------------------------------------------------->
-
-                        <li class="list-divider"></li>
-
-                        <!-- ------------------------------------------------ -->
-                        <li class="nav-small-cap"><span class="hide-menu">Componentes</span></li>
-
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="ui-cards.html" aria-expanded="false">
-                                <i class="far fa-calendar-alt"></i>
-                                <span class="hide-menu">Calendario
-                                </span>
-                            </a>
-                        </li>
-                        <!-- ------------------------------------------------ -->
-
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="form-input-grid.html" aria-expanded="false">
-                                <i class="fas fa-puzzle-piece"></i>
-                                <span class="hide-menu">Fichas
-                                </span>
-                            </a>
-                        </li>
-                        <!-- ------------------------------------------------ -->
-                        <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link" href="chart-knob.html" aria-expanded="false">
-                                <i class="fas fa-book"></i>
-                                <span class="hide-menu">Entregables</span>
-                            </a>
-                        </li>
-                        <!-- ------------------------------------------------ -->
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="form-inputs.html" aria-expanded="false">
-                                <i class="fas fa-video"></i>
-                                <span class="hide-menu">Reuniones</span>
-                            </a>
-                        </li>
-
---}}
                         <!-- -------------------------------------------------->
 
                     </ul>
@@ -404,12 +181,12 @@ integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChi
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Buenos días {{  Auth::user()->Nombre  }} {{  Auth::user()->Apellido  }}</h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                     <li class="breadcrumb-item"><a href="{{url('home')}}">Página Principal</a>
                                     </li>
+                                    @yield('bread')
                                 </ol>
                             </nav>
                         </div>
@@ -430,67 +207,6 @@ integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChi
 
 
                 @yield('contenido')
-
-
-                <div class="row">
-					<div class="col-md-6">
-                                <!-- SignIn modal content -->
-                                <div id="login-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <div class="text-center mt-2 mb-4">
-                                                    <a href="index.html" class="text-success">
-                                                        <span><img class="mr-2" src="assets/images/logo-icon.png"
-                                                                alt="" height="18"><img
-                                                                src="assets/images/logo-text.png" alt=""
-                                                                height="18"></span>
-                                                    </a>
-                                                </div>
-
-                                                <form action="#" class="pl-3 pr-3">
-
-                                                    <div class="form-group">
-                                                        <label for="emailaddress1">Email address</label>
-                                                        <input class="form-control" type="email" id="emailaddress1"
-                                                            required="" placeholder="john@deo.com">
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="password1">Password</label>
-                                                        <input class="form-control" type="password" required=""
-                                                            id="password1" placeholder="Enter your password">
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customCheck2">
-                                                            <label class="custom-control-label"
-                                                                for="customCheck2">Remember me</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group text-center">
-                                                        <button class="btn btn-rounded btn-primary" type="submit">Sign
-                                                            In</button>
-                                                    </div>
-
-                                                </form>
-
-                                            </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->
-
-                                <div class="btn-list">
-                                    <!-- Full width modal -->
-                                    <button type="button" class="btn btn-info" data-toggle="modal"
-                                        data-target="#login-modal">
-                                        Log in Modal
-                                    </button>
-                                </div>
-                </div> <!-- end row-->
 
 
 
@@ -527,10 +243,6 @@ integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChi
     <script src="./assetsAdm/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="./assetsAdm/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="./assetsAdm/dist/js/pages/dashboards/dashboard1.min.js"></script>
-
-    <script src="./assetsAdm/assets/libs/moment/min/moment.min.js"></script>
-    <script src="./assetsAdm/assets/libs/fullcalendar/dist/fullcalendar.min.js"></script>
-    <script src="./assetsAdm/dist/js/pages/calendar/cal-init.js"></script>
 
 
 </body>

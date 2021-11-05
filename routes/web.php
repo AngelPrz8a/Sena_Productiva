@@ -1,18 +1,19 @@
 <?php
 
+use App\Http\Middleware\login;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FichaController;
 use App\Http\Controllers\CentroController;
+use App\Http\Controllers\EventoController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\UsuarioController;
+//use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AprendizController;
 use App\Http\Controllers\ProgramaController;
-//use App\Http\Controllers\LoginController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\EntregablesController;
 use App\Http\Controllers\ReunionAprendizController;
-use App\Http\Middleware\login;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,8 @@ use App\Http\Middleware\login;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 
 Route::get('/', function () {
     return view('Landing.Landing');
@@ -114,7 +117,7 @@ Route::resource('empresas', EmpresaController::class)
 
 Route::get('empresas/aprendiz/{id}', [EmpresaController::class, 'aprendiz'])
 ->middleware('login');
-
+Route::get('empresa',[EmpresaController::class, 'empresa']);
 
 
 //CENTROS
@@ -126,14 +129,14 @@ Route::resource(
 
 
 //REUNION APRENDIZ
-Route::resource(
-    'reunionAprendiz', ReunionAprendizController::class
-)
-->middleware('login');
-Route::get(
-    'reunionAprendiz/habilitar/{id}', 'App\Http\Controllers\ReunionAprendizController@habilitar'::class
-)
-->middleware('login');
+Route::resource('reunionAprendiz', ReunionAprendizController::class)->middleware('login');
+Route::get('reunionAprendiz/mostrar', [ReunionAprendizController::class, 'show'])->middleware('login');
+Route::post('reunionAprendiz/{id}', [ReunionAprendizController::class, 'edit'])->middleware('login');
+Route::post('reunionAprendiz/{id}/edit', [ReunionAprendizController::class, 'update'])->middleware('login');
+Route::post('reunionAprendiz/{id}/delete', [ReunionAprendizController::class, 'destroy'])->middleware('login');
+Route::get('reunionAprendiz/{id}/habilitar', 'App\Http\Controllers\ReunionAprendizController@habilitar'::class)->middleware('login');
+
+//////////////////////////////////////
 
 
 

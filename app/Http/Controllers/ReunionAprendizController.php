@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use App\Models\Instructor;
 use Illuminate\Http\Request;
 use App\Models\ReunionAprendiz;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\storeReunionAprendiz;
 use App\Http\Requests\updateReunionAprendiz;
 
@@ -22,100 +24,71 @@ class ReunionAprendizController extends Controller
 
 
 //
-    public function create()
-    {
-        return view('reunionAprendiz.create')
-        ->with('instructores', Instructor::all() );
-    }
-//
-
-
-
-//
     public function store(storeReunionAprendiz $request)
     {
-        $new = new ReunionAprendiz();
-        $new->Titulo = $request->input('titulo');
-        $new->Descripcion = $request->input('descripcion');
-        $new->FechaCitacion = $request->input('fechaCitacion');
-        $new->HoraCitacion = $request->input('horaCitacion');
-        $new->Modalidad = $request->input('modalidad');
-        $new->FechaCreacion = Carbon::now();
-        $new->MomentoEleccion = $request->input('momentoEleccion');
-        $new->Estado = 'Activo';
-        $new->IdInstructor = $request->input('id_instructor');
-        $new->save();
 
-        return redirect('reunionAprendiz')
-        ->with('msg', 'Se registro correctamente');
+        $reunion = ReunionAprendiz::create($request->all());
+        if(Auth::user()->rol()->first()->tipoRol == 'Aprendiz'){
+            DB::insert(
+                'insert into reunionaprendiz_aprendices (id_reunionaprendiz, id_aprendiz) values (?, ?)',
+                 [$reunion->id, $request->id_usuario]
+                );
+        }
+
     }
+//
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ReunionAprendiz  $reunionAprendiz
-     * @return \Illuminate\Http\Response
-     */
-    public function show(/*ReunionAprendiz*/ $reunionAprendiz)
+
+
+//
+    public function show( $reunionAprendiz)
+    {
+        $reunionAprendiz = ReunionAprendiz::all();
+
+        return $reunionAprendiz;
+    }
+//
+
+
+
+//
+    public function edit( $reunionAprendiz)
     {
         $reunionAprendiz = ReunionAprendiz::find($reunionAprendiz);
 
-        return view('reunionAprendiz.show')
-        ->with('reunion',$reunionAprendiz );
-    }
+        $reunionAprendiz->start= date_create($reunionAprendiz->start);
+        $reunionAprendiz->start =  date_format($reunionAprendiz->start,'Y-m-d\TH:m:s');
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ReunionAprendiz  $reunionAprendiz
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(/*ReunionAprendiz*/ $reunionAprendiz)
+        $reunionAprendiz->end= date_create($reunionAprendiz->end);
+        $reunionAprendiz->end =  date_format($reunionAprendiz->end,'Y-m-d\TH:m:s');
+
+        return $reunionAprendiz;
+    }
+//
+
+
+
+//
+    public function update(updateReunionAprendiz $request,  $reunionAprendiz)
     {
         $reunionAprendiz = ReunionAprendiz::find($reunionAprendiz);
-        return view('reunionAprendiz.edit')
-        ->with('reunion',$reunionAprendiz )
-        ->with('instructores', Instructor::all());
+        $reunionAprendiz -> update($request->all());
     }
+//
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ReunionAprendiz  $reunionAprendiz
-     * @return \Illuminate\Http\Response
-     */
-    public function update(updateReunionAprendiz $request, /*ReunionAprendiz*/ $reunionAprendiz)
+
+
+//
+    public function destroy($reunionAprendiz)
     {
-        $new = ReunionAprendiz::find($reunionAprendiz);
-        $new->Titulo = $request->input('titulo');
-        $new->Descripcion = $request->input('descripcion');
-        $new->FechaCitacion = $request->input('fechaCitacion');
-        $new->HoraCitacion = $request->input('horaCitacion');
-        $new->Modalidad = $request->input('modalidad');
-        $new->FechaCreacion = Carbon::now();
-        $new->MomentoEleccion = $request->input('momentoEleccion');
-        $new->Estado = $request->input('estado');
-        $new->IdInstructor = $request->input('id_instructor');
-        $new->save();
-
-        return redirect('reunionAprendiz')
-        ->with('msg', 'Se registro correctamente');
+        $reunionAprendiz = ReunionAprendiz::find($reunionAprendiz)->delete();
+        return $reunionAprendiz;
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ReunionAprendiz  $reunionAprendiz
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ReunionAprendiz $reunionAprendiz)
-    {
-        //
-    }
+//
 
 
-    ////////////////////////////
+
+ ////////////////////////////
     public function habilitar($usuario){
         $usuario = ReunionAprendiz::find($usuario);
         switch($usuario->Estado){
@@ -135,8 +108,8 @@ class ReunionAprendizController extends Controller
                 break;
         }
 
-        return redirect('usuarios');
+        return redirect('reunionAprendiz');
         //echo $usuario->Estado;
     }//end function
-    ////////////////////////////
+////////////////////////////
 }

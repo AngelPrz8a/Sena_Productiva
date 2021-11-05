@@ -7,10 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReunionAprendiz extends Model
 {
-
     protected $table = "reunionaprendiz";
-    protected $primaryKey = "IdReunionAprendices";
+    protected $primaryKey = "id";
     public $timestamps = false;
+
+    protected $fillable = [
+        'title',
+        'Descripcion',
+        'start',
+        'end',
+        'Modalidad',
+        'MomentoEleccion',
+        'Estado',
+    ];
 
     public function instructor(){
         return $this->hasManyThrough(

@@ -3,10 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empresa;
+use App\Models\Aprendiz;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class EmpresaController extends Controller
 {
+
+
+    public function empresa(){
+
+        $user = Auth::user()->IdUsuario;
+        $apren = DB::select('select Aprendiz.id from Aprendiz inner join usuario on usuario.IdUsuario = Aprendiz.id_usuario where id_usuario = ?', [$user]);
+        $apren = Aprendiz::find(intval($apren));
+        $apren = $apren->empresas()->get();
+
+        foreach($apren as $ap){
+            $apren = $ap;
+        }
+
+        $con = new EmpresaController();
+         return $con = $con->edit($apren->IdEmpresa);
+
+        return redirect('empresas/'.$apren['IdEmpresa'].'/edit');
+    }
 //
     public function index()
     {
@@ -88,8 +109,13 @@ class EmpresaController extends Controller
         $new->CargoInmediato = $request->input('cargoJefe');
         $new->save();
 
-        return redirect('empresas')
-        ->with('msg', "Se actualizo correctamente");
+        if(Auth::user()->rol()->first()->tipoRol != 'Aprendiz'){
+            return redirect('empresas')
+            ->with('msg', "Se actualizo correctamente");
+        }else{
+            return redirect('empresa')
+            ->with('msg', "Se actualizo correctamente");
+        }
     }
 //
 

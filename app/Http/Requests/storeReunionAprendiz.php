@@ -24,14 +24,13 @@ class storeReunionAprendiz extends FormRequest
     public function rules()
     {
         return [
-            'titulo' => 'required|regex:/^[a-zA-Z\s]+$/u|max:100',
-            'descripcion' => 'required|regex:/^[a-zA-Z\s]+$/u|max:100',
-            'fechaCitacion' => 'required|date|after:now',
-            'horaCitacion'=> 'required',
-            'modalidad'=>'required',
-            'momentoEleccion'=>'required',
-            'estado'=>'nullable',
-            'id_instructor'=>'required',
+            'title' => 'required|regex:/^[a-zA-Z\s]+$/u|max:100',
+            'Descripcion' => 'required|regex:/^[a-zA-Z\s]+$/u|max:100',
+            'start' => 'required|date|after:yesterday()',
+            'end'=> 'required',
+            'Modalidad'=>'required',
+            'MomentoEleccion'=>'required',
+            'Estado'=>'nullable',
         ];
     }
 }
