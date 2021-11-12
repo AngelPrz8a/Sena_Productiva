@@ -2,52 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\storeInstructor;
+use App\Models\User;
+use App\Models\Ficha;
 use App\Models\Instructor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\storeUsuario;
-use App\Http\Requests\updateInstructor;
 use App\Http\Requests\updateUsuario;
+use App\Http\Requests\storeInstructor;
+use App\Http\Requests\updateInstructor;
 
 
 
 class InstructorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('instructores.index')
         ->with('instructores', Instructor::paginate(25));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(storeUsuario $request)
     {
-        return view('instructores.create');
-    }
+        $usuarioC = new UsuarioController();
+        $usuarioC = $usuarioC->store($request);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(storeInstructor $request)
-    {
         $newInstructor = new Instructor();
-        $newInstructor->IdInstructor= $request->input('id');
-        $newInstructor->Nombre= $request->input('nombre');
-        $newInstructor->Apellido= $request->input('apellido');
-        $newInstructor->id_centro= $request->input('centro');
-
+        $newInstructor->id_centro = $request->input('centro');
+        $newInstructor->id_usuario = $usuarioC->IdUsuario;
         $newInstructor->save();
 
         return redirect('instructores')
@@ -55,13 +38,8 @@ class InstructorController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Instructor  $instructor
-     * @return \Illuminate\Http\Response
-     */
-    public function show(/*Instructor*/ $instructor)
+
+    public function show( $instructor)
     {
         $instructor = Instructor::find($instructor);
 
@@ -69,61 +47,75 @@ class InstructorController extends Controller
         ->with('instructor', $instructor);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Instructor  $instructor
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(/*Instructor*/ $instructor)
+
+    public function update(updateUsuario $request, $Instructor)
     {
-        $instructor = Instructor::find($instructor);
+        $instructor = Instructor::find($Instructor);
+        $usuario = User::where('IdUsuario','=',$instructor->id_usuario)->first()->IdUsuario;
 
-        return view('instructores.edit')
-        ->with('instructor', $instructor);
-    }
+        //usuario
+        $usuarioC = new UsuarioController();
+        $usuarioC = $usuarioC->update($request, $usuario );
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Instructor  $instructor
-     * @return \Illuminate\Http\Response
-     */
-    public function update(updateInstructor $request, Instructor $Instructor)
-    {
-
-        $inst = $Instructor;
-        $Instructor =Instructor::find($inst);
-
-        $Instructor = new Instructor();
-        $Instructor->Id= $request->input('id');
-        $Instructor->Nombre= $request->input('nombre');
-        $Instructor->Apellido= $request->input('apellido');
-        $Instructor->Centro= $request->input('centro');
-
-        $Instructor->save();
+        //instructor
+        $instructor->id_centro = $request->input('centro');
+        $instructor->id_usuario = $usuarioC->IdUsuario;
+        $instructor->save();
 
         return redirect('instructores')
         ->with('msg', 'Se actualizo correctamente');
-
-
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Instructor  $instructor
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Instructor $instructor)
+
+    public function destroy($instructor)
     {
-
-        $i = $instructor;
         $instructor = Instructor::find($instructor);
-        $instructor->delete();
-        return redirect('instructores')
-        ->msg('msg', 'Se actualizo correctamente');
 
+        $usuario = User::find($instructor->id_usuario);
+        $usuario->Estado = 'Inactivo';
+        $usuario->save();
+
+        return redirect('instructores')
+        ->with('msg', 'Se Elimino Correctamente');
+    }
+
+
+    public function asignar(Request $request, $instructor){
+
+        //recorre lo que el usuario selecciono y lo guarda en un array
+        $id_ficha = [];
+        foreach (Ficha::all() as $fichas) {
+            //1.sacar los id y saber cuantas fichas son
+            //el valor del request es 'ficha[IdFicha]', recorro los request con esta estructura y unicamente uso el id
+            if ($request->input('ficha'.strval($fichas->IdFicha) ) == 'on') {
+                array_push($id_ficha, $fichas->IdFicha);
+            }
+        }
+        // return $id_ficha;
+
+
+        //recorreo el array con los id de ficha para ser insertados en la tabla intermedia instructorficha
+        foreach($id_ficha as $id){
+            DB::insert('insert into instructorficha (id_instructor, id_ficha) values (?, ?)',
+            [$instructor, $id]
+            );
+        }
+
+        return redirect('instructores/'.$instructor)
+        ->with('msg', 'Se Asignaron Fichas Correctamente');
+    }
+
+
+    public function desasignar($id_ficha){
+        //return $id_ficha;
+
+        //consulta hacia instructorficha para retornar al instructor
+        //como DB::select debuelve un array, por ello el foreach, para acceder de forma mas facil a sus atributos
+        foreach( DB::select('select * from instructorficha where id_ficha = ?', [$id_ficha]) as $sql ){}
+        //eliminar la ficha asignada al instructor
+        DB::delete('delete from instructorficha where id_ficha = ?', [$id_ficha]);
+
+        return redirect('instructores/'.$sql->id_instructor)
+        ->with('msg', 'Se Elimino la Ficha Asignada al Instructor Correctamente');
     }
 }

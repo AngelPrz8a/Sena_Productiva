@@ -9979,10 +9979,17 @@ a.btn.disabled, fieldset:disabled a.btn {
     border-radius: calc(.25rem - 0)
 }
 
+.card-img-top1 {
+    width: 70%;
+    padding: 10px;
+
+}
+
+
 .card-img-top {
-    width: 100%;
-    border-top-left-radius: calc(.25rem - 0);
-    border-top-right-radius: calc(.25rem - 0)
+    width: 70%;
+    padding: 10px;
+    margin-left:30px;
 }
 
 .card-img-bottom {
@@ -16901,4 +16908,8 @@ ul.list-style-none li a:hover {
     src: url(fonts/Gilmer-Bold.eot?#iefix) format("embedded-opentype"), url(fonts/Gilmer-Bold.otf) format("opentype"), url(fonts/Gilmer-Bold.woff) format("woff"), url(fonts/Gilmer-Bold.ttf) format("truetype"), url(fonts/Gilmer-Bold.svg#Gilmer-Bold) format("svg");
     font-weight: 400;
     font-style: normal
+}
+
+.a_fichas:hover{
+    color:orange;
 }

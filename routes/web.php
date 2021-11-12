@@ -52,10 +52,10 @@ Route::resource(
 
 
 //INSTRUCTORES
-Route::resource(
-    'instructores', InstructorController::class
-)
-->middleware('login');
+Route::resource('instructores', InstructorController::class)->middleware('login');
+
+Route::get('instructores/{id}/asignar',[InstructorController::class, 'asignar'])->middleware('login');
+Route::post('instructores/{id_ficha}/desasignar', [InstructorController::class, 'desasignar'])->middleware('login');
 
 
 
@@ -72,11 +72,8 @@ Route::get(
 
 
 //FICHAS
-Route::resource(
-    'fichas', FichaController::class
-)
-->middleware('login');
-
+Route::resource('fichas', FichaController::class)->middleware('login');
+Route::get('fichas/{id}/aprendices', [FichaController::class, 'aprendices']);
 
 
 //USUARIOS
@@ -117,7 +114,6 @@ Route::resource('empresas', EmpresaController::class)
 
 Route::get('empresas/aprendiz/{id}', [EmpresaController::class, 'aprendiz'])
 ->middleware('login');
-Route::get('empresa',[EmpresaController::class, 'empresa']);
 
 
 //CENTROS

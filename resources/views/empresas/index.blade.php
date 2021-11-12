@@ -3,7 +3,6 @@
 
 
 
-<center><h1>Lista de Empresas</h1></center>
 
 @if(Session::has('msg'))
  <div class="alert alert-warning alert-dismissible" role="alert">

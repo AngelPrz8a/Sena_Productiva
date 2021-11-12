@@ -2,75 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\storeAprendiz;
-use App\Http\Requests\storeUsuario;
-use App\Http\Requests\updateAprendiz;
 use App\Models\Rol;
+use App\Models\User;
+use App\Models\Ficha;
 use App\Models\Usuario;
 use App\Models\Aprendiz;
-use App\Models\Ficha;
 use App\Models\UsuarioRol;
 use Illuminate\Http\Request;
+use App\Http\Requests\storeUsuario;
+use App\Http\Requests\storeAprendiz;
+use App\Http\Requests\updateUsuario;
+use App\Http\Requests\updateAprendiz;
 
 class AprendizController extends Controller
 {
 //
-    public function index()
+    public function index($id)
     {
+        $ficha = Ficha::find($id);
+        $array = $ficha->aprendices()->get();
+
         return view('aprendices.index')
-        ->with('aprendices',Aprendiz::paginate(5));
+        ->with('aprendices', $array)
+        ->with('ficha', $ficha);
     }
 //
 
 
 
 //
-    public function create()
+    public function store(storeUsuario $request)
     {
-        return view('aprendices.create')
-        ->with('roles', Rol::all())
-        ->with('fichas', Ficha::all());
-    }
-//
-
-
-//
-    public function store(storeAprendiz $request)
-    {
-        $newUsuario = new Usuario();
-        $newUsuario->Nombre = $request->input('nombre');
-        $newUsuarioN = $request->input('nombre');
-        $newUsuario->Apellido = $request->input('apellido');
-        $newUsuarioA = $request->input('apellido');
-        $newUsuario->FechaNacimiento = $request->input('fechaNacimiento');
-        $newUsuarioF = $request->input('fechaNacimiento');
-        $newUsuario->Genero = $request->input('genero');
-        $newUsuario->TipoDocumento = $request->input('tipoD');
-        $newUsuario->NumeroIdentificacion = $request->input('numeroD');
-        $newUsuario->NumeroCelular = $request->input('celular');
-        $newUsuario->NumeroFijo = $request->input('telefono');
-        $newUsuario->EmailPersonal = $request->input('emailP');
-        $newUsuario->EmailSena = $request->input('emailS');
-        $newUsuario->Direccion = $request->input('direccion');
-        $newUsuario->Estado = 'Activo';
-        $newUsuario->Contraseña = $request->input('numeroD');
-
-        $newUsuario->save();
-
-        $newUsuRol = new UsuarioRol();
-        $newUsuRol->id_usuario = $newUsuario->IdUsuario;
-        $rolAprendiz = Rol::select('id')->where('tipoRol', '=' , 'Aprendiz')->first();
-        $newUsuRol->id_rol = $rolAprendiz->id;
-
-        $newUsuRol->save();
+        $usuarioC = new UsuarioController();
+        $usuarioC = $usuarioC->store($request);
+        $usuarioC->save();
 
         $newA = new Aprendiz();
-        $newA->id_usuario = $newUsuario->IdUsuario;
+        $newA->id_usuario = $usuarioC->IdUsuario;
         $newA->id_ficha = $request->input('ficha');
-
         $newA->save();
 
-        return redirect('aprendices')
+        return redirect($request->url)
         ->with('msg', "Se registro correctamente");
     }
 //
@@ -90,48 +62,16 @@ class AprendizController extends Controller
 
 
 //
-    public function edit($usuario)
+    public function update(updateUsuario $request,  $aprendiz)
     {
-        $usu = $usuario;
+        $aprendiz = Aprendiz::find($aprendiz);
+        $user = $aprendiz->usuarios();
 
-        $usuario = Usuario::find($usu);
-        $aprendiz = Aprendiz::find($usu);
+        $usuarioC = new UsuarioController();
+        $usuarioC = $usuarioC->update(  $request, $user->IdUsuario  );
+        $usuarioC->save();
 
-        return view('aprendices.edit')
-        ->with('aprendiz', $usuario)
-        ->with('a', $aprendiz)
-        ->with('fichas', Ficha::all());
-    }
-//
-
-
-
-//
-    public function update(updateAprendiz $request, /*Aprendiz*/ $aprendiz)
-    {
-        $apre = $aprendiz;
-        $aprendiz = Usuario::find($apre);
-
-        $aprendiz->Nombre = $request->input('nombre');
-        $aprendiz->Apellido = $request->input('apellido');
-        $aprendiz->FechaNacimiento = $request->input('fechaNacimiento');
-        $aprendiz->Genero = $request->input('genero');
-        $aprendiz->TipoDocumento = $request->input('tipoD');
-        $aprendiz->NumeroIdentificacion = $request->input('numeroD');
-        $aprendiz->NumeroCelular = $request->input('celular');
-        $aprendiz->NumeroFijo = $request->input('telefono');
-        $aprendiz->EmailPersonal = $request->input('emailP');
-        $aprendiz->EmailSena = $request->input('emailS');
-        $aprendiz->Direccion = $request->input('direccion');
-        $aprendiz->Estado = $request->input('estado');
-
-        $aprendiz->save();
-
-        $a = Aprendiz::find($apre);
-        $a->id_ficha = $request->input('ficha');
-        $a->save();
-
-        return redirect('aprendices')
+        return redirect($request->url)
         ->with('msg', 'Se actualizo correctamente');
     }
 //
@@ -148,4 +88,6 @@ class AprendizController extends Controller
         ->msg('msg', 'Se actualizo correctamente');
     }
 //
+
+
 }

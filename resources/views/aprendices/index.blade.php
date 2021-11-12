@@ -1,62 +1,99 @@
+<!--PLANTILLA-->
 @extends('plantilla.plantilla')
+
+<!--TITULO MIGAJAS DE PAN-->
+@section('title-bread')
+    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1"> Aprendices  </h4>
+@endsection
+
+<!--MIGAJAS DE PAN-->
+@section('bread')
+<li class="breadcrumb-item"><a href="{{  url('fichas')  }}">Fichas</a>
+</li>
+<li class="breadcrumb-item"><a href="{{  url('fichas/'.$ficha->IdFicha)  }}">  {{  $ficha->NumeroFicha  }}  </a>
+</li>
+<li class="breadcrumb-item"><a href="{{  url('fichas/'.$ficha->IdFicha.'/aprendices' )  }}"> Aprendices  </a>
+</li>
+@endsection
+
+<!--CONTENIDO-->
 @section('contenido')
 
 
-<center><h1>Lista Aprendices</h1></center>
+<!--------------------------------------------->
+<!---LLAMA MODAL PARA CREAR-->
+<!--------------------------------------------->
+<button type="button" class="btn btn-primary btn-circle"  data-toggle="modal" data-target="#CreateAprendiz">
+    <i class="fas fa-plus"></i>
+</button>
 
-    <button type="button" class="btn btn-primary"><a style="color:black;" href="{{url('aprendices/create')}}">+ Aprendiz</a></button>
-<table class="table table-striped">
-    <thead>
-        <th>Usuario</th>
-        <th>Ficha</th>
-        <th>Empresa</th>
-        <th>Ver</th>
-        <th>Editar</th>
-        <th>Eliminar</th>
-    </thead>
-    <tbody>
-        @foreach ($aprendices as $aprendiz)
-            <tr>
-                <td>
-                    @foreach ($aprendiz->usuarios()->get() as $usuario)
-                        {{$usuario->Nombre}}
-                        {{$usuario->Apellido}}
-                    @endforeach
-                </td>
-                <td>
-                    @foreach ($aprendiz->fichas()->get() as $ficha)
-                        {{$ficha->NumeroFicha}}
-                    @endforeach
-                </td>
-                <td>
-                    {{$aprendiz->empresas()->first()->Nombre}}
-                </td>
-                <td>
-                    <form action="{{url('aprendices/'.$aprendiz->id)}}">
-                        <button class="btn btn-inverse"><img width="20px" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGc+DQoJCTxwYXRoIGQ9Ik01MDguMTc3LDI0NS45OTVDNTAzLjYwNywyNDAuODk3LDM5My42ODIsMTIxLDI1NiwxMjFTOC4zOTQsMjQwLjg5NywzLjgyMywyNDUuOTk1Yy01LjA5OCw1LjY5OC01LjA5OCwxNC4zMTIsMCwyMC4wMQ0KCQkJQzguMzk0LDI3MS4xMDMsMTE4LjMyLDM5MSwyNTYsMzkxczI0Ny42MDYtMTE5Ljg5NywyNTIuMTc3LTEyNC45OTVDNTEzLjI3NCwyNjAuMzA3LDUxMy4yNzQsMjUxLjY5Myw1MDguMTc3LDI0NS45OTV6IE0yNTYsMzYxDQoJCQljLTU3Ljg5MSwwLTEwNS00Ny4xMDktMTA1LTEwNXM0Ny4xMDktMTA1LDEwNS0xMDVzMTA1LDQ3LjEwOSwxMDUsMTA1UzMxMy44OTEsMzYxLDI1NiwzNjF6Ii8+DQoJPC9nPg0KPC9nPg0KPGc+DQoJPGc+DQoJCTxwYXRoIGQ9Ik0yNzEsMjI2YzAtMTUuMDksNy40OTEtMjguMzY1LDE4Ljg4Ny0zNi41M0MyNzkuNjYxLDE4NC4yMzUsMjY4LjI1NSwxODEsMjU2LDE4MWMtNDEuMzUzLDAtNzUsMzMuNjQ3LTc1LDc1DQoJCQljMCw0MS4zNTMsMzMuNjQ3LDc1LDc1LDc1YzM3LjAyNCwwLDY3LjY2OC0yNy4wMzQsNzMuNzIyLTYyLjM1OEMyOTkuNTE2LDI3OC4zNjcsMjcxLDI1NS41MjIsMjcxLDIyNnoiLz4NCgk8L2c+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg==" /></button>
-                    </form>
-                </td>
-                <td>
-                    <form action="{{url('aprendices/'.$aprendiz->id.'/edit')}}">
-                        <button class="btn btn-inverse"><img width="20px" src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMnB0IiB2aWV3Qm94PSIwIDAgNTEyIDUxMSIgd2lkdGg9IjUxMnB0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im00MDUuMzMyMDMxIDI1Ni40ODQzNzVjLTExLjc5Njg3NSAwLTIxLjMzMjAzMSA5LjU1ODU5NC0yMS4zMzIwMzEgMjEuMzMyMDMxdjE3MC42Njc5NjljMCAxMS43NTM5MDYtOS41NTg1OTQgMjEuMzMyMDMxLTIxLjMzMjAzMSAyMS4zMzIwMzFoLTI5OC42Njc5NjljLTExLjc3NzM0NCAwLTIxLjMzMjAzMS05LjU3ODEyNS0yMS4zMzIwMzEtMjEuMzMyMDMxdi0yOTguNjY3OTY5YzAtMTEuNzUzOTA2IDkuNTU0Njg3LTIxLjMzMjAzMSAyMS4zMzIwMzEtMjEuMzMyMDMxaDE3MC42Njc5NjljMTEuNzk2ODc1IDAgMjEuMzMyMDMxLTkuNTU4NTk0IDIxLjMzMjAzMS0yMS4zMzIwMzEgMC0xMS43NzczNDQtOS41MzUxNTYtMjEuMzM1OTM4LTIxLjMzMjAzMS0yMS4zMzU5MzhoLTE3MC42Njc5NjljLTM1LjI4NTE1NiAwLTY0IDI4LjcxNDg0NC02NCA2NHYyOTguNjY3OTY5YzAgMzUuMjg1MTU2IDI4LjcxNDg0NCA2NCA2NCA2NGgyOTguNjY3OTY5YzM1LjI4NTE1NiAwIDY0LTI4LjcxNDg0NCA2NC02NHYtMTcwLjY2Nzk2OWMwLTExLjc5Njg3NS05LjUzOTA2My0yMS4zMzIwMzEtMjEuMzM1OTM4LTIxLjMzMjAzMXptMCAwIi8+PHBhdGggZD0ibTIwMC4wMTk1MzEgMjM3LjA1MDc4MWMtMS40OTIxODcgMS40OTIxODgtMi40OTYwOTMgMy4zOTA2MjUtMi45MjE4NzUgNS40Mzc1bC0xNS4wODIwMzEgNzUuNDM3NWMtLjcwMzEyNSAzLjQ5NjA5NC40MDYyNSA3LjEwMTU2MyAyLjkyMTg3NSA5LjY0MDYyNSAyLjAyNzM0NCAyLjAyNzM0NCA0Ljc1NzgxMiAzLjExMzI4MiA3LjU1NDY4OCAzLjExMzI4Mi42Nzk2ODcgMCAxLjM4NjcxOC0uMDYyNSAyLjA4OTg0My0uMjEwOTM4bDc1LjQxNDA2My0xNS4wODIwMzFjMi4wODk4NDQtLjQyOTY4OCAzLjk4ODI4MS0xLjQyOTY4OCA1LjQ2MDkzNy0yLjkyNTc4MWwxNjguNzg5MDYzLTE2OC43ODkwNjMtNzUuNDE0MDYzLTc1LjQxMDE1NnptMCAwIi8+PHBhdGggZD0ibTQ5Ni4zODI4MTIgMTYuMTAxNTYyYy0yMC43OTY4NzQtMjAuODAwNzgxLTU0LjYzMjgxMi0yMC44MDA3ODEtNzUuNDE0MDYyIDBsLTI5LjUyMzQzOCAyOS41MjM0MzggNzUuNDE0MDYzIDc1LjQxNDA2MiAyOS41MjM0MzctMjkuNTI3MzQzYzEwLjA3MDMxMy0xMC4wNDY4NzUgMTUuNjE3MTg4LTIzLjQ0NTMxMyAxNS42MTcxODgtMzcuNjk1MzEzcy01LjU0Njg3NS0yNy42NDg0MzctMTUuNjE3MTg4LTM3LjcxNDg0NHptMCAwIi8+PC9zdmc+" /></button>
-                     </form>
-                </td>
-                <td>
-                    <form method="post" action="{{url('aprendices/'.$aprendiz->id)}}">
-                        @method('DELETE')
-                        @csrf
+<!--------------------------------------------->
+<!---CARD   -->
+<!--------------------------------------------->
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Lista de Aprendices</h4>
+            <div class="table-responsive">
+                <table id="multi_col_order"
+                    class="table table-striped table-bordered display no-wrap" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Empresa</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($aprendices as $aprendiz)
+                        <tr>
+                            <td>{{  $aprendiz->usuarios()->Nombre  }} {{  $aprendiz->usuarios()->Apellido  }}</td>
+                            <td>
+                                @if( $aprendiz->empresas() != null || $aprendiz->empresas() != '' )
+                                    {{  $aprendiz->empresas()->Nombre  }}
+                                @else
+                                    {{  'Sin Empresa'  }}
+                                @endif
+                            </td>
 
-                        <button class="btn btn-dangel"><img width="20px" src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNTEyIDUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnPjxwYXRoIGQ9Im00MjQgNjRoLTg4di0xNmMwLTI2LjUxLTIxLjQ5LTQ4LTQ4LTQ4aC02NGMtMjYuNTEgMC00OCAyMS40OS00OCA0OHYxNmgtODhjLTIyLjA5MSAwLTQwIDE3LjkwOS00MCA0MHYzMmMwIDguODM3IDcuMTYzIDE2IDE2IDE2aDM4NGM4LjgzNyAwIDE2LTcuMTYzIDE2LTE2di0zMmMwLTIyLjA5MS0xNy45MDktNDAtNDAtNDB6bS0yMTYtMTZjMC04LjgyIDcuMTgtMTYgMTYtMTZoNjRjOC44MiAwIDE2IDcuMTggMTYgMTZ2MTZoLTk2eiIvPjxwYXRoIGQ9Im03OC4zNjQgMTg0Yy0yLjg1NSAwLTUuMTMgMi4zODYtNC45OTQgNS4yMzhsMTMuMiAyNzcuMDQyYzEuMjIgMjUuNjQgMjIuMjggNDUuNzIgNDcuOTQgNDUuNzJoMjQyLjk4YzI1LjY2IDAgNDYuNzItMjAuMDggNDcuOTQtNDUuNzJsMTMuMi0yNzcuMDQyYy4xMzYtMi44NTItMi4xMzktNS4yMzgtNC45OTQtNS4yMzh6bTI0MS42MzYgNDBjMC04Ljg0IDcuMTYtMTYgMTYtMTZzMTYgNy4xNiAxNiAxNnYyMDhjMCA4Ljg0LTcuMTYgMTYtMTYgMTZzLTE2LTcuMTYtMTYtMTZ6bS04MCAwYzAtOC44NCA3LjE2LTE2IDE2LTE2czE2IDcuMTYgMTYgMTZ2MjA4YzAgOC44NC03LjE2IDE2LTE2IDE2cy0xNi03LjE2LTE2LTE2em0tODAgMGMwLTguODQgNy4xNi0xNiAxNi0xNnMxNiA3LjE2IDE2IDE2djIwOGMwIDguODQtNy4xNiAxNi0xNiAxNnMtMTYtNy4xNi0xNi0xNnoiLz48L2c+PC9zdmc+" /></button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-    </tbody>
+                            <td>
+                                <!--------------------------------------------->
+                                <!---URL PARA VER-->
+                                <!--------------------------------------------->
+                                <a href="{{url('aprendices/'.$aprendiz->id)}}">
+                                    <button type="button" class="btn btn-primary btn-circle">
+                                        <i class="fas fa-info"></i>
+                                    </button>
+                                </a>
 
-</table>
+                                <!--------------------------------------------->
+                                <!---LLAMA MODAL PARA EDITAR-->
+                                <!--------------------------------------------->
+                                <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditAprendiz{{$aprendiz->id}}">
+                                    <i class="fas fa-edit"></i>
+                                </button>
 
-<div>
-    {{$aprendices->links()}}
+                                <!--------------------------------------------->
+                                <!---LLAMA MODAL PARA ELIMINAR-->
+                                <!--------------------------------------------->
+                                {{-- <button type="button" class="btn btn-danger btn-circle"  data-toggle="modal" data-target="#DeleteAprendiz{{$aprendiz->id}}">
+                                    <i class=" fas fa-trash-alt"></i>
+                                </button> --}}
+
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<!--------------------------------------------->
+<!---END CARD   -->
+<!--------------------------------------------->
+
+<!--MODALES-->
+@include('plantilla.modales.aprendiz')
 
 @endsection

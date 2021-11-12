@@ -35,7 +35,6 @@ class updateUsuario extends FormRequest
             "celular" => 'required|integer|numeric|digits:10',
             "telefono" => 'nullable|integer|numeric|digits:7',
             "direccion" => 'nullable|regex:/^[a-zA-Z0-9\s]+$/u|max:20',
-            "clave" => 'required|regex:/^[a-zA-Z0-9\s]+$/u|max:20',
             "estado" => 'required'
         ];
     }

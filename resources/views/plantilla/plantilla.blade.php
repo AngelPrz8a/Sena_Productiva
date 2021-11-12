@@ -9,14 +9,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="./assetsAdm/assets/images/iconoo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assetsAdmin/assets/images/iconoo.png') }}">
     <title>ProductivA - Usuarios</title>
-    <!-- This page css -->
-    <!-- Custom CSS -->
-    <link href="./assetsAdm/dist/css/style.min.css" rel="stylesheet">
+
+    <link href="{{asset('assetsAdm/dist/css/style.min.css')}}" rel="stylesheet">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
     integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
 
 </head>
 
@@ -52,17 +52,17 @@
                         <a href="{{url('home')}}">
                             <b class="logo-icon">
                                 <!-- Dark Logo icon -->
-                                <img src="./assetsAdm/assets/images/iconoo.png" alt="homepage" class="dark-logo" />
+                                <img src="{{asset('assets/images/iconoo.png')}}" alt="homepage" class="dark-logo" />
                                 <!-- Light Logo icon -->
-                                <img src="./assetsAdm/assets/images/iconoo.png" alt="homepage" class="light-logo" />
+                                <img src="{{asset('assets/images/iconoo.png')}}" alt="homepage" class="light-logo" />
                             </b>
                             <!--End Logo icon -->
                             <!-- Logo text -->
                             <span class="logo-text">
                                 <!-- dark Logo text -->
-                                <img src="./assetsAdm/assets/images/logooo-text-black.png" alt="homepage" class="dark-logoo" />
+                                <img src="{{asset('assetsAdm/assets/images/logooo-text-black.png')}}" alt="homepage" class="dark-logoo" />
                                 <!-- Light Logo text -->
-                                <img src="./assetsAdm/assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                                <img src="{{asset('assetsAdm/assets/images/logo-light-text.png')}}" class="light-logo" alt="homepage" />
                             </span>
                         </a>
                     </div>
@@ -111,7 +111,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                <img src="./assetsAdm/assets/images/usuarioN.png" alt="user" class="rounded-circle"
+                                <img src="{{ asset('assetsAdm/assets/images/usuarioN.png') }}" alt="user" class="rounded-circle"
                                     width="40">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>Hola,</span> <span
                                         class="text-dark">{{  Auth::user()->Nombre  }}</span> <i data-feather="chevron-down"
@@ -128,6 +128,8 @@
                                     Cerrar Sesión</a>
 
                             </div>
+
+
                         </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
@@ -152,7 +154,7 @@
 
                         <li class="sidebar-item">
                             <a class="sidebar-link sidebar-link" href="{{url('home')}}" aria-expanded="false">
-                                <i data-feather="home" class="feather-icon"></i>
+                                <i data-feather="home" class="feather-icon "></i>
                                 <span class="hide-menu">Página Principal</span>
                             </a>
 
@@ -181,12 +183,34 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
+
+
+
+
+
+                        @yield('title-bread')
+
+
+
+
+
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
+
                                     <li class="breadcrumb-item"><a href="{{url('home')}}">Página Principal</a>
                                     </li>
+
+
+
+
+
                                     @yield('bread')
+
+
+
+
+
                                 </ol>
                             </nav>
                         </div>
@@ -210,6 +234,8 @@
 
 
 
+
+
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
@@ -223,26 +249,32 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="./assetsAdm/assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="./assetsAdm/assets/extra-libs/taskboard/js/jquery.ui.touch-punch-improved.js"></script>
-    <script src="./assetsAdm/assets/extra-libs/taskboard/js/jquery-ui.min.js"></script>
-    <script src="./assetsAdm/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="./assetsAdm/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="{{ asset('assetsAdm/assets/libs/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('assetsAdm/assets/extra-libs/taskboard/js/jquery.ui.touch-punch-improved.js') }}"></script>
+    <script src="{{ asset('assetsAdm/assets/extra-libs/taskboard/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('assetsAdm/assets/libs/popper.js/dist/umd/popper.min.js') }}"></script>
+    <script src="{{ asset('assetsAdm/assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- apps -->
-    <script src="./assetsAdm/dist/js/app-style-switcher.js"></script>
-    <script src="./assetsAdm/dist/js/feather.min.js"></script>
-    <script src="./assetsAdm/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="./assetsAdm/dist/js/sidebarmenu.js"></script>
+    <script src="{{ asset('assetsAdm/dist/js/app-style-switcher.js') }}"></script>
+    <script src="{{ asset('assetsAdm/dist/js/feather.min.js') }}"></script>
+    <script src="{{ asset('assetsAdm/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') }}"></script>
+    <script src="{{ asset('assetsAdm/dist/js/sidebarmenu.js') }}"></script>
     <!--Custom JavaScript -->
-    <script src="./assetsAdm/dist/js/custom.min.js"></script>
+    <script src="{{ asset('assetsAdm/dist/js/custom.min.js') }}"></script>
     <!--This page JavaScript -->
-    <script src="./assetsAdm/assets/extra-libs/c3/d3.min.js"></script>
-    <script src="./assetsAdm/assets/extra-libs/c3/c3.min.js"></script>
-    <script src="./assetsAdm/assets/libs/chartist/dist/chartist.min.js"></script>
-    <script src="./assetsAdm/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-    <script src="./assetsAdm/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
-    <script src="./assetsAdm/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="./assetsAdm/dist/js/pages/dashboards/dashboard1.min.js"></script>
+    <script src="{{ asset('assetsAdm/assets/extra-libs/c3/d3.min.js') }}"></script>
+    <script src="{{ asset('assetsAdm/assets/extra-libs/c3/c3.min.js') }}"></script>
+    <script src="{{ asset('assetsAdm/assets/libs/chartist/dist/chartist.min.js') }}"></script>
+    <script src="{{ asset('assetsAdm/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js') }}"></script>
+    <script src="{{ asset('assetsAdm/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js') }}"></script>
+    <script src="{{ asset('assetsAdm/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js') }}"></script>
+    <script src="{{ asset('assetsAdm/dist/js/pages/dashboards/dashboard1.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $('.toast').toast('show');
+    </script>
+
 
 
 </body>

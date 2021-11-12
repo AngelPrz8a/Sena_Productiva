@@ -12,27 +12,11 @@ class EmpresaController extends Controller
 {
 
 
-    public function empresa(){
-
-        $user = Auth::user()->IdUsuario;
-        $apren = DB::select('select Aprendiz.id from Aprendiz inner join usuario on usuario.IdUsuario = Aprendiz.id_usuario where id_usuario = ?', [$user]);
-        $apren = Aprendiz::find(intval($apren));
-        $apren = $apren->empresas()->get();
-
-        foreach($apren as $ap){
-            $apren = $ap;
-        }
-
-        $con = new EmpresaController();
-         return $con = $con->edit($apren->IdEmpresa);
-
-        return redirect('empresas/'.$apren['IdEmpresa'].'/edit');
-    }
 //
     public function index()
     {
         return view('empresas.index')
-        ->with('empresas', Empresa::paginate(15));
+        ->with('empresas', Empresa::all() );
     }
 //
 

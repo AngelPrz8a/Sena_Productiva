@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Programa extends Model
 {
@@ -21,4 +22,17 @@ class Programa extends Model
     public function fichas(){
         return $this->hasMany('App\Models\Ficha', 'Id_programa');
     }
+
+    public function centro(){
+        foreach(DB::select(
+        'select centro.* from centro
+        inner join centroprograma on centroprograma.id_centro = centro.IdCentro
+        inner join programa on programa.IdPrograma = centroprograma.id_programa
+        where programa.IdPrograma = ?',
+        [$this->IdPrograma])
+        as $sql){
+            return $sql;
+        }
+    }
+
 }

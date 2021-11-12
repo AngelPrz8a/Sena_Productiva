@@ -9,6 +9,4 @@
 {{session('msg')}}
 @endif
 
-
-
 @endsection

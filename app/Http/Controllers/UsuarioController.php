@@ -27,19 +27,9 @@ class UsuarioController extends Controller
 
 
 //
-    public function create()
-    {
-        return view('usuarios.create')
-        ->with('roles', Rol::all());
-    }
-//
-
-
-
-//
     public function store(storeUsuario $request)
     {
-        $newUsuario = new Usuario();
+        $newUsuario = new User();
         $newUsuario->Nombre = $request->input('nombre');
         $newUsuario->Apellido = $request->input('apellido');
         $newUsuario->FechaNacimiento = $request->input('fechaNacimiento');
@@ -51,20 +41,20 @@ class UsuarioController extends Controller
         $newUsuario->EmailPersonal = $request->input('emailP');
         $newUsuario->EmailSena = $request->input('emailS');
         $newUsuario->Direccion = $request->input('direccion');
-        $newUsuario->Estado = 'Activo';
-        $newUsuario->Contraseña = $request->input('numeroD');
-
+        $newUsuario->Estado = $request->estado;
+        $newUsuario->Contraseña = $request->input('numeroD'); //valor predeterminado, que el usuario puede modificar
         $newUsuario->save();
 
-        $newUsuRol = new UsuarioRol();
-        $newUsuRol->id_usuario = $newUsuario->IdUsuario;
-        $newUsuRol->id_rol = $request->input('rol');
+        //consulta el id del rol si es el mismo al traido
+        $selectrol = Rol::where('tipoRol', '=', $request->input('rol') )->first()->id ;
 
+        $newUsuRol = new UsuarioRol();
+        $newUsuRol->id_usuario = $newUsuario->IdUsuario;//trae el id del usuario creado
+        $newUsuRol->id_rol = $selectrol; //rol del formulario
         $newUsuRol->save();
 
 
-        return redirect('usuarios')
-         ->with('msg', "Se registro correctamente");
+        return $newUsuario;
     }
 //
 
@@ -73,7 +63,7 @@ class UsuarioController extends Controller
 //
     public function show( $usuario)
     {
-        $usuario = Usuario::find($usuario);
+        $usuario = User::find($usuario);
         return view('usuarios.show')
         ->with('usuario', $usuario);
     }
@@ -82,21 +72,9 @@ class UsuarioController extends Controller
 
 
 //
-    public function edit( $usuario)
-    {
-        $usuario = Usuario::find($usuario);
-        return view('usuarios.edit')
-        ->with('usuario', $usuario)
-        ->with('roles', Rol::all());
-    }
-//
-
-
-
-//
     public function update(updateUsuario $request,  $usuario)
     {
-        $usuario = Usuario::find($usuario);
+        $usuario = User::find($usuario);
         $usuario->Nombre = $request->input('nombre');
         $usuario->Apellido = $request->input('apellido');
         $usuario->FechaNacimiento = $request->input('fechaNacimiento');
@@ -109,16 +87,16 @@ class UsuarioController extends Controller
         $usuario->EmailSena = $request->input('emailS');
         $usuario->Direccion = $request->input('direccion');
         $usuario->Estado = $request->input('estado');
-        $usuario->Contraseña = $request->input('clave');
         $usuario->save();
 
-        $newUsuRol = UsuarioRol::where('id_usuario', '=', $usuario->IdUsuario)->first();
-        $newUsuRol->id_rol = $request->input('rol');
+        //consulta el id del rol si es el mismo al traido
+        $selectrol = Rol::where('tipoRol', '=', $request->input('rol') )->first()->id ;
 
+        $newUsuRol = UsuarioRol::where('id_usuario', '=', $usuario->IdUsuario)->first();
+        $newUsuRol->id_rol = $selectrol;
         $newUsuRol->save();
 
-        return redirect('usuarios')
-        ->with('msg', "Se actualizo correctamente");
+        return $usuario;
     }
 //
 

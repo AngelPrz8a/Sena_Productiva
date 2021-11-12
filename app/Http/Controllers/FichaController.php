@@ -9,34 +9,24 @@ use App\Http\Requests\updateFicha;
 
 class FichaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+
+    public function aprendices($id){
+        $ficha = Ficha::find($id);
+        $array = $ficha->aprendices()->get();
+
+        return view('aprendices.index')
+        ->with('aprendices', $array)
+        ->with('ficha', $ficha);
+    }
+
+
+
+    public function index(){
         return view('fichas.index')
-        ->with('fichas', Ficha::paginate(25));
+        ->with('fichas', Ficha::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('fichas.create')
-        ->with('programas', Programa::all());;
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreFicha $request)
     {
         $newFicha = new Ficha();
@@ -54,47 +44,20 @@ class FichaController extends Controller
         ->with('msg', 'Se registro correctamente.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(/*Ficha*/ $ficha)
+
+
+    public function show( $ficha )
     {
-        $f = $ficha;
         $ficha = Ficha::find($ficha);
 
         return view('fichas.show')
         ->with('ficha', $ficha);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(/*Ficha*/ $ficha)
+
+
+    public function update(updateFicha $request, $ficha )
     {
-        $ficha = Ficha::find($ficha);
-
-        return view('fichas.edit')
-        ->with('ficha' ,$ficha)
-        ->with('programas', Programa::all());
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(updateFicha $request,/*Ficha*/ $ficha)
-    {
-        $f = $ficha;
         $ficha = Ficha::find($ficha);
         $ficha->NumeroFicha = $request->input('numero');
         $ficha->InicioLectiva = $request->input('inicioLectiva');
@@ -106,25 +69,28 @@ class FichaController extends Controller
         $ficha->Id_programa = $request->input('programa');
         $ficha->save();
 
+        $msg = 'Se actualizo correctamente.' ;
+
+        if( $request->url ){
+            return redirect( $request->url )
+            ->with('msg', $msg);
+        }
         return redirect('fichas')
-        ->with('msg', 'Se actualizo correctamente.');
+        ->with('msg', $msg);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(/*Ficha*/$ficha)
+
+
+    public function destroy( $ficha )
     {
-        $f = $ficha;
         $ficha = Ficha::find($ficha);
         $ficha->Estado = "Inactivo";
         $ficha->save();
 
         return redirect('fichas')
         ->with('msg', 'Se elimino correctamente.');
-
     }
+
+
+
 }

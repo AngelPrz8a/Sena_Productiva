@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class storeUsuario extends FormRequest
@@ -23,6 +24,7 @@ class storeUsuario extends FormRequest
      */
     public function rules()
     {
+
         return [
             "nombre" => 'required|regex:/^[a-zA-Z\s]+$/u|max:50',
             "apellido" => 'required|regex:/^[a-zA-Z\s]+$/u|max:50',
@@ -37,6 +39,8 @@ class storeUsuario extends FormRequest
             "direccion" => 'nullable|alpha_num|regex:/^[a-zA-Z0-9\s]+$/u|max:20',
             "estado" => 'nullable',
             'rol' => 'required',
+
+            'centro'=>'nullable'
         ];
     }
 
