@@ -1,5 +1,3 @@
-<!--MODALES-->
-@include('plantilla.modales.centro')
 
 
 <!--PLANTILLA-->
@@ -151,9 +149,11 @@
     </div>
 </div>
 <!--------------------------------------------------------------->
-    <!---END Card-->
+<!---END Card-->
 <!--------------------------------------------------------------->
 
+<!--MODALES-->
+@include('plantilla.modales.centro')
 
 @endsection
 

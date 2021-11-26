@@ -9919,6 +9919,10 @@ a.btn.disabled, fieldset:disabled a.btn {
     margin-bottom: .75rem
 }
 
+.card-title:hover{
+    color:orange;
+}
+
 .card-header, .card-subtitle, .card-text:last-child {
     margin-bottom: 0
 }
@@ -9980,14 +9984,14 @@ a.btn.disabled, fieldset:disabled a.btn {
 }
 
 .card-img-top1 {
-    width: 70%;
+    width: 50%;
     padding: 10px;
 
 }
 
 
 .card-img-top {
-    width: 70%;
+    width: 50%;
     padding: 10px;
     margin-left:30px;
 }
@@ -16910,6 +16914,6 @@ ul.list-style-none li a:hover {
     font-style: normal
 }
 
-.a_fichas:hover{
+h4:hover{
     color:orange;
 }

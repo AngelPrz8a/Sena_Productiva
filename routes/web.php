@@ -88,9 +88,7 @@ Route::get(
 )
 ->middleware('login');
 //ver perfil
-Route::get(
-    'perfil', 'App\Http\Controllers\UsuarioController@perfil'::class
-)
+Route::get('perfil', 'App\Http\Controllers\UsuarioController@perfil'::class)
 ->middleware('login');
 
 
@@ -98,10 +96,7 @@ Route::get(
 
 //ENTREGABLES
 //CRUD
-Route::resource(
-    'entregables', EntregablesController::class
-)
-->middleware('login');
+Route::resource('entregables', EntregablesController::class)->middleware('login');
 //Modificar estado
 Route::get('entregables/habilitar/{h}' , 'App\Http\Controllers\EntregablesController@habilitar'::class)
 ->middleware('login');

@@ -2,15 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Empresa extends Model
 {
-    //Vincular MODEL - TABLE (Mysql)
+
     protected $table = "empresa";
-    //Establecer la PK de la entidad (por defecto :ArtistId)
     protected $primaryKey = "IdEmpresa";
-    //Omitir Campos de AUDITORIA
     public $timestamps = false;
+
+    public function aprendiz(){
+        foreach( DB::select(
+        'SELECT usuario.*, aprendiz.* FROM usuario
+        inner join aprendiz on aprendiz.id_usuario = usuario.IdUsuario
+        inner join empresa on empresa.IdEmpresa = aprendiz.id_empresa
+        where empresa.IdEmpresa = ?',
+        [$this->IdEmpresa]
+        )  as $sql){
+            
+        }
+    }
 }

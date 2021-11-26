@@ -50,7 +50,7 @@
                             <td>{{  $aprendiz->usuarios()->Nombre  }} {{  $aprendiz->usuarios()->Apellido  }}</td>
                             <td>
                                 @if( $aprendiz->empresas() != null || $aprendiz->empresas() != '' )
-                                    {{  $aprendiz->empresas()->Nombre  }}
+                                   <a href="{{  url('empresas/'.$aprendiz->empresas()->IdEmpresa)  }}"> {{  $aprendiz->empresas()->Nombre  }} </a>
                                 @else
                                     {{  'Sin Empresa'  }}
                                 @endif

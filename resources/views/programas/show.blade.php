@@ -103,6 +103,12 @@
 
 
 
+<!--------------------------------------------->
+<!---LLAMA MODAL PARA CREAR-->
+<!--------------------------------------------->
+<button type="button" class="btn btn-primary btn-circle"  data-toggle="modal" data-target="#CreateFicha">
+    <i class="fas fa-plus"></i>
+</button>
 
 <!--------------------------------------------------------------->
 <!---Card-->

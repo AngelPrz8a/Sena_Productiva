@@ -1,7 +1,3 @@
-<!--MODALES-->
-@include('plantilla.modales.programa')
-@include('plantilla.modales.centro')
-@include('plantilla.modales.instructor')
 
 
 <!--PLANTILLA-->
@@ -305,6 +301,13 @@
 <!--------------------------------------------------------------->
     <!---END Card-->
 <!--------------------------------------------------------------->
+
+
+
+<!--MODALES-->
+@include('plantilla.modales.programa')
+@include('plantilla.modales.centro')
+@include('plantilla.modales.instructor')
 
 
 @endsection

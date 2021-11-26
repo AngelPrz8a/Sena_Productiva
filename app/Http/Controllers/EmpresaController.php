@@ -15,17 +15,18 @@ class EmpresaController extends Controller
 //
     public function index()
     {
-        return view('empresas.index')
-        ->with('empresas', Empresa::all() );
-    }
-//
+        //Visualiza todas las empresas, sino es aprendiz
+        if (Auth::user()->rol()->first()->tipoRol != 'Aprendiz') {
+            return view('empresas.index')
+            ->with('empresas', Empresa::all());
 
-
-
-//
-    public function create()
-    {
-        return view('empresas.create');
+            //vializa la empresa del aprendiz
+        }else{
+            $aprendiz = Aprendiz::where('id_usuario','=',Auth::user()->IdUsuario )->first();
+            $empresa = $aprendiz->empresas();
+            return view('empresas.index')
+            ->with(  'empresa',   $empresa );
+        }
     }
 //
 
@@ -47,6 +48,11 @@ class EmpresaController extends Controller
         $new->CargoInmediato = $request->input('cargoJefe');
         $new->save();
 
+        $usuario = Auth::user()->IdUsuario;
+        $aprendiz_empresa = Aprendiz::where('id_usuario','=',$usuario)->first();
+        $aprendiz_empresa->id_empresa = $new->IdEmpresa;
+        $aprendiz_empresa->save();
+
         return redirect('empresas')
         ->with('msg', "Se registro correctamente");
     }
@@ -60,18 +66,6 @@ class EmpresaController extends Controller
         $id = Empresa::find($id);
         return view('empresas.show')
         ->with('empresa',$id);
-    }
-//
-
-
-
-//
-    public function edit($id)
-    {
-        $id = Empresa::find($id);
-
-        return view('empresas.edit')
-        ->with('empresa', $id);
     }
 //
 
@@ -93,13 +87,10 @@ class EmpresaController extends Controller
         $new->CargoInmediato = $request->input('cargoJefe');
         $new->save();
 
-        if(Auth::user()->rol()->first()->tipoRol != 'Aprendiz'){
-            return redirect('empresas')
-            ->with('msg', "Se actualizo correctamente");
-        }else{
-            return redirect('empresa')
-            ->with('msg', "Se actualizo correctamente");
-        }
+
+        return redirect('empresas')
+        ->with('msg', "Se actualizo correctamente");
+
     }
 //
 
