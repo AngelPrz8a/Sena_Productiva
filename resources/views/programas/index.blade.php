@@ -1,6 +1,3 @@
-<!--MODALES-->
-@include('plantilla.modales.programa')
-
 
 <!--PLANTILLA-->
 @extends('plantilla.plantilla')
@@ -22,6 +19,12 @@
 <!--CONTENIDO-->
 @section('contenido')
 
+
+
+<!--------------------------------------------->
+<!---MOSTRARA AL COORDINADOR Y ADMINISTRADOR TODOS LOS PROGRAMAS AL CONTRARIO SOLO ALGUNOS-->
+<!--------------------------------------------->
+@if( Auth::user()->rol()->first()->tipoRol == 'Administrador' ||  Auth::user()->rol()->first()->tipoRol == 'Coordinador' )
 
 <!--------------------------------------------->
 <!---LLAMA MODAL PARA CREAR-->
@@ -98,6 +101,82 @@
 <!----------------------------------------------------------->
 <!--END CARD FICHAS-->
 <!----------------------------------------------------------->
+
+@else
+
+
+
+
+
+@if(    Auth::user()->instructor() != null ||   Auth::user()->instructor() != '' )
+@if(  Auth::user()->instructor()->programas()  != 'null' || Auth::user()->instructor()->programas()  != '' )
+
+<!----------------------------------------------------------->
+<!--CARD FICHAS-->
+<!----------------------------------------------------------->
+
+
+<div class="row">
+    <div class="card-columns">
+
+        @foreach (  Auth::user()->instructor()->programas() as $programa)
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <h4 class="card-title">{{  $programa->Nombre  }}</h4>
+                <p class="card-text">{{  $programa->Nivel  }}</p>
+                <p>{{  $programa->centro()->Nombre  }}</p>
+
+                <p class="card-text">
+                    @if($programa->Estado == 'Activo')
+                        <span class="badge badge-pill badge-success">{{  $programa->Estado  }}</span>
+                    @elseif($programa->Estado == 'Inactivo')
+                        <span class="badge badge-pill badge-secondary">{{  $programa->Estado  }}</span>
+                    @else
+                        <span class="badge badge-pill badge-info">{{  $programa->Estado  }}</span>
+                    @endif
+                </p>
+
+            </div>
+
+            <div class="card-footer">
+                <div class="row">
+
+                    <!--------------------------------------------->
+                    <!---URL PARA VER-->
+                    <a href="{{  url('programas/'.$programa->IdPrograma ) }}">
+                    <button type="button" class="btn btn-primary btn-circle">
+                        <i class="fas fa-info"></i>
+                    </button>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        @endforeach
+    </div>
+</div>
+<!----------------------------------------------------------->
+<!--END CARD FICHAS-->
+<!----------------------------------------------------------->
+
+
+
+
+@else
+<h1>No tienes fichas asignadas</h1>
+@endif
+@endif
+
+
+@endif
+
+
+<!--MODALES-->
+@include('plantilla.modales.programa')
 
 
 @endsection

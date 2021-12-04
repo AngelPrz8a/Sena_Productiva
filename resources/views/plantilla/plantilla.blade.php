@@ -118,11 +118,7 @@
                                         class="svg-icon"></i></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                                <a class="dropdown-item" href="{{'perfil'}}"><i data-feather="user"
-                                        class="svg-icon mr-2 ml-1"></i>
-                                    Mi perfil</a>
 
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{  url('logout')  }}"><i data-feather="power"
                                         class="svg-icon mr-2 ml-1"></i>
                                     Cerrar Sesión</a>

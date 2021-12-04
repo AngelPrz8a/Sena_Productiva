@@ -38,36 +38,30 @@ class Aprendiz extends Model
     }
 
     public function instructor(){
-        $sql = DB::select('
-        SELECT instructor.IdInstructor from aprendiz
+        foreach( DB::select('
+        SELECT instructor.*, usuario.*
+        from aprendiz
         INNER JOIN ficha on ficha.IdFicha = aprendiz.id_ficha
         INNER JOIN instructorficha on ficha.IdFicha = instructorficha.id_ficha
         INNER JOIN instructor on instructorficha.id_instructor = instructor.IdInstructor
         INNER JOIN usuario on usuario.IdUsuario = instructor.id_usuario
-        where aprendiz.id = ?
-        GROUP by IdInstructor
-        ', [$this->id]);
-
-        $a =[];
-        foreach($sql as $i){
-            array_push($a, $i->IdInstructor);
+        where aprendiz.id = ?',
+        [$this->id])
+        as $sql){
+            return Instructor::find($sql->IdInstructor) ;
         }
-        return $a;
     }
 
-    public function i(){
-        $sql = DB::select('
-        SELECT instructor.* from aprendiz
-        INNER JOIN ficha on ficha.IdFicha = aprendiz.id_ficha
-        INNER JOIN instructorficha on ficha.IdFicha = instructorficha.id_ficha
-        INNER JOIN instructor on instructorficha.id_instructor = instructor.IdInstructor
-        INNER JOIN usuario on usuario.IdUsuario = instructor.id_usuario
-        where aprendiz.id = ?
-        ', [$this->id]);
-
-        foreach($sql as $i){
-            return Instructor::find($i->IdInstructor) ;
+    public function reuniones(){
+        $array = [];
+        foreach(DB::SELECT(
+            'SELECT reunionaprendiz.* FROM reunionaprendiz
+            inner join aprendiz on aprendiz.id = reunionaprendiz.id_aprendiz
+            where aprendiz.id = ?',
+            [$this->id]
+        ) as $sql ){
+            array_push($array, ReunionAprendiz::find($sql->id));
         }
-
+        return $array;
     }
 }

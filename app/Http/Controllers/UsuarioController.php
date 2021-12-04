@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\storeUsuario;
 use App\Http\Requests\updateUsuario;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -42,7 +43,7 @@ class UsuarioController extends Controller
         $newUsuario->EmailSena = $request->input('emailS');
         $newUsuario->Direccion = $request->input('direccion');
         $newUsuario->Estado = $request->estado;
-        $newUsuario->Contraseña = $request->input('numeroD'); //valor predeterminado, que el usuario puede modificar
+        $newUsuario->Contraseña = Hash::make(  $request->input('numeroD')  ); //valor predeterminado, que el usuario puede modificar
         $newUsuario->save();
 
         //consulta el id del rol si es el mismo al traido

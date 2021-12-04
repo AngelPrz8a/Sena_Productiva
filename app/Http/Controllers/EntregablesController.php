@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\EntregablesStoreRequest;
-use App\Http\Requests\storeEntregables;
-use App\Models\Entregables;
-use App\Models\Instructor;
 use Carbon\Carbon;
+use App\Models\Ficha;
+use App\Models\Instructor;
+use App\Models\Entregables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\storeEntregables;
+use App\Http\Requests\EntregablesStoreRequest;
 
 class EntregablesController extends Controller
 {
@@ -15,20 +17,20 @@ class EntregablesController extends Controller
 
 
 //
-    public function index()
+    public function index($id_ficha)
     {
-        return view('entregables.index')
-        ->with('entregables', Entregables::paginate(15));
-    }
-//
 
+        if (Auth::user()->rol()->first()->tipoRol == 'Instructor') {
+            return view('entregables.index')
+            ->with('entregables', Auth::user()->instructor()->entregable($id_ficha))
+            ->with('ficha', Ficha::find($id_ficha))
+            ;
+        }else{
+            return view('entregables.index')
+            ->with('entregables', Auth::user()->aprendiz()->instructor()->entregable($id_ficha) )
+            ->with('id_ficha', $id_ficha);
+        }
 
-
-
-    public function create()
-    {
-        return view('entregables.create')
-        ->with('instructores',Instructor::all());
     }
 //
 
@@ -37,55 +39,45 @@ class EntregablesController extends Controller
 //
     public function store( storeEntregables  $request)
     {
-        //Seleccinar el id max que exista en los centros
-        $maxentregables=Entregables::all()->max('IdEntregables');
-
-        $carbon = Carbon::now();
-
         //Crear el nuevo recurso cliente
         $nuevoentregable = new Entregables();
         $nuevoentregable ->Titulo = $request->input("titulo");
         $nuevoentregable ->Descripcion = $request->input("descripcion");
-        $nuevoentregable ->FechaInicial= $carbon->toDateString();       //carbon
+        $nuevoentregable ->FechaInicial=  $request->input("fechaInicial");;
         $nuevoentregable ->FechaFinal= $request->input("fechaentrega");
-        $nuevoentregable ->HoraInicial= $carbon->toTimeString();       //carbon
+        $nuevoentregable ->HoraInicial=  $request->input("horaInicial");
         $nuevoentregable ->HoraEntrega= $request->input("horaentrega");
-        $nuevoentregable ->Acta= $request->input("acta");
         $nuevoentregable ->Estado='Activo';
-        $nuevoentregable ->IdInstructor=$request->input('id_instructor');
+        $nuevoentregable ->id_ficha=$request->input('id_ficha');
         $nuevoentregable ->save();
 
 
-        return redirect('entregables')
+        return redirect('fichas/'.$nuevoentregable->id_ficha.'/entregables')
         ->with('msg', 'Se registro correctamente');
-
-
     }
 //
 
 
 
 //
-    public function show(Entregables $entregables)
-    {
-        //
-        return view('entregables.show')
-        ->with('entregables', $entregables);
-    }
-//
-
-
-
-//
-    public function edit(/*Entregables*/ $entregables)
+    public function show($id_ficha, $entregables)
     {
         $entregables = Entregables::find($entregables);
-        return view('entregables.edit')
-        ->with('entregables' , $entregables);
-
+        return view('entregables.show')
+        ->with('entregable', $entregables);
     }
 //
 
+
+
+//
+public function edit( $entregables)
+{
+    $entregables = Entregables::find($entregables);
+    return view('entregables.edit')
+    ->with('entregable', $entregables);
+}
+//
 
 
 
@@ -95,17 +87,15 @@ class EntregablesController extends Controller
         $entregables = Entregables::find($entregables);
         $entregables ->Titulo = $request->input("titulo");
         $entregables ->Descripcion = $request->input("descripcion");
-        $entregables ->FechaHoraInicial= $request->input("fechainicial");
-        $entregables ->FechaHoraEntrega= $request->input("fechaentrega");
-        $entregables ->HoraInicial= $request->input("horainicial");
+        $entregables ->FechaInicial= $request->input("fechaInicial");
+        $entregables ->FechaFinal= $request->input("fechaentrega");
+        $entregables ->HoraInicial= $request->input("horaInicial");
         $entregables ->HoraEntrega= $request->input("horaentrega");
-        $entregables ->Acta= $request->input("acta");
-        $entregables ->Estado= $request->input("estado");
-        $entregables ->IdInstructor=$request->input('id_instructor');
+        $entregables ->id_ficha=$request->input('id_ficha');
         $entregables ->save();
 
 
-        return redirect('entregables')
+        return redirect('fichas/'.$entregables->id_ficha.'/entregables')
         ->with('msg', 'Se actualizo correctamente');
     }
 //
@@ -115,43 +105,10 @@ class EntregablesController extends Controller
 //
     public function destroy(Entregables $entregables)
     {
-        //
-
 
 
     }
 //
 
-
-
-//
-    public function habilitar ($entregables){
-
-         $entregables= Entregables::find($entregables);
-
-
-        switch($entregables->Estado)
-         {
-            case('Activo'):
-                $entregables->Estado = 'Inactivo';
-                $entregables->save();
-            break;
-
-            case('Inactivo'):
-                $entregables->Estado = 'Activo';
-                $entregables->save();
-            break;
-
-            default;
-                $entregables->Estado = 'Activo';
-                $entregables->save();
-            break;
-
-
-        }
-
-        return redirect('entregables');
-    }
-//
 }
 

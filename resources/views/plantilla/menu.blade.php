@@ -3,7 +3,7 @@
 @switch(Auth::user()->rol()->first()->tipoRol)
     @case("Aprendiz")
 
-    <li class="sidebar-item"> <a class="sidebar-link" href="{{url('entregables')}}" aria-expanded="false">
+    <li class="sidebar-item"> <a class="sidebar-link" href="{{  url('entregables/'.Auth::user()->aprendiz()->fichas()->IdFicha.'/aprendiz' )  }}" aria-expanded="false">
         <i data-feather="file-text" class="feather-icon"></i>
         <span class="hide-menu">Entregables</span></a>
     </li>
@@ -42,13 +42,6 @@
         <i data-feather="briefcase" class="feather-icon"></i>
         <span class="hide-menu">Empresa</span></a>
     </li>
-
-
-    <li class="sidebar-item"> <a class="sidebar-link" href="{{url('entregables')}}" aria-expanded="false">
-        <i data-feather="file-text" class="feather-icon"></i>
-        <span class="hide-menu">Entregables</span></a>
-    </li>
-
 
     @break
 

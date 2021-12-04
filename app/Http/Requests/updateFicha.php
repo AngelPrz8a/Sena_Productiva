@@ -24,7 +24,7 @@ class updateFicha extends FormRequest
     public function rules()
     {
         return [
-            'numero'=>'Required|numeric|integer|digits:8',
+            'numero'=>'Required|numeric|integer',
 
             'inicioLectiva'=>'required|date|before:finLectiva' ,
             'finLectiva'=>'required|date|after:inicioLectiva',

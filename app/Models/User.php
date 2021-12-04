@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Aprendiz;
+use App\Models\Instructor;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -16,7 +18,21 @@ class User extends Authenticatable
     protected $primaryKey = 'IdUsuario';
     public $timestamps = false;
 
+    public function instructor(){
+        foreach( DB::select('SELECT instructor.* FROM usuario
+        INNER JOIN instructor on usuario.IdUsuario = instructor.id_usuario
+        where usuario.IdUsuario = ?', [$this->IdUsuario]) as $sql){
+            return Instructor::find($sql->IdInstructor);
+        }
+    }
 
+    public function aprendiz(){
+        foreach( DB::select('SELECT aprendiz.* FROM usuario
+        INNER JOIN aprendiz on usuario.IdUsuario = aprendiz.id_usuario
+        where usuario.IdUsuario = ?', [$this->IdUsuario]) as $sql){
+            return Aprendiz::find($sql->id);
+        }
+    }
 
 
     public function rol(){
@@ -29,10 +45,10 @@ class User extends Authenticatable
            'IdUsuario',           //PK on the model principal
            'id_rol'            //PD on the 2 table
        )
-       //->select('usuariorol.id_usuario', 'rol.tipoRol')
        ;
    }
-   //end function
+
+
 
 
 /*

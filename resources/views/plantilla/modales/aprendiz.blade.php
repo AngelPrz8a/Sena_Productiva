@@ -192,7 +192,7 @@
                             </div>
                         </div>
 
-                        <input type="text" name="url" value=" {{  'fichas/'.$ficha->IdFicha.'/aprendices'  }}  ">
+                        <input type="hidden" name="url" value=" {{  'fichas/'.$ficha->IdFicha.'/aprendices'  }}  ">
 
 
                     </div>

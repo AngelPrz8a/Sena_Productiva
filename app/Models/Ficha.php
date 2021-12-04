@@ -3,22 +3,19 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Entregables;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ficha extends Model
 {
      //Vincular MODEL - TABLE (Mysql)
      protected $table = "ficha";
-
      //Establecer la PK de la entidad (por defecto :ArtistId)
      protected $primaryKey = "IdFicha";
-
      //Omitir Campos de AUDITORIA
      public $timestamps = false;
-
-    //use HasFactory;
 
     public function programa(){
         foreach( DB::select(
@@ -41,9 +38,8 @@ class Ficha extends Model
     }
 
     public function aprendices(){
-        return $this->hasMany('App\Models\Aprendiz', 'id_ficha', 'IdFicha');
+        return $this->hasMany('App\Models\Aprendiz', 'id_ficha', 'IdFicha')->get();
     }
-
 
     public function instructor(){
         foreach(DB::select(

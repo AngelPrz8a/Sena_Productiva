@@ -50,7 +50,11 @@
                             <td>{{  $aprendiz->usuarios()->Nombre  }} {{  $aprendiz->usuarios()->Apellido  }}</td>
                             <td>
                                 @if( $aprendiz->empresas() != null || $aprendiz->empresas() != '' )
-                                   <a href="{{  url('empresas/'.$aprendiz->empresas()->IdEmpresa)  }}"> {{  $aprendiz->empresas()->Nombre  }} </a>
+                                    {{  $aprendiz->empresas()->Nombre  }}
+                                    <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditEmpresa{{  $aprendiz->empresas()->IdEmpresa  }}">
+                                        <i class="far fa-edit"></i>
+                                    </button>
+
                                 @else
                                     {{  'Sin Empresa'  }}
                                 @endif
@@ -95,5 +99,6 @@
 
 <!--MODALES-->
 @include('plantilla.modales.aprendiz')
+@include('plantilla.modales.empresa')
 
 @endsection

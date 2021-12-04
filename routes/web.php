@@ -100,6 +100,10 @@ Route::resource('entregables', EntregablesController::class)->middleware('login'
 //Modificar estado
 Route::get('entregables/habilitar/{h}' , 'App\Http\Controllers\EntregablesController@habilitar'::class)
 ->middleware('login');
+//index por ficha
+Route::get('fichas/{id}/entregables', [EntregablesController::class, 'index']);
+Route::get('entregables/{id}/aprendiz', [EntregablesController::class, 'index']);
+Route::get('fichas/{id_ficha}/entregables/{id}', [EntregablesController::class, 'show']);
 
 
 

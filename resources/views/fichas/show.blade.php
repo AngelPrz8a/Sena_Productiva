@@ -71,9 +71,22 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             Instructor
-                            <a href="instructores/{{  $ficha->instructor()->IdInstructor  }}">
+
+                             <!--------------------------------------------->
+                            <!---MOSTRARA AL COORDINADOR Y ADMINISTRADOR TODOS LOS PROGRAMAS AL CONTRARIO SOLO ALGUNOS-->
+                            <!--------------------------------------------->
+                            @if(  Auth::user()->rol()->first()->tipoRol == 'Coordinador'  && Auth::user()->rol()->first()->tipoRol == 'Adminsitrador'  )
+
+                            <a href="{{ url('instructores/'.$ficha->instructor()->IdInstructor )  }}">
                                  {{  $ficha->instructor()->Nombre  }}  {{  $ficha->instructor()->Apellido  }}
                             </a>
+
+                             @else
+
+                             {{  $ficha->instructor()->Nombre  }}  {{  $ficha->instructor()->Apellido  }}
+
+                            @endif
+
                         </div>
                     </div>
                 </div>
@@ -141,13 +154,13 @@
                                 <img class="card-img-top"  src="{{asset('book.png')}}">
 
                                 <div class="card-body">
-                                    <a href="#" class="a_fichas"><h4 class="card-title">Entregables</h4></a>
+                                    <a href="{{  url('fichas/'.$ficha->IdFicha.'/entregables')  }}" class="a_fichas"><h4 class="card-title">Entregables</h4></a>
                                 </div>
                             </div>
                             <div class="card">
                                 <img class="card-img-top"  src="{{asset('calendar.png')}}">
                                 <div class="card-body">
-                                <a href="#" class="a_fichas"><h4 class="card-title">Calendario</h4></a>
+                                <a href="{{ url('reunionAprendiz') }}" class="a_fichas"><h4 class="card-title">Calendario</h4></a>
                                 </div>
                             </div>
             </div>

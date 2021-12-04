@@ -17,7 +17,7 @@ class CentroController extends Controller
     public function index()
     {
         return view('centros.index')
-        ->with('centros', Centro::paginate(25));
+        ->with('centros', Centro::all() );
     }
 
     /**

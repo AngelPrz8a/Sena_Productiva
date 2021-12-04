@@ -16,8 +16,13 @@ class ReunionAprendizController extends Controller
 //
     public function index()
     {
-        return view('reunionAprendiz.index')
-        ->with('reuniones', ReunionAprendiz::paginate(25));
+        if( Auth::user()->rol()->first()->tipoRol == 'Aprendiz'   ){
+            return view('reunionAprendiz.index')
+            ->with('reuniones', Auth::user()->aprendiz()->reuniones() );
+        }else if( Auth::user()->rol()->first()->tipoRol == 'Instructor'){
+            return view('reunionAprendiz.index')
+            ->with('reuniones', Auth::user()->instructor()->reuniones() );
+        }
     }
 //
 
@@ -26,24 +31,25 @@ class ReunionAprendizController extends Controller
 //
     public function store(storeReunionAprendiz $request)
     {
-
         $reunion = ReunionAprendiz::create($request->all());
-        if(Auth::user()->rol()->first()->tipoRol == 'Aprendiz'){
-            DB::insert(
-                'insert into reunionaprendiz_aprendices (id_reunionaprendiz, id_aprendiz) values (?, ?)',
-                 [$reunion->id, $request->id_usuario]
-                );
-        }
 
+        return redirect('reunionAprendiz');
     }
 //
 
 
 
 //
-    public function show( $reunionAprendiz)
+/*
+se muestran todas las reuniones
+*/
+    public function show()
     {
-        $reunionAprendiz = ReunionAprendiz::all();
+        if( Auth::user()->rol()->first()->tipoRol == 'Aprendiz'   ){
+            $reunionAprendiz =  Auth::user()->aprendiz()->reuniones();
+        }else if( Auth::user()->rol()->first()->tipoRol == 'Instructor'){
+            $reunionAprendiz =  Auth::user()->instructor()->reuniones();
+        }
 
         return $reunionAprendiz;
     }
@@ -52,6 +58,9 @@ class ReunionAprendizController extends Controller
 
 
 //
+/*
+Ayudaa visualizar en el calendario cambiando el formato
+*/
     public function edit( $reunionAprendiz)
     {
         $reunionAprendiz = ReunionAprendiz::find($reunionAprendiz);
@@ -73,6 +82,9 @@ class ReunionAprendizController extends Controller
     {
         $reunionAprendiz = ReunionAprendiz::find($reunionAprendiz);
         $reunionAprendiz -> update($request->all());
+
+        return redirect('reunionAprendiz')
+        ->with('msg', 'Se Actualizo');
     }
 //
 

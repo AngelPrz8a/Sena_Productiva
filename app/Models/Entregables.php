@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Ficha;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Entregables extends Model
 {
@@ -27,7 +28,6 @@ class Entregables extends Model
     //
 
 
-
     //
     public function usuario_instructor(){
         return $this->hasManyThrough(
@@ -39,5 +39,21 @@ class Entregables extends Model
             'id_usuario' //to Inner with usuario
         );
     }
-    //end function
+    //
+
+
+    //
+    public function ficha(){
+        foreach(
+        DB::select(
+            'SELECT ficha.* FROM FICHA
+            INNER JOIN entregables on entregables.id_ficha = ficha.IdFicha
+            WHERE IdEntregables = ?',
+            [ $this->IdEntregables ])
+        as $sql){
+            return Ficha::find($sql->IdFicha);
+        }
+    }
+    //
+
 }

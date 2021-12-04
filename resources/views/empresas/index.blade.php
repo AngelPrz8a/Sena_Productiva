@@ -1,4 +1,19 @@
+<!--PLANTILLA-->
 @extends('plantilla.plantilla')
+
+<!--TITULO MIGAJAS DE PAN-->
+@section('title-bread')
+    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1"> Empresa  </h4>
+@endsection
+
+<!--MIGAJAS DE PAN-->
+@section('bread')
+<li class="breadcrumb-item"><a href="{{  url('empresas')  }}">Empresa</a>
+</li>
+
+@endsection
+
+<!--CONTENIDO-->
 @section('contenido')
 
 
@@ -49,26 +64,10 @@
 
                             <td>
                                 <!--------------------------------------------->
-                                <!---URL PARA VER-->
-                                <!--------------------------------------------->
-                                <a href="{{  url('instructores/'.$empresa->IdEmpresa)  }}">
-                                    <button type="button" class="btn btn-primary btn-circle">
-                                        <i class="fas fa-info"></i>
-                                    </button>
-                                </a>
-
-                                <!--------------------------------------------->
                                 <!---LLAMA MODAL PARA EDITAR-->
                                 <!--------------------------------------------->
                                 <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditEmpresa{{  $empresa->IdEmpresa  }}">
                                     <i class="fas fa-edit"></i>
-                                </button>
-
-                                <!--------------------------------------------->
-                                <!---LLAMA MODAL PARA ELIMINAR-->
-                                <!--------------------------------------------->
-                                <button type="button" class="btn btn-danger btn-circle"  data-toggle="modal" data-target="#DeleteEmrpesa{{  $empresa->IdEmpresa  }}">
-                                    <i class=" fas fa-trash-alt"></i>
                                 </button>
 
                             </td>

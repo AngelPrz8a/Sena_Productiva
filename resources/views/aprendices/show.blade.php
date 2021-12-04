@@ -234,9 +234,7 @@
 
                 <h3>Instructor a Cargo</h3>
 
-                @foreach ( $aprendiz->i()->usuarios() as $usuario)
-                    <a href="{{  url('instructores/'.$aprendiz->i()->IdInstructor )  }}">{{ $usuario->Nombre }} {{ $usuario->Apellido }}</a>
-                @endforeach
+                <a href="{{  url('instructores/'.$aprendiz->instructor()->IdInstructor )  }}">{{ $aprendiz->instructor()->Nombre }} {{ $aprendiz->instructor()->Apellido }}</a>
 
                 <h3>Ficha asignada</h3>
 
@@ -252,6 +250,9 @@
 
                 @if( $aprendiz->empresas() != null || $aprendiz->empresas() != '' )
                     {{  $aprendiz->empresas()->Nombre  }}
+                    <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditEmpresa{{  $aprendiz->empresas()->IdEmpresa  }}">
+                        <i class="far fa-edit"></i>
+                    </button>
                 @else
                     {{  'Sin Empresa'  }}
                 @endif
@@ -264,7 +265,9 @@
 <!---END Card-->
 <!--------------------------------------------------------------->
 
-
+<!--MODALES-->
 @include('plantilla.modales.aprendiz')
+@include('plantilla.modales.empresa')
+
 
 @endsection

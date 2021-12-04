@@ -80,6 +80,8 @@
 
     <div id="slideBox">
         <div class="topLayer">
+
+            {{--
             <div class="left">
                 <img src="./assets/images/logooo2.png" class="logoV2" alt="">
                 <div class="content">
@@ -102,7 +104,7 @@
                     </form>
                 </div>
             </div>
-
+            --}}
 
             <div class="right">
                 <img src="./assets/images/logooo.png" class="logoV" alt="">
@@ -110,6 +112,7 @@
                     <h2><strong>Iniciar Sesión</strong></h2>
                     <form id="form-login" method="POST" action="{{url('login')}}" >
                     @csrf
+
                         <div class="form-element form-stack">
                             <label for="username-login" class="form-label">Usuario</label>
                             <input id="username-login" value="{{old('number')}}" type="text" name="number">
@@ -127,10 +130,8 @@
                         </div>
                         <div class="form-element form-submit">
 
-                            <a id="goRight" class="login off" name="signup">¿Olvidaste tu contraseña?</a>
+                            {{--<a id="goRight" class="login off" name="signup">¿Olvidaste tu contraseña?</a>--}}
                             <button id="logIn" class="login" type="submit" name="login">Ingresar</button>
-
-
 
                         </div>
                     </form>

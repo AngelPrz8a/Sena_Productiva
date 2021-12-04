@@ -31,6 +31,7 @@ class storeReunionAprendiz extends FormRequest
             'Modalidad'=>'required',
             'MomentoEleccion'=>'required',
             'Estado'=>'nullable',
+            'id_instructor'=>'required',
         ];
     }
 }

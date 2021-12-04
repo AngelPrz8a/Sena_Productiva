@@ -24,22 +24,16 @@ class storeEntregables extends FormRequest
      */
     public function rules()
     {
-        $carbon = Carbon::now();
-        $time = Carbon::parse($carbon)->format('H');
+
         return [
             //
             'titulo'=>'required|regex:/^[\pL\s\-]+$/u',
             'descripcion'=>'required|regex:/^[\pL\s\-]+$/u' ,
-
-            //'fechainicial'=>'required|date|before Or Equal:fechaentrega',
-            'fechaentrega' => "required|date|after_or_equal:{$carbon->toDateString()}",
-
-            //'horainicial' => 'required|before Or Equal:horaentrega',
-            'horaentrega'=>"required|date_format:H:i",
-
-            //'acta' => 'required|regex:/^[\pL\s\-]+$/u|max:10',
-            //'estado' => 'required'
-            'id_instructor' =>'required',
+            'fechaInicial' => "required|date",
+            'fechaentrega' => "required|date",
+            'horaentrega'=>"required",
+            'horaInicial'=>"required",
+            'id_ficha' =>'required',
         ];
     }
 }

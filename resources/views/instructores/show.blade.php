@@ -1,5 +1,3 @@
-<!--MODALES-->
-@include('plantilla.modales.instructor')
 
 
 <!--PLANTILLA-->
@@ -319,6 +317,10 @@
 <!----------------------------------------------------------->
 <!--END CARD FICHAS-->
 <!----------------------------------------------------------->
+
+
+<!--MODALES-->
+@include('plantilla.modales.instructor')
 
 
 @endsection

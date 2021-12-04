@@ -1,6 +1,3 @@
-<!--MODALES-->
-@include('plantilla.modales.instructor')
-
 
 <!--PLANTILLA-->
 @extends('plantilla.plantilla')
@@ -82,6 +79,10 @@
         </div>
     </div>
 </div>
+
+
+<!--MODALES-->
+@include('plantilla.modales.instructor')
 
 
 

@@ -1,72 +1,126 @@
+<!--PLANTILLA-->
 @extends('plantilla.plantilla')
+
+<!--TITULO MIGAJAS DE PAN-->
+@section('title-bread')
+    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1"> Entregables</h4>
+@endsection
+
+<!--MIGAJAS DE PAN-->
+@section('bread')
+
+@if(  Auth::user()->rol()->first()->tipoRol != 'Aprendiz'   )
+
+<li class="breadcrumb-item"><a href="{{  url('fichas')  }}">Fichas</a>
+</li>
+<li class="breadcrumb-item"><a href="{{  url('fichas/'.$ficha->IdFicha )  }}"> {{  $ficha->NumeroFicha  }} </a>
+</li>
+<li class="breadcrumb-item"><a href=" {{  url('fichas/'.$ficha->IdFicha.'/entregables' ) }}"> Entregables  </a>
+</li>
+
+@else
+
+<li class="breadcrumb-item"><a href="{{  url('entregables')  }}">Entregables</a>
+</li>
+
+@endif
+
+@endsection
+
+<!--CONTENIDO-->
 @section('contenido')
 
 
-<div class="col-12">
-        <!-- Card -->
-        <div class="card text-center">
+@if(  Auth::user()->rol()->first()->tipoRol != 'Aprendiz'   )
+
+<!--------------------------------------------->
+<!---LLAMA MODAL PARA CREACION-->
+<!--------------------------------------------->
+<button type="button" class="btn btn-primary btn-circle"  data-toggle="modal" data-target="#CreateEntregable">
+    <i class="fas fa-plus"></i>
+</button>
+
+
+<!--------------------------------------------------------------->
+<!---Card-->
+<!--------------------------------------------------------------->
+<div class="row">
+    <div class="card-columns">
+        @foreach ($entregables as $entregable)
+
+        <div class="col-md-20">
+        <div class="card">
 
             <div class="card-body">
-                <h4 class="card-title"> Opciones - Entregables</h4>
-            <div class="card-deck">
+                <h4 class="card-title">{{$entregable->Titulo  }}</h4>
+            </div>
+            <div class="card-footer">
+                <div class="row">
 
-                            <div class="card">
-                                <a>
-                                    <img class="card-img-top" src="{{asset('plus.png')}}">
-                                    <div class="card-body">
-                                        <a href="" class="a_fichas  btn btn-primary" >
-                                            <h4 style="color:white;" class="card-title">Crear</h4>
-                                        </a>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="card">
-                                <img class="card-img-top"  src="{{asset('writing.png')}}">
+                    <!--------------------------------------------->
+                    <!---URL PARA VER-->
+                    <!--------------------------------------------->
+                    <a href="{{url('fichas/'.$entregable->ficha()->IdFicha.'/entregables/'.$entregable->IdEntregables )}}">
+                        <button type="button" class="btn btn-primary btn-circle">
+                            <i class="fas fa-info"></i>
+                        </button>
+                    </a>
 
-                                <div class="card-body">
-                                    <a href="#" class="a_fichas"><h4 class="card-title">Plan mejoramiento</h4></a>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img class="card-img-top"  src="{{asset('list.png')}}">
-                                <div class="card-body">
-                                <a href="#" class="a_fichas"><h4 class="card-title">Bitacora</h4></a>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <a>
-                                    <img class="card-img-top" src="{{asset('more.png')}}">
-                                    <div class="card-body">
-                                        <a href="" class="a_fichas">
-                                            <h4 class="card-title">otros</h4>
-                                        </a>
-                                    </div>
-                                </a>
-                            </div>
+                    <!--------------------------------------------->
+                    <!---LLAMA MODAL PARA EDITAR-->
+                    <!--------------------------------------------->
+                    <a href="{{url('entregables/'.$entregable->IdEntregables.'/edit' )}}">
+                        <button type="button" class="btn btn-warning btn-circle">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </a>
+
+                </div>
             </div>
 
         </div>
-        <!-- Card -->
-    </div>
+        </div>
 
-                <script src="./assetsAdm/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="./assetsAdm/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- apps -->
-    <!-- apps -->
-    <script src="./assetsAdm/dist/js/app-style-switcher.js"></script>
-    <script src="./assetsAdm/dist/js/feather.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="./assetsAdm/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="./assetsAdm/assets/extra-libs/sparkline/sparkline.js"></script>
-    <!--Wave Effects -->
-    <!-- themejs -->
-    <!--Menu sidebar -->
-    <script src="./assetsAdm/dist/js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
-    <script src="./assetsAdm/dist/js/custom.min.js"></script>
-    <!--This page plugins -->
-    <script src="./assetsAdm/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="./assetsAdm/dist/js/pages/datatable/datatable-basic.init.js"></script>
+        @endforeach
+    </div>
+</div>
+<!--------------------------------------------------------------->
+<!---END Card-->
+<!--------------------------------------------------------------->
+
+@else
+
+<!--------------------------------------------------------------->
+<!---Card-->
+<!--------------------------------------------------------------->
+<div class="row">
+    <div class="card-columns">
+        @foreach ($entregables as $entregable)
+
+        <div class="col-md-20">
+        <div class="card">
+
+            <div class="card-body">
+                <h4 class="card-title">{{$entregable->Titulo  }}</h4>
+            </div>
+
+        </div>
+        </div>
+
+        @endforeach
+    </div>
+</div>
+<!--------------------------------------------------------------->
+<!---END Card-->
+<!--------------------------------------------------------------->
+
+@endif
+
+<!--------------------------------------------------------------->
+<!---MODALES-->
+<!--------------------------------------------------------------->
+@include('plantilla.modales.entregable')
+
 @endsection
 
 

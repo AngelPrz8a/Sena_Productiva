@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ReunionAprendiz extends Model
 {
@@ -19,7 +20,10 @@ class ReunionAprendiz extends Model
         'Modalidad',
         'MomentoEleccion',
         'Estado',
+        'id_instructor',
+        'id_aprendiz'
     ];
+
 
     public function instructor(){
         return $this->hasManyThrough(
@@ -30,4 +34,5 @@ class ReunionAprendiz extends Model
             'IdInstructor'
         );
     }
+
 }
