@@ -13,7 +13,7 @@ class Entregables extends Model
     //Vincular MODEL - TABLE (Mysql)
     protected $table = "entregables";
     //Establecer la PK de la entidad (por defecto :ArtistId)
-    protected $primaryKey = "IdEntregables";
+    protected $primaryKey = "id";
     //Omitir Campos de AUDITORIA
     public $timestamps = false;
 
@@ -23,7 +23,7 @@ class Entregables extends Model
     public function instructor(){
         return $this->hasMany(
             'App\Models\Instructor',
-            'IdInstructor');
+            'id');
     }
     //
 
@@ -33,9 +33,9 @@ class Entregables extends Model
         return $this->hasManyThrough(
             Usuario::class,
             Instructor::class,
-            'IdInstructor',   //FK to Instructor
-            'IdUsuario',    //PK to Usuario
-            'IdInstructor', //local
+            'id',   //FK to Instructor
+            'id',    //PK to Usuario
+            'id', //local
             'id_usuario' //to Inner with usuario
         );
     }
@@ -47,11 +47,11 @@ class Entregables extends Model
         foreach(
         DB::select(
             'SELECT ficha.* FROM FICHA
-            INNER JOIN entregables on entregables.id_ficha = ficha.IdFicha
-            WHERE IdEntregables = ?',
-            [ $this->IdEntregables ])
+            INNER JOIN entregables on entregables.id_ficha = ficha.id
+            WHERE id = ?',
+            [ $this->id ])
         as $sql){
-            return Ficha::find($sql->IdFicha);
+            return Ficha::find($sql->id);
         }
     }
     //

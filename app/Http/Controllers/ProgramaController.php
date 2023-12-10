@@ -32,9 +32,9 @@ class ProgramaController extends Controller
         $newProgram->save();
 
         $newProCen = DB::insert(
-            'insert into centroprograma (id_centro, id_programa)
+            'insert into centro_programa (id_centro, id_programa)
              values (?, ?)',
-             [$request->centro, $newProgram->IdPrograma]
+             [$request->centro, $newProgram->id]
         );
 
         $msg = 'Se registro correctamente';
@@ -60,17 +60,17 @@ class ProgramaController extends Controller
     public function update(updatePrograma $request, Programa $programa)
     {
         //$newProgram = new Programa();
-        $programa->Nombre = $request->input('nombre');
-        $programa->Nivel = $request->input('nivel');
-        $programa->Estado = $request->input('estado');
+        $programa->nombre = $request->input('nombre');
+        $programa->nivel = $request->input('nivel');
+        $programa->estado = $request->input('estado');
         $programa->save();
 
         $proCen = DB::update(
-            'update centroprograma SET
+            'update centro_programa SET
             id_centro = ? ,
             id_programa = ?
             where id_programa = ?',
-            [$request->centro, $programa->IdPrograma, $programa->IdPrograma]
+            [$request->centro, $programa->id, $programa->id]
         );
 
         return redirect('programas')
@@ -96,19 +96,19 @@ class ProgramaController extends Controller
 //
     public function habilitar($usuario){
         $usuario = Programa::find($usuario);
-        switch($usuario->Estado){
+        switch($usuario->estado){
             case 'Activo'://estado activo
-                $usuario->Estado = 'Inactivo';
+                $usuario->estado = 'Inactivo';
                 $usuario->save();
                 break;
 
             case 'Inactivo'://estado inactivo
-                $usuario->Estado = 'Activo';
+                $usuario->estado = 'Activo';
                 $usuario->save();
                 break;
 
             default:    //sin estado
-                $usuario->Estado = 'Activo';
+                $usuario->estado = 'Activo';
                 $usuario->save();
                 break;
         }

@@ -8,18 +8,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ReunionAprendiz extends Model
 {
-    protected $table = "reunionaprendiz";
+    protected $table = "reunion_aprendiz";
     protected $primaryKey = "id";
     public $timestamps = false;
 
     protected $fillable = [
         'title',
-        'Descripcion',
+        'descripcion',
         'start',
         'end',
-        'Modalidad',
-        'MomentoEleccion',
-        'Estado',
+        'modalidad',
+        'momentoEleccion',
+        'estado',
         'id_instructor',
         'id_aprendiz'
     ];
@@ -29,9 +29,9 @@ class ReunionAprendiz extends Model
         return $this->hasManyThrough(
             Usuario::class,
             Instructor::class,
-            'IdInstructor',
-            'IdUsuario',
-            'IdInstructor'
+            'id',
+            'id',
+            'id'
         );
     }
 

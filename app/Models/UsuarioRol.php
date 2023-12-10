@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class UsuarioRol extends Model
 {
+   use HasFactory;
    //Vincular MODEL - TABLE (Mysql)
-   protected $table = "usuariorol";
+   protected $table = "usuario_rol";
 
    //Establecer la PK de la entidad (por defecto :ArtistId)
    protected $primaryKey = "Id";

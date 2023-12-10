@@ -34,15 +34,14 @@
                     <tbody>
                         @foreach ($instructores as $instructor)
                         <tr>
-                            @foreach ($instructor->usuarios() as $usuario)
-                                <td>
-                                    {{$usuario->Nombre}}  {{$usuario->Apellido}}
-                                </td>
-                            @endforeach
+                            
+                            <td>
+                                {{$instructor->usuarios()->first()->nombre}}  {{$instructor->usuarios()->first()->apellido}}
+                            </td>
 
                             @foreach ($instructor->centro() as $c)
                             <td>
-                                {{$c->Nombre}}
+                                {{$c->nombre}}
                             </td>
                             @endforeach
 
@@ -50,7 +49,7 @@
                                 <!--------------------------------------------->
                                 <!---URL PARA VER-->
                                 <!--------------------------------------------->
-                                <a href="{{url('instructores/'.$instructor->IdInstructor)}}">
+                                <a href="{{url('instructores/'.$instructor->id)}}">
                                     <button type="button" class="btn btn-primary btn-circle">
                                         <i class="fas fa-info"></i>
                                     </button>
@@ -59,14 +58,14 @@
                                 <!--------------------------------------------->
                                 <!---LLAMA MODAL PARA EDITAR-->
                                 <!--------------------------------------------->
-                                <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditInstructor{{$instructor->IdInstructor}}">
+                                <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditInstructor{{$instructor->id}}">
                                     <i class="fas fa-edit"></i>
                                 </button>
 
                                 <!--------------------------------------------->
                                 <!---LLAMA MODAL PARA ELIMINAR-->
                                 <!--------------------------------------------->
-                                <button type="button" class="btn btn-danger btn-circle"  data-toggle="modal" data-target="#DeleteInstructor{{$instructor->IdInstructor}}">
+                                <button type="button" class="btn btn-danger btn-circle"  data-toggle="modal" data-target="#DeleteInstructor{{$instructor->id}}">
                                     <i class=" fas fa-trash-alt"></i>
                                 </button>
 

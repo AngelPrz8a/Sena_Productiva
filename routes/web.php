@@ -125,11 +125,11 @@ Route::resource(
 
 //REUNION APRENDIZ
 Route::resource('reunionAprendiz', ReunionAprendizController::class)->middleware('login');
-Route::get('reunionAprendiz/mostrar', [ReunionAprendizController::class, 'show'])->middleware('login');
-Route::post('reunionAprendiz/{id}', [ReunionAprendizController::class, 'edit'])->middleware('login');
-Route::post('reunionAprendiz/{id}/edit', [ReunionAprendizController::class, 'update'])->middleware('login');
-Route::post('reunionAprendiz/{id}/delete', [ReunionAprendizController::class, 'destroy'])->middleware('login');
-Route::get('reunionAprendiz/{id}/habilitar', 'App\Http\Controllers\ReunionAprendizController@habilitar'::class)->middleware('login');
+// Route::get('reunionAprendiz/mostrar', [ReunionAprendizController::class, 'show'])->middleware('login');
+// Route::post('reunionAprendiz/{id}', [ReunionAprendizController::class, 'edit'])->middleware('login');
+// Route::post('reunionAprendiz/{id}/edit', [ReunionAprendizController::class, 'update'])->middleware('login');
+// Route::post('reunionAprendiz/{id}/delete', [ReunionAprendizController::class, 'destroy'])->middleware('login');
+// Route::get('reunionAprendiz/{id}/habilitar', 'App\Http\Controllers\ReunionAprendizController@habilitar'::class)->middleware('login');
 
 //////////////////////////////////////
 

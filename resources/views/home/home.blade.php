@@ -3,7 +3,7 @@
 @section('contenido')
 
 
-<h3>Eres un {{  Auth::user()->rol()->first()->tipoRol  }}</h3>
+<h3>Eres un {{  Auth::user()->rol()->first()->tipo  }}</h3>
 
 @if (session('msg'))
 {{session('msg')}}

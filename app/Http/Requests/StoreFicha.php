@@ -17,7 +17,7 @@ class StoreFicha extends FormRequest
     {
         return [
             //
-            'numero'=>'Required|numeric|integer|unique:ficha,NumeroFicha',
+            'numero'=>'Required|numeric|integer|unique:ficha,numero',
 
             'inicioLectiva'=>'required|date|before:finLectiva' ,
             'finLectiva'=>'required|date|after:inicioLectiva',

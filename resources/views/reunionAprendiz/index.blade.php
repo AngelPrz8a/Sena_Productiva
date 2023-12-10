@@ -65,7 +65,7 @@
                 </div>
 
 
-                @if(Auth::user()->rol()->first()->tipoRol != 'Aprendiz')
+                @if(Auth::user()->rol()->first()->tipo != 'Aprendiz')
                 <div class="form-group">
                     <label for="">Estado</label>
                     <select name="Estado" class="form-control">
@@ -90,7 +90,7 @@
                     <input type="datetime-local" name="end" id="" class="form-control" placeholder="" aria-describedby="helpId">
                 </div>
 
-                @if(Auth::user()->rol()->first()->tipoRol == 'Aprendiz')
+                @if(Auth::user()->rol()->first()->tipo == 'Aprendiz')
                     <input type="hidden" name="id_usuario" value="{{Auth::user()->IdUsuario}}">
                     <input type="hidden" name="id_instructor" value="{{Auth::user()->IdUsuario}}">
                 @endif

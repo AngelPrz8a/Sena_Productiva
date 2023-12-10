@@ -5,14 +5,14 @@
 
 <!--TITULO MIGAJAS DE PAN-->
 @section('title-bread')
-    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">{{ $centro->Nombre }}</h4>
+    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">{{ $centro->nombre }}</h4>
 @endsection
 
 <!--MIGAJAS DE PAN-->
 @section('bread')
 <li class="breadcrumb-item"><a href="{{url('centros')}}">Centros</a>
 </li>
-<li class="breadcrumb-item"><a href="{{url('centros')}}">{{ $centro->Nombre }}</a>
+<li class="breadcrumb-item"><a href="{{url('centros')}}">{{ $centro->nombre }}</a>
 </li>
 @endsection
 
@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <input type="text"  value="{{ $centro->Nombre }}"  name="nombre" class="form-control"
+                            <input type="text"  value="{{ $centro->nombre }}"  name="nombre" class="form-control"
                             placeholder="Nombre" data-toggle="tooltip" title="Nombre" readonly>
                         </div>
                     </div>
@@ -42,13 +42,13 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text"  value="{{ $centro->Sede }}"  name="sede" class="form-control"
+                            <input type="text"  value="{{ $centro->sede }}"  name="sede" class="form-control"
                                 placeholder="Sede" data-toggle="tooltip" title="Sede" readonly>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" value="{{ $centro->Ciudad }}" name="ciudad" class="form-control"
+                            <input type="text" value="{{ $centro->ciudad }}" name="ciudad" class="form-control"
                                 placeholder="Ciudad" data-toggle="tooltip" title="Ciudad" readonly>
                         </div>
                     </div>
@@ -59,13 +59,13 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text"  value="{{ $centro->Direccion }}" name="direccion" class="form-control"
+                            <input type="text"  value="{{ $centro->direccion }}" name="direccion" class="form-control"
                                 placeholder="Dirección" data-toggle="tooltip" title="Dirección" readonly>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" value="{{ $centro->Region }}" name="region" class="form-control"
+                            <input type="text" value="{{ $centro->region }}" name="region" class="form-control"
                                 placeholder="Región" data-toggle="tooltip" title="Región" readonly>
                         </div>
                     </div>
@@ -79,8 +79,8 @@
                         <div class="form-group">
                             <select name="estado" class="form-control"
                             data-toggle="tooltip" title="estado" aria-readonly="readonly">
-                                <option {{$centro->Estado=='Activo' ? 'selected' : ''}}>Activo</option>
-                                <option {{$centro->Estado=='Inactivo' ? 'selected' : ''}}>Inactivo</option>
+                                <option {{$centro->estado=='Activo' ? 'selected' : ''}}>Activo</option>
+                                <option {{$centro->estado=='Inactivo' ? 'selected' : ''}}>Inactivo</option>
                             </select>
                         </div>
                     </div>
@@ -90,14 +90,14 @@
         <!--------------------------------------------->
         <!---LLAMA MODAL PARA EDITAR-->
         <!--------------------------------------------->
-        <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditCentro{{$centro->IdCentro}}">
+        <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditCentro{{$centro->id}}">
             <i class="far fa-edit"></i>
         </button>
 
             <!--------------------------------------------->
         <!---LLAMA MODAL PARA ELIMINAR-->
         <!--------------------------------------------->
-        <button type="button" class="btn btn-danger btn-circle"  data-toggle="modal" data-target="#DeleteCentro{{$centro->IdCentro}}">
+        <button type="button" class="btn btn-danger btn-circle"  data-toggle="modal" data-target="#DeleteCentro{{$centro->id}}">
             <i class=" fas fa-trash-alt"></i>
         </button>
     </div>
@@ -135,13 +135,13 @@
                 @foreach ($centro->programas() as $programa)
                 <tr>
                     <td>
-                        {{$programa->Nombre}}
+                        {{$programa->nombre}}
                     </td>
                     <td>
                         <!--------------------------------------------->
                         <!---URL PARA VER-->
                         <!--------------------------------------------->
-                        <a href="{{url('programas/'.$programa->IdPrograma)}}">
+                        <a href="{{url('programas/'.$programa->id)}}">
                             <button type="button" class="btn btn-primary btn-circle">
                                 <i class="fas fa-info"></i>
                             </button>
@@ -150,7 +150,7 @@
                         <!--------------------------------------------->
                         <!---LLAMA MODAL PARA EDITAR-->
                         <!--------------------------------------------->
-                        <button type="button" class="btn btn-sm btn-warning btn-circle"  data-toggle="modal" data-target="#EditPrograma{{$programa->IdPrograma}}">
+                        <button type="button" class="btn btn-sm btn-warning btn-circle"  data-toggle="modal" data-target="#EditPrograma{{$programa->id}}">
                             <i class="far fa-edit"></i>
                         </button>
                     </td>
@@ -206,11 +206,11 @@
             <div class="carousel-caption d-none d-md-block">
                 <div style="color:black;">
                     <h3>
-                    <a href="{{url('programas/'.$programa->IdPrograma)}}">
-                        {{$programa->Nombre}}
+                    <a href="{{url('programas/'.$programa->id)}}">
+                        {{$programa->nombre}}
                     </a>
                     </h3>
-                    <p>{{$programa->Nivel}}</p>
+                    <p>{{$programa->nivel}}</p>
                 </div>
             </div>
         </div>
@@ -261,7 +261,7 @@
         <div class="card">
 
             <div class="card-body">
-                <h4 class="card-title">{{$instructor->Nombre}} {{$instructor->Apellido}}</h4>
+                <h4 class="card-title">{{$instructor->nombre}} {{$instructor->apellido}}</h4>
             </div>
             <div class="card-footer">
                 <div class="row">
@@ -269,7 +269,7 @@
                     <!--------------------------------------------->
                     <!---URL PARA VER-->
                     <!--------------------------------------------->
-                    <a href="{{  url('instructores/'.$i->IdInstructor ) }}">
+                    <a href="{{  url('instructores/'.$i->id ) }}">
                     <button type="button" class="btn btn-primary btn-circle">
                         <i class="fas fa-info"></i>
                     </button>
@@ -278,7 +278,7 @@
                     <!--------------------------------------------->
                     <!---LLAMA MODAL PARA EDITAR-->
                     <!--------------------------------------------->
-                    <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditInstructor{{$i->IdInstructor}}">
+                    <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditInstructor{{$i->id}}">
                         <i class="far fa-edit"></i>
                     </button>
 
@@ -286,7 +286,7 @@
                     <!---LLAMA MODAL PARA ELIMINAR-->
                     <!--------------------------------------------->
                     <!--
-                    <button type="button" class="btn btn-danger btn-circle"  data-toggle="modal" data-target="#DeleteInstructor{{$i->IdInstructor}}">
+                    <button type="button" class="btn btn-danger btn-circle"  data-toggle="modal" data-target="#DeleteInstructor{{$i->id}}">
                         <i class=" fas fa-trash-alt"></i>
                     </button>
                     -->

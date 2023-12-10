@@ -1,5 +1,10 @@
 @extends('plantilla.plantilla')
 
+@section('title-bread')
+    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">  Calendario  </h4>
+@endsection
+
+
 @section('bread')
 <li class="breadcrumb-item"><a href="{{url('reunionAprendiz')}}">Calendario</a>
 </li>
@@ -43,12 +48,7 @@
 <!--------------------------------------------->
 <!---MOSTRARA INSTRUCTOR-->
 <!--------------------------------------------->
-@if(  Auth::user()->rol()->first()->tipoRol == 'Intructor' )
-
-
-
-
-@else
+@if(  Auth::user()->rol()->first()->tipo == 'Intructor' ||  Auth::user()->rol()->first()->tipo == 'Administrador' )
 
 <!--------------------------------------------->
 <!---TABLE-->
@@ -78,8 +78,8 @@
                         @foreach ($reuniones as $reunion)
                         <tr>
                             <td>{{  $reunion->title  }} </td>
-                            <td>{{  $reunion->Descripcion  }} </td>
-                            <td>{{  $reunion->Estado  }}</td>
+                            <td>{{  $reunion->descripcion  }} </td>
+                            <td>{{  $reunion->estado  }}</td>
                             <td>{{  $reunion->start  }} </td>
                             <td>{{  $reunion->end  }} </td>
 

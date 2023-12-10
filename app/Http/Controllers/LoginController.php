@@ -21,14 +21,14 @@ class LoginController extends Controller
 
 //
     public function login(loginLogin $request){
-        $usuario = User::where('NumeroIdentificacion','=',$request->input('number') )->first();
+        $usuario = User::where('numeroIdentificacion','=',$request->input('number') )->first();
 
         if($usuario != null || $usuario != '')    //si la contraseña es diferente a null o no esta encriptada con hash
         {
             $usuario_contraseña =   //revisa si la contraseña que ingreso el usuario es la misma que en la BD
                 Hash::check(
                 $request->input('clave'),
-                $usuario->Contraseña);
+                $usuario->contraseña);
 
             if ($usuario_contraseña) {  //si el usuario existe
                 Auth::login($usuario);  //se crea la sesion

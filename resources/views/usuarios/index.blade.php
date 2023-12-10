@@ -18,7 +18,7 @@
                                             color:white;
 											"
 											>
-                                                <th ">Nombre</th>
+                                                <th>Nombre</th>
                                                 <th>Apellido</th>
                                                 <th>Genero</th>
                                                 <th>Email-Sena</th>
@@ -34,15 +34,15 @@
                                                 <tr>
 
                                                     <td style="padding-right:20px;">
-                                                       {{$usuario->Nombre}}
+                                                       {{$usuario->nombre}}
                                                     </td>
                                                     <td>
-                                                        {{$usuario->Apellido}}
+                                                        {{$usuario->apellido}}
                                                     </td>
 
                                                     <td>
 
-                                                        @switch($usuario->Genero)
+                                                        @switch($usuario->genero)
                                                             @case('M')
                                                                 <img width="18px"  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNDIzLjE4NCA0MjMuMTg0IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0MjMuMTg0IDQyMy4xODQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwYXRoIHN0eWxlPSJmaWxsOiMwMEJCRDM7IiBkPSJNNDA3LjUxLDBIMjY2Ljk3MWMtOC44ODIsMC0xNS42NzMsNi43OTItMTUuNjczLDE1LjY3M3M2Ljc5MiwxNS42NzMsMTUuNjczLDE1LjY3M2gxMDIuOTIyDQoJTDI2NC44ODIsMTM2LjM1OWMtMjguMjEyLTIyLjk4OC02My43MzktMzcuMDk0LTEwMi45MjItMzcuMDk0QzcyLjYyLDk5LjI2NSwwLDE3MS44ODYsMCwyNjEuMjI0czcyLjYyLDE2MS45NTksMTYxLjk1OSwxNjEuOTU5DQoJczE2MS45NTktNzIuNjIsMTYxLjk1OS0xNjEuOTU5YzAtMzkuMTg0LTE0LjEwNi03NC43MS0zNy4wOTQtMTAyLjkyMkwzOTEuODM3LDUzLjI5djEwMi45MjJjMCw4Ljg4Miw2Ljc5MiwxNS42NzMsMTUuNjczLDE1LjY3Mw0KCXMxNS42NzMtNi43OTIsMTUuNjczLTE1LjY3M1YxNS42NzNDNDIzLjE4NCw2Ljc5Miw0MTYuMzkyLDAsNDA3LjUxLDB6IE0xNjEuOTU5LDM5MS44MzdjLTcyLjA5OCwwLTEzMC42MTItNTguNTE0LTEzMC42MTItMTMwLjYxMg0KCXM1OC41MTQtMTMwLjYxMiwxMzAuNjEyLTEzMC42MTJzMTMwLjYxMiw1OC41MTQsMTMwLjYxMiwxMzAuNjEyUzIzNC4wNTcsMzkxLjgzNywxNjEuOTU5LDM5MS44Mzd6Ii8+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg==" />                            @break
                                                             @case('F')
@@ -53,40 +53,40 @@
                                                     </td>
 
                                                     <td>
-                                                        {{$usuario->EmailSena}}
+                                                        {{$usuario->emailSena}}
                                                     </td>
 
                                                     <td>
 
-                                                        @switch($usuario->Estado)
+                                                        @switch($usuario->estado)
                                                             @case('Activo')
-                                                                <a href="{{    url('usuarios/habilitar/'.$usuario->IdUsuario)    }}" class="btn btn-primary btn-success"><span class="glyphicon glyphicon-ok"></span> Activo</a>
+                                                                <a href="{{    url('usuarios/habilitar/'.$usuario->id)    }}" class="btn btn-primary btn-success"><span class="glyphicon glyphicon-ok"></span> Activo</a>
                                                                 @break
                                                             @case('Inactivo')
-                                                                <a href="{{    url('usuarios/habilitar/'.$usuario->IdUsuario)    }}" class="btn btn-primary btn-danger"><span class="glyphicon glyphicon-remove"></span> Inactivo</a>
+                                                                <a href="{{    url('usuarios/habilitar/'.$usuario->id)    }}" class="btn btn-primary btn-danger"><span class="glyphicon glyphicon-remove"></span> Inactivo</a>
                                                                 @break
                                                             @default
-                                                                <a href="{{    url('usuarios/habilitar/'.$usuario->IdUsuario)    }}" class="btn btn-primary btn-info"><span class="glyphicon glyphicon-question-sign"></span> Sin estado</a>
+                                                                <a href="{{    url('usuarios/habilitar/'.$usuario->id)    }}" class="btn btn-primary btn-info"><span class="glyphicon glyphicon-question-sign"></span> Sin estado</a>
                                                         @endswitch
                                                     </td>
                                                     <td>
                                                         @foreach ($usuario->rol()->get() as $rol)
-                                                            {{$rol->tipoRol}}
+                                                            {{$rol->tipo}}
                                                         @endforeach
                                                     </td>
 
                                                     <td>
-                                                        <form action="{{url('usuarios/'.$usuario->IdUsuario)}}">
+                                                        <form action="{{url('usuarios/'.$usuario->id)}}">
                                                         <button style="border: none;"><i style="color: orange;" class="fas fa-eye"></i></button>
                                                         </form>
                                                     </td>
                                                     <td>
-                                                        <form action="{{url('usuarios/'.$usuario->IdUsuario.'/edit')}}">
+                                                        <form action="{{url('usuarios/'.$usuario->id.'/edit')}}">
                                                         <button style="border: none;"><i style="color: orange;" class="fas fa-edit"></i></button>
                                                          </form>
                                                     </td>
 													<td>
-													<form method="post" action="{{url('usuarios/'.$usuario->IdUsuario)}}">
+													<form method="post" action="{{url('usuarios/'.$usuario->id)}}">
 														@method('DELETE')
 														@csrf
 														<button style="border:none;"><i style="color:orange;" class="far fa-trash-alt"></i></button>

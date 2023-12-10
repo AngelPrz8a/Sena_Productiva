@@ -3,18 +3,18 @@
 
 <!--TITULO MIGAJAS DE PAN-->
 @section('title-bread')
-    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1"> {{  $aprendiz->usuarios()->Nombre  }}  {{  $aprendiz->usuarios()->Apellido  }}  </h4>
+    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1"> {{  $aprendiz->usuarios()->nombre  }}  {{  $aprendiz->usuarios()->apellido  }}  </h4>
 @endsection
 
 <!--MIGAJAS DE PAN-->
 @section('bread')
 <li class="breadcrumb-item"><a href="{{  url('fichas')  }}">Fichas</a>
 </li>
-<li class="breadcrumb-item"><a href="{{  url('fichas/'.$aprendiz->fichas()->IdFicha )  }}">  {{  $aprendiz->fichas()->NumeroFicha  }}  </a>
+<li class="breadcrumb-item"><a href="{{  url('fichas/'.$aprendiz->fichas()->id )  }}">  {{  $aprendiz->fichas()->numero  }}  </a>
 </li>
-<li class="breadcrumb-item"><a href="{{  url('fichas/'.$aprendiz->fichas()->IdFicha.'/aprendices' )  }}"> Aprendices  </a>
+<li class="breadcrumb-item"><a href="{{  url('fichas/'.$aprendiz->fichas()->id.'/aprendices' )  }}"> Aprendices  </a>
 </li>
-<li class="breadcrumb-item"><a href="{{  url('fichas/'.$aprendiz->fichas()->IdFicha.'/aprendices/'.$aprendiz->id )  }}"> {{  $aprendiz->usuarios()->Nombre  }}  {{  $aprendiz->usuarios()->Apellido  }}  </a>
+<li class="breadcrumb-item"><a href="{{  url('fichas/'.$aprendiz->fichas()->id.'/aprendices/'.$aprendiz->id )  }}"> {{  $aprendiz->usuarios()->nombre  }}  {{  $aprendiz->usuarios()->apellido  }}  </a>
 </li>
 @endsection
 
@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" value="{{ $aprendiz->usuarios()->Nombre }}"  name="nombre" class="form-control"
+                        <input type="text" value="{{ $aprendiz->usuarios()->nombre }}"  name="nombre" class="form-control"
                         placeholder="Nombre" data-toggle="tooltip" title="Nombre" readonly>
                         @error('nombre')
                         {{$message}}
@@ -43,7 +43,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" value="{{ $aprendiz->usuarios()->Apellido  }}"  name="apellido" class="form-control"
+                        <input type="text" value="{{ $aprendiz->usuarios()->apellido  }}"  name="apellido" class="form-control"
                         placeholder="Apellido" data-toggle="tooltip" title="Apellido" readonly>
                         @error('apellido')
                         {{$message}}
@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="date" value="{{ $aprendiz->usuarios()->FechaNacimiento  }}"  name="fechaNacimiento" class="form-control"
+                        <input type="date" value="{{ $aprendiz->usuarios()->fechaNacimiento  }}"  name="fechaNacimiento" class="form-control"
                         placeholder="Fecha Nacimiento" data-toggle="tooltip" title="Fecha Nacimiento" readonly>
                         @error('fechaNacimiento')
                         {{$message}}
@@ -68,8 +68,8 @@
                     <div class="form-group">
                         <select name="genero" class="form-control" data-toggle="tooltip" title="Genero">
                             <option value="">Seleccione...</option>
-                            <option {{ $aprendiz->usuarios()->Genero == "F" ? 'selected' : ''}}>F</option>
-                            <option {{ $aprendiz->usuarios()->Genero =="M" ? 'selected' : ''}}>M</option>
+                            <option {{ $aprendiz->usuarios()->genero == "F" ? 'selected' : ''}}>F</option>
+                            <option {{ $aprendiz->usuarios()->genero =="M" ? 'selected' : ''}}>M</option>
                             </select>
                         @error('genero')
                         {{$message}}
@@ -84,12 +84,12 @@
                     <div class="form-group">
                         <select id="" name="tipoD" class="form-control"  data-toggle="tooltip" title="Tipo Documento">
                             <option value="">Seleccione...</option>
-                            <option {{ $aprendiz->usuarios()->TipoDocumento == "CC" ? 'selected' : ''}}>CC</option>
-                            <option {{ $aprendiz->usuarios()->TipoDocumento == "TI" ? 'selected' : ''}}>TI</option>
-                            <option {{ $aprendiz->usuarios()->TipoDocumento == "CE" ? 'selected' : ''}}>CE</option>
-                            <option {{ $aprendiz->usuarios()->TipoDocumento == "NIP" ? 'selected' : ''}}>NIP</option>
-                            <option {{ $aprendiz->usuarios()->TipoDocumento == "NIT" ? 'selected' : ''}}>NIT</option>
-                            <option {{ $aprendiz->usuarios()->TipoDocumento == "PAP" ? 'selected' : ''}}>PAP</option>
+                            <option {{ $aprendiz->usuarios()->tipoDocumento == "CC" ? 'selected' : ''}}>CC</option>
+                            <option {{ $aprendiz->usuarios()->tipoDocumento == "TI" ? 'selected' : ''}}>TI</option>
+                            <option {{ $aprendiz->usuarios()->tipoDocumento == "CE" ? 'selected' : ''}}>CE</option>
+                            <option {{ $aprendiz->usuarios()->tipoDocumento == "NIP" ? 'selected' : ''}}>NIP</option>
+                            <option {{ $aprendiz->usuarios()->tipoDocumento == "NIT" ? 'selected' : ''}}>NIT</option>
+                            <option {{ $aprendiz->usuarios()->tipoDocumento == "PAP" ? 'selected' : ''}}>PAP</option>
                         </select>
                         @error('tipoD')
                         {{$message}}
@@ -98,7 +98,7 @@
                 </div>
                 <div class="col-md-9">
                     <div class="form-group">
-                        <input type="text" value="{{  $aprendiz->usuarios()->NumeroIdentificacion  }}"  name="numeroD" class="form-control"
+                        <input type="text" value="{{  $aprendiz->usuarios()->numeroIdentificacion  }}"  name="numeroD" class="form-control"
                         placeholder="Número Documento" data-toggle="tooltip" title="Número Documento" readonly>
                         @error('numeroD')
                         {{$message}}
@@ -111,7 +111,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" value="{{  $aprendiz->usuarios()->EmailPersonal }}"  name="emailP" class="form-control"
+                        <input type="text" value="{{  $aprendiz->usuarios()->emailPersonal }}"  name="emailP" class="form-control"
                         placeholder="Email Personal" data-toggle="tooltip" title="Email Personal" readonly>
                         @error('emailP')
                         {{$message}}
@@ -120,7 +120,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" value="{{  $aprendiz->usuarios()->EmailSena }}"  name="emailS" class="form-control"
+                        <input type="text" value="{{  $aprendiz->usuarios()->emailSena }}"  name="emailS" class="form-control"
                         placeholder="Email Sena" data-toggle="tooltip" title="Email Sena" readonly>
                         @error('emailS')
                         {{$message}}
@@ -134,7 +134,7 @@
                 <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" value="{{  $aprendiz->usuarios()->NumeroCelular }}"  name="celular" class="form-control"
+                        <input type="text" value="{{  $aprendiz->usuarios()->numeroCelular }}"  name="celular" class="form-control"
                         placeholder="Celular" data-toggle="tooltip" title="Celular" readonly>
                         @error('celular')
                         {{$message}}
@@ -143,7 +143,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" value="{{  $aprendiz->usuarios()->NumeroFijo }}"  name="telefono" class="form-control"
+                        <input type="text" value="{{  $aprendiz->usuarios()->numeroFijo }}"  name="telefono" class="form-control"
                         placeholder="Telefono" data-toggle="tooltip" title="Telefono" readonly>
                         @error('telefono')
                         {{$message}}
@@ -157,7 +157,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <input type="text" value="{{  $aprendiz->usuarios()->Direccion }}"  name="direccion" class="form-control"
+                        <input type="text" value="{{  $aprendiz->usuarios()->direccion }}"  name="direccion" class="form-control"
                         placeholder="Dirección" data-toggle="tooltip" title="Dirección" readonly>
                         @error('direccion')
                         {{$message}}
@@ -174,8 +174,8 @@
                        <select name="estado" class="form-control"
                        data-toggle="tooltip" title="Estado">
                             <option value="">Seleccione</option>
-                            <option {{  $aprendiz->usuarios()->Estado == 'Activo' ? 'selected' : ''  }} value="Activo">Activo</option>
-                            <option {{  $aprendiz->usuarios()->Estado == 'Inactivo' ? 'selected' : ''  }}  value="Inactivo">Inactivo</option>
+                            <option {{  $aprendiz->usuarios()->estado == 'Activo' ? 'selected' : ''  }} value="Activo">Activo</option>
+                            <option {{  $aprendiz->usuarios()->estado == 'Inactivo' ? 'selected' : ''  }}  value="Inactivo">Inactivo</option>
                        </select>
                         @error('estado')
                         {{$message}}
@@ -195,7 +195,7 @@
 
                 <div class="col-md-0">
                     <div class="form-group">
-                        <input type="text" value="{{  $aprendiz->fichas()->IdFicha  }}"  name="ficha" class="form-control"
+                        <input type="text" value="{{  $aprendiz->fichas()->id  }}"  name="ficha" class="form-control"
                         placeholder="Ficha" data-toggle="tooltip" title="Ficha" hidden>
                         @error('ficha')
                         {{$message}}
@@ -234,11 +234,11 @@
 
                 <h3>Instructor a Cargo</h3>
 
-                <a href="{{  url('instructores/'.$aprendiz->instructor()->IdInstructor )  }}">{{ $aprendiz->instructor()->Nombre }} {{ $aprendiz->instructor()->Apellido }}</a>
+                <a href="{{  url('instructores/'.$aprendiz->instructor()->id )  }}">{{ $aprendiz->instructor()->nombre }} {{ $aprendiz->instructor()->apellido }}</a>
 
                 <h3>Ficha asignada</h3>
 
-                <a href="{{  url('fichas/'. $aprendiz->fichas()->IdFicha )  }}">{{  $aprendiz->fichas()->NumeroFicha  }}</a>
+                <a href="{{  url('fichas/'. $aprendiz->fichas()->id )  }}">{{  $aprendiz->fichas()->numero  }}</a>
 
             </div>
         </div>
@@ -249,7 +249,7 @@
                 <h3>Empresa</h3>
 
                 @if( $aprendiz->empresas() != null || $aprendiz->empresas() != '' )
-                    {{  $aprendiz->empresas()->Nombre  }}
+                    {{  $aprendiz->empresas()->nombre  }}
                     <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditEmpresa{{  $aprendiz->empresas()->IdEmpresa  }}">
                         <i class="far fa-edit"></i>
                     </button>

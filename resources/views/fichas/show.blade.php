@@ -3,14 +3,14 @@
 
 <!--TITULO MIGAJAS DE PAN-->
 @section('title-bread')
-    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">  {{  $ficha->NumeroFicha  }}  </h4>
+    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">  {{  $ficha->numero  }}  </h4>
 @endsection
 
 <!--MIGAJAS DE PAN-->
 @section('bread')
 <li class="breadcrumb-item"><a href="{{url('fichas')}}">Fichas</a>
 </li>
-<li class="breadcrumb-item"><a href="{{url('fichas/'.$ficha->IdFicha)}}">  {{  $ficha->NumeroFicha  }}  </a>
+<li class="breadcrumb-item"><a href="{{url('fichas/'.$ficha->id)}}">  {{  $ficha->numero  }}  </a>
 </li>
 @endsection
 
@@ -38,7 +38,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <h4 class="card-title">  {{  $ficha->NumeroFicha  }}  </h4>
+                            <h4 class="card-title">  {{  $ficha->numero  }}  </h4>
                         </div>
                     </div>
                 </div>
@@ -48,8 +48,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <a href="{{  url('programas/'.$ficha->programa()->IdPrograma)  }}">
-                                {{ $ficha->programa()->Nombre  }}
+                            <a href="{{  url('programas/'.$ficha->programa()->id)  }}">
+                                {{ $ficha->programa()->nombre  }}
                             </a>
                         </div>
                     </div>
@@ -70,21 +70,22 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            Instructor
-
-                             <!--------------------------------------------->
+                            <!--------------------------------------------->
                             <!---MOSTRARA AL COORDINADOR Y ADMINISTRADOR TODOS LOS PROGRAMAS AL CONTRARIO SOLO ALGUNOS-->
                             <!--------------------------------------------->
-                            @if(  Auth::user()->rol()->first()->tipoRol == 'Coordinador'  && Auth::user()->rol()->first()->tipoRol == 'Adminsitrador'  )
+                            @if(  Auth::user()->rol()->first()->tipo == 'Coordinador' || Auth::user()->rol()->first()->tipo == 'Adminsitrador'  )
+                            Instructor
 
-                            <a href="{{ url('instructores/'.$ficha->instructor()->IdInstructor )  }}">
-                                 {{  $ficha->instructor()->Nombre  }}  {{  $ficha->instructor()->Apellido  }}
+                            <a href="{{ url('instructores/'.$ficha->instructor()->id )  }}">
+                                 {{  $ficha->instructor()->nombre  }}  {{  $ficha->instructor()->apellido  }}
                             </a>
 
+                             @elseif ($ficha->instructor() == null)
+
+                             Sin instructor
+
                              @else
-
-                             {{  $ficha->instructor()->Nombre  }}  {{  $ficha->instructor()->Apellido  }}
-
+                                {{  $ficha->instructor()->nombre  }}  {{  $ficha->instructor()->apellido  }}
                             @endif
 
                         </div>
@@ -95,12 +96,12 @@
 
 
                 <!-- estado -->
-                @if($ficha->Estado == 'Activo')
-                    <span class="badge badge-pill badge-success">{{  $ficha->Estado  }}</span>
-                @elseif($ficha->Estado == 'Inactivo')
-                    <span class="badge badge-pill badge-secondary">{{  $ficha->Estado  }}</span>
+                @if($ficha->estado == 'Activo')
+                    <span class="badge badge-pill badge-success">{{  $ficha->estado  }}</span>
+                @elseif($ficha->estado == 'Inactivo')
+                    <span class="badge badge-pill badge-secondary">{{  $ficha->estado  }}</span>
                 @else
-                    <span class="badge badge-pill badge-info">{{  $ficha->Estado  }}</span>
+                    <span class="badge badge-pill badge-info">{{  $ficha->estado  }}</span>
                 @endif
 
 
@@ -110,7 +111,7 @@
                 <!--------------------------------------------->
                 <!---LLAMA MODAL PARA EDITAR-->
                 <!--------------------------------------------->
-                <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditFicha{{$ficha->IdFicha}}">
+                <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditFicha{{$ficha->id}}">
                     <i class="far fa-edit"></i>
                 </button>
 
@@ -144,19 +145,21 @@
                                 <a>
                                     <img class="card-img-top1" src="{{asset('graduation-hat.png')}}">
                                     <div class="card-body">
-                                        <a href="{{ url( 'fichas/'.$ficha->IdFicha.'/aprendices' ) }}" class="a_fichas">
+                                        <a href="{{ url( 'fichas/'.$ficha->id.'/aprendices' ) }}" class="a_fichas">
                                             <h4 class="card-title">Aprendiz</h4>
                                         </a>
                                     </div>
                                 </a>
                             </div>
+                            @if ($ficha->instructor() != null)
                             <div class="card">
                                 <img class="card-img-top"  src="{{asset('book.png')}}">
 
                                 <div class="card-body">
-                                    <a href="{{  url('fichas/'.$ficha->IdFicha.'/entregables')  }}" class="a_fichas"><h4 class="card-title">Entregables</h4></a>
+                                    <a href="{{  url('fichas/'.$ficha->id.'/entregables')  }}" class="a_fichas"><h4 class="card-title">Entregables</h4></a>
                                 </div>
                             </div>
+                            @endif
                             <div class="card">
                                 <img class="card-img-top"  src="{{asset('calendar.png')}}">
                                 <div class="card-body">

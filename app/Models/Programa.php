@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Programa extends Model
 {
+    // Si no está activo se evita que se pueda llamar el factory
+    use HasFactory;
+
     //Vincular MODEL - TABLE (Mysql)
     protected $table = "programa";
 
     //Establecer la PK de la entidad (por defecto :ArtistId)
-    protected $primaryKey = "IdPrograma";
+    protected $primaryKey = "id";
 
     //Omitir Campos de AUDITORIA
     public $timestamps = false;
@@ -20,16 +23,16 @@ class Programa extends Model
     //use HasFactory;
 
     public function fichas(){
-        return $this->hasMany('App\Models\Ficha', 'Id_programa');
+        return $this->hasMany('App\Models\Ficha', 'id');
     }
 
     public function centro(){
         foreach(DB::select(
         'select centro.* from centro
-        inner join centroprograma on centroprograma.id_centro = centro.IdCentro
-        inner join programa on programa.IdPrograma = centroprograma.id_programa
-        where programa.IdPrograma = ?',
-        [$this->IdPrograma])
+        left join centro_programa on centro_programa.id_centro = centro.id
+        left join programa on programa.id = centro_programa.id_programa
+        where programa.id = ?',
+        [$this->id])
         as $sql){
             return $sql;
         }

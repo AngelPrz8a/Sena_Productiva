@@ -38,7 +38,7 @@ class AprendizController extends Controller
         $usuarioC->save();
 
         $newA = new Aprendiz();
-        $newA->id_usuario = $usuarioC->IdUsuario;
+        $newA->id_usuario = $usuarioC->id;
         $newA->id_ficha = $request->input('ficha');
         $newA->save();
 
@@ -68,7 +68,7 @@ class AprendizController extends Controller
         $user = $aprendiz->usuarios();
 
         $usuarioC = new UsuarioController();
-        $usuarioC = $usuarioC->update(  $request, $user->IdUsuario  );
+        $usuarioC = $usuarioC->update(  $request, $user->id  );
         $usuarioC->save();
 
         return redirect($request->url)
@@ -82,7 +82,7 @@ class AprendizController extends Controller
     public function destroy(/*Aprendiz*/ $aprendiz)
     {
         $a = $aprendiz;
-        $aprendiz = Usuario::find($aprendiz);
+        $aprendiz = User::find($aprendiz);
         $aprendiz->delete();
         return redirect('aprendices')
         ->msg('msg', 'Se actualizo correctamente');

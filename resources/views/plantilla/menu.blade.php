@@ -1,6 +1,6 @@
 
 
-@switch(Auth::user()->rol()->first()->tipoRol)
+@switch(Auth::user()->rol()->first()->tipo)
     @case("Aprendiz")
 
     <li class="sidebar-item"> <a class="sidebar-link" href="{{  url('entregables/'.Auth::user()->aprendiz()->fichas()->IdFicha.'/aprendiz' )  }}" aria-expanded="false">

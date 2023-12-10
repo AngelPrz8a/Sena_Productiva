@@ -10,18 +10,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ficha extends Model
 {
+    use HasFactory;
+    
      //Vincular MODEL - TABLE (Mysql)
      protected $table = "ficha";
      //Establecer la PK de la entidad (por defecto :ArtistId)
-     protected $primaryKey = "IdFicha";
+     protected $primaryKey = "id";
      //Omitir Campos de AUDITORIA
      public $timestamps = false;
 
     public function programa(){
         foreach( DB::select(
             'select programa.* from programa
-            inner join ficha on ficha.id_programa = programa.IdPrograma
-            where ficha.IdFicha = ?', [$this->IdFicha])   as $sql){
+            inner join ficha on ficha.id_programa = programa.id
+            where ficha.id = ?', [$this->id])   as $sql){
                 return $sql;
         }
     }
@@ -29,26 +31,26 @@ class Ficha extends Model
     public function countAprendices(){
         foreach(DB::select(
             'SELECT count(aprendiz.id_ficha) as cuenta FROM ficha
-            inner join aprendiz on aprendiz.id_ficha = ficha.IdFicha
-            where ficha.IdFicha = ?'
-            , [$this->IdFicha])
+            inner join aprendiz on aprendiz.id_ficha = ficha.id
+            where ficha.id = ?'
+            , [$this->id])
             as $sql){
             return $sql->cuenta;
          }
     }
 
     public function aprendices(){
-        return $this->hasMany('App\Models\Aprendiz', 'id_ficha', 'IdFicha')->get();
+        return $this->hasMany('App\Models\Aprendiz', 'id_ficha', 'id');
     }
 
     public function instructor(){
         foreach(DB::select(
             'select usuario.*, instructor.* from usuario
-            inner join instructor on instructor.id_usuario = usuario.IdUsuario
-            INNER join instructorficha on instructorficha.id_instructor = instructor.IdInstructor
-            inner join ficha on ficha.IdFicha = instructorficha.id_ficha
-            where ficha.IdFicha = ?',
-         [$this->IdFicha]) as $sql){
+            inner join instructor on instructor.id_usuario = usuario.id
+            INNER join instructor_ficha on instructor_ficha.id_instructor = instructor.id
+            inner join ficha on ficha.id = instructor_ficha.id_ficha
+            where ficha.id = ?',
+         [$this->id]) as $sql){
             return $sql;
         }//end foreach
 
@@ -61,11 +63,11 @@ class Ficha extends Model
         * ---------------------     finalProductiva > hoy   finalProductiva < hoy
         * LECTIVA                   PRODUCTIVA              FINALIZO
         */
-        $iL = $this->InicioLectiva;
-        $fL = $this->FinLectiva;
+        $iL = $this->inicioLectiva;
+        $fL = $this->finLectiva;
 
-        $iP = $this->InicioProductiva;
-        $fP = $this->FinProductiva;
+        $iP = $this->inicioProductiva;
+        $fP = $this->finProductiva;
 
         $hoy = Carbon::now();
 

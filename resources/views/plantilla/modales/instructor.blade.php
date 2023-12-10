@@ -2,7 +2,7 @@
 <!--INSTRUCTOR-->
 <!---------------------------------------------->
 
-@if(isset($centro->IdCentro) != null || isset($centro->IdCentro) != '')
+@if(isset($centro->id) != null || isset($centro->id) != '')
     <!---------------------------------------------->
     <!---CREATE-->
     <!---------------------------------------------->
@@ -183,7 +183,7 @@
 
                                 <div class="col-md-0">
                                     <div class="form-group">
-                                        <input type="text" value="{{$centro->IdCentro}}"  name="centro" class="form-control"
+                                        <input type="text" value="{{$centro->id}}"  name="centro" class="form-control"
                                         placeholder="Centro" data-toggle="tooltip" title="Centro" hidden>
                                         @error('centro')
                                         {{$message}}
@@ -223,7 +223,7 @@
     <!---------------------------------------------->
     <!---EDIT-->
     <!---------------------------------------------->
-    <div id="EditInstructor{{$instructor->IdInstructor}}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="EditInstructor{{$instructor->id}}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -239,19 +239,18 @@
 
             <div class="col-12">
                 <!--FORM-->
-                <form method="POST" action="{{ url('instructores/'.$instructor->IdInstructor) }}">
+                <form method="POST" action="{{ url('instructores/'.$instructor->id) }}">
                     @method('PUT')
                     @csrf
                     <div class="form-body">
 
 
-                        @foreach ($instructor->usuarios() as $usuario)
 
                          <!--NOMBRE, APELLIDO-->
                          <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" value="{{ $usuario->Nombre  }}"  name="nombre" class="form-control"
+                                    <input type="text" value="{{ $instructor->usuarios()->first()->nombre  }}"  name="nombre" class="form-control"
                                     placeholder="Nombre" data-toggle="tooltip" title="Nombre">
                                     @error('nombre')
                                     {{$message}}
@@ -260,7 +259,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" value="{{ $usuario->Apellido  }}"  name="apellido" class="form-control"
+                                    <input type="text" value="{{ $instructor->usuarios()->first()->apellido  }}"  name="apellido" class="form-control"
                                     placeholder="Apellido" data-toggle="tooltip" title="Apellido">
                                     @error('apellido')
                                     {{$message}}
@@ -274,7 +273,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="date" value="{{ $usuario->FechaNacimiento }}"  name="fechaNacimiento" class="form-control"
+                                    <input type="date" value="{{ $instructor->usuarios()->first()->fechaNacimiento }}"  name="fechaNacimiento" class="form-control"
                                     placeholder="Fecha Nacimiento" data-toggle="tooltip" title="Fecha Nacimiento">
                                     @error('fechaNacimiento')
                                     {{$message}}
@@ -285,8 +284,8 @@
                                 <div class="form-group">
                                     <select name="genero" class="form-control" data-toggle="tooltip" title="Genero">
                                         <option value="">Seleccione...</option>
-                                        <option {{ $usuario->Genero == "F" ? 'selected' : ''}}>F</option>
-                                        <option {{ $usuario->Genero =="M" ? 'selected' : ''}}>M</option>
+                                        <option {{ $instructor->usuarios()->first()->genero == "F" ? 'selected' : ''}}>F</option>
+                                        <option {{ $instructor->usuarios()->first()->genero =="M" ? 'selected' : ''}}>M</option>
                                         </select>
                                     @error('genero')
                                     {{$message}}
@@ -301,12 +300,12 @@
                                 <div class="form-group">
                                     <select name="tipoD" class="form-control"  data-toggle="tooltip" title="Tipo Documento">
                                         <option value="">Seleccione...</option>
-                                        <option {{ $usuario->TipoDocumento == "CC" ? 'selected' : ''}}>CC</option>
-                                        <option {{ $usuario->TipoDocumento == "TI" ? 'selected' : ''}}>TI</option>
-                                        <option {{ $usuario->TipoDocumento == "CE" ? 'selected' : ''}}>CE</option>
-                                        <option {{ $usuario->TipoDocumento == "NIP" ? 'selected' : ''}}>NIP</option>
-                                        <option {{ $usuario->TipoDocumento == "NIT" ? 'selected' : ''}}>NIT</option>
-                                        <option {{ $usuario->TipoDocumento == "PAP" ? 'selected' : ''}}>PAP</option>
+                                        <option {{ $instructor->usuarios()->first()->tipoDocumento == "CC" ? 'selected' : ''}}>CC</option>
+                                        <option {{ $instructor->usuarios()->first()->tipoDocumento == "TI" ? 'selected' : ''}}>TI</option>
+                                        <option {{ $instructor->usuarios()->first()->tipoDocumento == "CE" ? 'selected' : ''}}>CE</option>
+                                        <option {{ $instructor->usuarios()->first()->tipoDocumento == "NIP" ? 'selected' : ''}}>NIP</option>
+                                        <option {{ $instructor->usuarios()->first()->tipoDocumento == "NIT" ? 'selected' : ''}}>NIT</option>
+                                        <option {{ $instructor->usuarios()->first()->tipoDocumento == "PAP" ? 'selected' : ''}}>PAP</option>
                                     </select>
                                     @error('tipoD')
                                     {{$message}}
@@ -315,7 +314,7 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
-                                    <input type="text" value="{{ $usuario->NumeroIdentificacion }}"  name="numeroD" class="form-control"
+                                    <input type="text" value="{{ $instructor->usuarios()->first()->numeroIdentificacion }}"  name="numeroD" class="form-control"
                                     placeholder="Número Documento" data-toggle="tooltip" title="Número Documento">
                                     @error('numeroD')
                                     {{$message}}
@@ -328,7 +327,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" value="{{ $usuario->EmailPersonal }}"  name="emailP" class="form-control"
+                                    <input type="text" value="{{ $instructor->usuarios()->first()->emailPersonal }}"  name="emailP" class="form-control"
                                     placeholder="Email Personal" data-toggle="tooltip" title="Email Personal">
                                     @error('emailP')
                                     {{$message}}
@@ -337,7 +336,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" value="{{ $usuario->EmailSena }}"  name="emailS" class="form-control"
+                                    <input type="text" value="{{ $instructor->usuarios()->first()->emailSena }}"  name="emailS" class="form-control"
                                     placeholder="Email Sena" data-toggle="tooltip" title="Email Sena">
                                     @error('emailS')
                                     {{$message}}
@@ -351,7 +350,7 @@
                          <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" value="{{ $usuario->NumeroCelular}}"  name="celular" class="form-control"
+                                    <input type="text" value="{{ $instructor->usuarios()->first()->numeroCelular}}"  name="celular" class="form-control"
                                     placeholder="Celular" data-toggle="tooltip" title="Celular">
                                     @error('celular')
                                     {{$message}}
@@ -360,7 +359,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" value="{{ $usuario->NumeroFijo }}"  name="telefono" class="form-control"
+                                    <input type="text" value="{{ $instructor->usuarios()->first()->numeroFijo }}"  name="telefono" class="form-control"
                                     placeholder="Telefono" data-toggle="tooltip" title="Telefono">
                                     @error('telefono')
                                     {{$message}}
@@ -374,7 +373,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" value="{{ $usuario->Direccion }}"  name="direccion" class="form-control"
+                                    <input type="text" value="{{ $instructor->usuarios()->first()->direccion }}"  name="direccion" class="form-control"
                                     placeholder="Dirección" data-toggle="tooltip" title="Dirección">
                                     @error('direccion')
                                     {{$message}}
@@ -391,8 +390,8 @@
                                     <select name="estado" class="form-control"
                                     data-toggle="tooltip" title="Estado">
                                         <option value="">Seleccione...</option>
-                                        <option {{ $usuario->Estado == "Activo" ? 'selected' : ''}}>Activo</option>
-                                        <option {{ $usuario->Estado == "Inactivo" ? 'selected' : ''}}>Inactivo</option>
+                                        <option {{ $instructor->usuarios()->first()->estado == "Activo" ? 'selected' : ''}}>Activo</option>
+                                        <option {{ $instructor->usuarios()->first()->estado == "Inactivo" ? 'selected' : ''}}>Inactivo</option>
                                     </select>
                                     @error('estado')  {{$message}}  @enderror
                                 </div>
@@ -416,7 +415,7 @@
                                     data-toggle="tooltip" title="Centro">
                                         <option value="">Seleccione...</option>
                                         @foreach(  App\Models\Centro::all() as $c  )
-                                            <option {{ $centro->IdCentro == $c->IdCentro ? 'selected' : ''}} value="{{  $c->IdCentro  }}">  {{  $c->Nombre  }}  </option>
+                                            <option {{ $centro->id == $c->id ? 'selected' : ''}} value="{{  $c->id  }}">  {{  $c->nombre  }}  </option>
                                         @endforeach
                                     </select>
                                     @error('centro')  {{$message}}  @enderror
@@ -428,7 +427,6 @@
                         </div>
 
 
-                        @endforeach
 
                     </div>
                     <!--BTNS-->
@@ -464,10 +462,10 @@
 <!---------------------------------------------->
 <!---DELETE-->
 <!---------------------------------------------->
-<div id="DeleteInstructor{{$instructor->IdInstructor}}" class="modal fade" tabindex="-1" role="dialog"
+<div id="DeleteInstructor{{$instructor->id}}" class="modal fade" tabindex="-1" role="dialog"
 aria-labelledby="fill-danger-modalLabel" aria-hidden="true">
 <div class="modal-dialog">
-    <form method="post" action="{{url('instructores/'.$instructor->IdInstructor)}}">
+    <form method="post" action="{{url('instructores/'.$instructor->id)}}">
         @method('DELETE')
         @csrf
 
@@ -505,7 +503,7 @@ aria-labelledby="fill-danger-modalLabel" aria-hidden="true">
 <!---------------------------------------------->
 <!---ASIGNAR-->
 <!---------------------------------------------->
-<div id="AsignarInstructor{{$instructor->IdInstructor}}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="AsignarInstructor{{$instructor->id}}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -517,7 +515,7 @@ aria-labelledby="fill-danger-modalLabel" aria-hidden="true">
 
             <div class="col-12">
                 <!--FORM-->
-                <form method="GET" action="{{ url('instructores/'.$instructor->IdInstructor.'/asignar') }}">
+                <form method="GET" action="{{ url('instructores/'.$instructor->id.'/asignar') }}">
                     @csrf
                     <div class="form-body">
 
@@ -534,7 +532,7 @@ aria-labelledby="fill-danger-modalLabel" aria-hidden="true">
 
                                     <fieldset class="checkbox">
                                         <label>
-                                            <input name="ficha{{  $ficha->IdFicha  }}" value="on" type="checkbox"> {{  $ficha->NumeroFicha  }}
+                                            <input name="ficha{{  $ficha->id  }}" value="on" type="checkbox"> {{  $ficha->numero  }}
                                         </label>
                                     </fieldset>
 
@@ -582,10 +580,10 @@ aria-labelledby="fill-danger-modalLabel" aria-hidden="true">
 <!---------------------------------------------->
 @foreach (App\Models\Ficha::all() as $ficha)
 
-<div id="DeleteAsignar{{$ficha->IdFicha}}" class="modal fade" tabindex="-1" role="dialog"
+<div id="DeleteAsignar{{$ficha->id}}" class="modal fade" tabindex="-1" role="dialog"
     aria-labelledby="fill-danger-modalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form method="POST" action="{{url('instructores/'.$ficha->IdFicha.'/desasignar')}}">
+        <form method="POST" action="{{url('instructores/'.$ficha->id.'/desasignar')}}">
             @csrf
 
         <div class="modal-content modal-filled bg-danger">

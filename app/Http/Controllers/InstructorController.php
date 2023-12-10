@@ -30,7 +30,7 @@ class InstructorController extends Controller
 
         $newInstructor = new Instructor();
         $newInstructor->id_centro = $request->input('centro');
-        $newInstructor->id_usuario = $usuarioC->IdUsuario;
+        $newInstructor->id_usuario = $usuarioC->id;
         $newInstructor->save();
 
         return redirect('instructores')
@@ -51,7 +51,7 @@ class InstructorController extends Controller
     public function update(updateUsuario $request, $Instructor)
     {
         $instructor = Instructor::find($Instructor);
-        $usuario = User::where('IdUsuario','=',$instructor->id_usuario)->first()->IdUsuario;
+        $usuario = User::where('id','=',$instructor->id_usuario)->first()->id;
 
         //usuario
         $usuarioC = new UsuarioController();
@@ -59,7 +59,7 @@ class InstructorController extends Controller
 
         //instructor
         $instructor->id_centro = $request->input('centro');
-        $instructor->id_usuario = $usuarioC->IdUsuario;
+        $instructor->id_usuario = $usuarioC->id;
         $instructor->save();
 
         return redirect('instructores')
@@ -72,7 +72,7 @@ class InstructorController extends Controller
         $instructor = Instructor::find($instructor);
 
         $usuario = User::find($instructor->id_usuario);
-        $usuario->Estado = 'Inactivo';
+        $usuario->estado = 'Inactivo';
         $usuario->save();
 
         return redirect('instructores')
@@ -87,8 +87,8 @@ class InstructorController extends Controller
         foreach (Ficha::all() as $fichas) {
             //1.sacar los id y saber cuantas fichas son
             //el valor del request es 'ficha[IdFicha]', recorro los request con esta estructura y unicamente uso el id
-            if ($request->input('ficha'.strval($fichas->IdFicha) ) == 'on') {
-                array_push($id_ficha, $fichas->IdFicha);
+            if ($request->input('ficha'.strval($fichas->id) ) == 'on') {
+                array_push($id_ficha, $fichas->id);
             }
         }
         // return $id_ficha;
@@ -96,7 +96,7 @@ class InstructorController extends Controller
 
         //recorreo el array con los id de ficha para ser insertados en la tabla intermedia instructorficha
         foreach($id_ficha as $id){
-            DB::insert('insert into instructorficha (id_instructor, id_ficha) values (?, ?)',
+            DB::insert('insert into instructor_ficha (id_instructor, id_ficha) values (?, ?)',
             [$instructor, $id]
             );
         }
@@ -111,9 +111,9 @@ class InstructorController extends Controller
 
         //consulta hacia instructorficha para retornar al instructor
         //como DB::select debuelve un array, por ello el foreach, para acceder de forma mas facil a sus atributos
-        foreach( DB::select('select * from instructorficha where id_ficha = ?', [$id_ficha]) as $sql ){}
+        foreach( DB::select('select * from instructor_ficha where id_ficha = ?', [$id_ficha]) as $sql ){}
         //eliminar la ficha asignada al instructor
-        DB::delete('delete from instructorficha where id_ficha = ?', [$id_ficha]);
+        DB::delete('delete from instructor_ficha where id_ficha = ?', [$id_ficha]);
 
         return redirect('instructores/'.$sql->id_instructor)
         ->with('msg', 'Se Elimino la Ficha Asignada al Instructor Correctamente');

@@ -78,7 +78,7 @@
                         </div>
 
 
-                        @if(Auth::user()->rol()->first()->tipoRol != 'Aprendiz')
+                        @if(Auth::user()->rol()->first()->tipo != 'Aprendiz')
 
                         <!--Estado-->
                         <div class="row">
@@ -134,18 +134,18 @@
 
 
                         <!--INSTRUCTOR, APRENDICES-->
-                        @if(Auth::user()->rol()->first()->tipoRol == 'Aprendiz')
+                        @if(Auth::user()->rol()->first()->tipo == 'Aprendiz')
                             <input type="hidden" name="id_aprendiz" value="{{  Auth::user()->aprendiz()->id  }}">
-                            <input type="hidden" name="id_instructor" value="{{  Auth::user()->aprendiz()->instructor()->IdInstructor   }}">
+                            <input type="hidden" name="id_instructor" value="{{  Auth::user()->aprendiz()->instructor()->id   }}">
                         @else
                             <select name="id_aprendiz" class="form-control"
                             data-toggle="tooltip" title="Aprendiz">
                                 <option value="">Seleccione...</option>
                                 @foreach ( Auth::user()->instructor()->aprendices() as $aprendiz )
-                                    <option value="{{  $aprendiz->id  }}">{{  $aprendiz->Nombre  }} {{  $aprendiz->Apellido  }}</option>
+                                    <option value="{{  $aprendiz->id  }}">{{  $aprendiz->nombre  }} {{  $aprendiz->apellido  }}</option>
                                 @endforeach
                             </select>
-                            <input type="hidden" name="id_instructor" value="{{Auth::user()->instructor()->IdInstructor}}">
+                            <input type="hidden" name="id_instructor" value="{{Auth::user()->instructor()->id}}">
                         @endif
 
 
@@ -213,7 +213,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <textarea  name="Descripcion" class="form-control"
-                                    data-toggle="tooltip" title="Descripcion">{{  $reunion->Descripcion  }}</textarea>
+                                    data-toggle="tooltip" title="Descripcion">{{  $reunion->descripcion  }}</textarea>
                                     @error('Descripcion')
                                     {{$message}}
                                     @enderror
@@ -230,9 +230,9 @@
                                     <select name="Modalidad" class="form-control"
                                     data-toggle="tooltip" title="Modalidad">
                                         <option value="">Seleccione</option>
-                                        <option {{  $reunion->Modalidad == 'Virtual' ? 'selected' : ''  }}  value="Virtual">Virtual</option>
-                                        <option {{  $reunion->Modalidad == 'Presencial' ? 'selected' : ''  }} value="Presencial">Presencial</option>
-                                        <option {{  $reunion->Modalidad == 'Telefonica' ? 'selected' : ''  }} value="Telefonica">Telefonica</option>
+                                        <option {{  $reunion->modalidad == 'Virtual' ? 'selected' : ''  }}  value="Virtual">Virtual</option>
+                                        <option {{  $reunion->modalidad == 'Presencial' ? 'selected' : ''  }} value="Presencial">Presencial</option>
+                                        <option {{  $reunion->modalidad == 'Telefonica' ? 'selected' : ''  }} value="Telefonica">Telefonica</option>
                                     </select>
                                     @error('Modalidad')
                                     {{$message}}
@@ -244,8 +244,8 @@
                                     <select name="MomentoEleccion" class="form-control"
                                     data-toggle="tooltip" title="Momento Eleccion">
                                         <option  value="">Seleccione</option>
-                                        <option {{  $reunion->MomentoEleccion == 'Lectiva' ? 'selected' : ''  }} value="Lectiva">Lectiva</option>
-                                        <option {{  $reunion->MomentoEleccion == 'Productiva' ? 'selected' : ''  }} value="Productiva">Productiva</option>
+                                        <option {{  $reunion->momentoEleccion == 'Lectiva' ? 'selected' : ''  }} value="Lectiva">Lectiva</option>
+                                        <option {{  $reunion->momentoEleccion == 'Productiva' ? 'selected' : ''  }} value="Productiva">Productiva</option>
                                     </select>
                                     @error('MomentoEleccion')
                                     {{$message}}
@@ -255,7 +255,7 @@
                         </div>
 
 
-                        @if(Auth::user()->rol()->first()->tipoRol != 'Aprendiz')
+                        @if(Auth::user()->rol()->first()->tipo != 'Aprendiz')
 
                         <!--Estado-->
                         <div class="row">
@@ -264,10 +264,10 @@
                                     <select name="Estado" class="form-control"
                                     data-toggle="tooltip" title="Estado">
                                         <option value="">Seleccione</option>
-                                        <option {{  $reunion->Estado == 'En espera' ? 'selected' : ''  }} value="En espera">En espera</option>
-                                        <option {{  $reunion->Estado == 'Aceptado' ? 'selected' : ''  }} value="Aceptado">Aceptado</option>
-                                        <option {{  $reunion->Estado == 'Rechazado' ? 'selected' : ''  }} value="Rechazado">Rechazado</option>
-                                        <option {{  $reunion->Estado == 'Finalizado' ? 'selected' : ''  }} value="Finalizado">Finalizado</option>
+                                        <option {{  $reunion->estado == 'En espera' ? 'selected' : ''  }} value="En espera">En espera</option>
+                                        <option {{  $reunion->estado == 'Aceptado' ? 'selected' : ''  }} value="Aceptado">Aceptado</option>
+                                        <option {{  $reunion->estado == 'Rechazado' ? 'selected' : ''  }} value="Rechazado">Rechazado</option>
+                                        <option {{  $reunion->estado == 'Finalizado' ? 'selected' : ''  }} value="Finalizado">Finalizado</option>
                                     </select>
                                     @error('Estado')
                                     {{$message}}
@@ -311,9 +311,9 @@
 
 
                         <!--INSTRUCTOR, APRENDICES-->
-                        @if(Auth::user()->rol()->first()->tipoRol == 'Aprendiz')
+                        @if(Auth::user()->rol()->first()->tipo == 'Aprendiz')
                             <input type="hidden" name="id_aprendiz" value="{{  Auth::user()->aprendiz()->id  }}">
-                            <input type="hidden" name="id_instructor" value="{{  Auth::user()->aprendiz()->instructor()->IdInstructor   }}">
+                            <input type="hidden" name="id_instructor" value="{{  Auth::user()->aprendiz()->instructor()->id   }}">
                         @else
                             <select name="id_aprendiz" class="form-control"
                             data-toggle="tooltip" title="Aprendiz">
@@ -322,7 +322,7 @@
                                     <option {{  $aprendiz->id == $reunion->id_aprendiz ? 'selected' : ''  }} value="{{  $aprendiz->id  }}">{{  $aprendiz->Nombre  }} {{  $aprendiz->Apellido  }}</option>
                                 @endforeach
                             </select>
-                            <input type="hidden" name="id_instructor" value="{{Auth::user()->instructor()->IdInstructor}}">
+                            <input type="hidden" name="id_instructor" value="{{Auth::user()->instructor()->id}}">
                         @endif
 
 

@@ -21,7 +21,7 @@
 
 
 
-                        <!--NUMERO, JORNADA-->
+                        <!--NUMERO, jornada-->
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -35,7 +35,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <select name="jornada" class="form-control"
-                                    data-toggle="tooltip" title="Jornada">
+                                    data-toggle="tooltip" title="jornada">
                                         <option value="">Seleccione...</option>
                                         <option {{old('jornada')=='Mixta' ? 'selected' : ''}}>Mixta</option>
                                         <option {{old('jornada')=='Diurna' ? 'selected' : ''}}>Diurna</option>
@@ -96,7 +96,7 @@
                                     data-toggle="tooltip" title="Programa">
                                         <option value="">Seleccione...</option>
                                         @foreach (App\Models\Programa::all() as $p)
-                                            <option {{old('programa')==$p->IdPrograma ? 'selected' : ''}} value="{{$p->IdPrograma}}">{{$p->Nombre}}</option>
+                                            <option {{old('programa')==$p->id ? 'selected' : ''}} value="{{$p->id}}">{{$p->nombre}}</option>
                                         @endforeach
                                     </select>
                                     @error('programa')   {{$message}}    @enderror
@@ -146,7 +146,7 @@
 <!---------------------------------------------->
 <!---EDIT-->
 <!---------------------------------------------->
-<div id="EditFicha{{  $ficha->IdFicha  }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="EditFicha{{  $ficha->id  }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
@@ -156,30 +156,30 @@
                 </div>
 
                 <!--FORM-->
-                <form method="POST" action="{{ url('fichas/'.$ficha->IdFicha) }}">
+                <form method="POST" action="{{ url('fichas/'.$ficha->id) }}">
                     @method('PUT')
                     @csrf
                     <div class="form-body">
 
 
 
-                        <!--NUMERO, JORNADA-->
+                        <!--NUMERO, jornada-->
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input value="{{  $ficha->NumeroFicha  }}" name="numero" type="text" class="form-control"
+                                    <input value="{{  $ficha->numero  }}" name="numero" type="text" class="form-control"
                                     placeholder="Número" data-toggle="tooltip" title="Número">
                                     @error('numero')   {{$message}}   @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <select name="jornada" class="form-control"
+                                    <select name="Jornada" class="form-control"
                                     data-toggle="tooltip" title="Jornada">
                                         <option value="">Seleccione...</option>
-                                        <option {{ $ficha->Jornada =='Mixta' ? 'selected' : ''}}>Mixta</option>
-                                        <option {{ $ficha->Jornada =='Diurna' ? 'selected' : ''}}>Diurna</option>
-                                        <option {{ $ficha->Jornada =='Nocturna' ? 'selected' : ''}}>Nocturna</option>
+                                        <option {{ $ficha->jornada =='Mixta' ? 'selected' : ''}}>Mixta</option>
+                                        <option {{ $ficha->jornada =='Diurna' ? 'selected' : ''}}>Diurna</option>
+                                        <option {{ $ficha->jornada =='Nocturna' ? 'selected' : ''}}>Nocturna</option>
                                     </select>
                                     @error('jornada')   {{$message}}    @enderror
                                 </div>
@@ -192,14 +192,14 @@
                          <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input value="{{  $ficha->InicioLectiva  }}" name="inicioLectiva" type="date" class="form-control"
+                                    <input value="{{  $ficha->inicioLectiva  }}" name="inicioLectiva" type="date" class="form-control"
                                     placeholder="Inicio Lectiva" data-toggle="tooltip" title="Inicio Lectiva">
                                     @error('inicioLectiva') {{$message}}  @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input value="{{  $ficha->FinLectiva }}" name="finLectiva" type="date" class="form-control"
+                                    <input value="{{  $ficha->finLectiva }}" name="finLectiva" type="date" class="form-control"
                                     placeholder="Fin Lectiva" data-toggle="tooltip" title="Fin Lectiva">
                                     @error('finLectiva') {{$message}}  @enderror
                                 </div>
@@ -212,14 +212,14 @@
                          <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input value="{{  $ficha->InicioProductiva }}" name="inicioProductiva" type="date" class="form-control"
+                                    <input value="{{  $ficha->inicioProductiva }}" name="inicioProductiva" type="date" class="form-control"
                                     placeholder="Inicio Productiva" data-toggle="tooltip" title="Inicio Productiva">
                                     @error('inicioProductiva')  {{$message}}  @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input value="{{  $ficha->FinProductiva  }}" name="finProductiva" type="date" class="form-control"
+                                    <input value="{{  $ficha->finProductiva  }}" name="finProductiva" type="date" class="form-control"
                                     placeholder="Fin Productiva" data-toggle="tooltip" title="Fin Productiva">
                                     @error('finProductiva')  {{$message}}  @enderror
                                 </div>
@@ -236,7 +236,7 @@
                                     data-toggle="tooltip" title="Programa">
                                         <option value="">Seleccione...</option>
                                         @foreach (App\Models\Programa::all() as $p)
-                                            <option {{  $ficha->Id_programa == $p->IdPrograma ? 'selected' : ''}} value="{{  $p->IdPrograma  }}">{{  $p->Nombre  }}</option>
+                                            <option {{  $ficha->id_programa == $p->id ? 'selected' : ''}} value="{{  $p->id  }}">{{  $p->nombre  }}</option>
                                         @endforeach
                                     </select>
                                     @error('programa')   {{$message}}    @enderror
@@ -247,8 +247,8 @@
                                     <select name="estado" class="form-control"
                                     data-toggle="tooltip" title="Estado">
                                         <option value="">Seleccione...</option>
-                                        <option {{ $ficha->Estado =='Activo' ? 'selected' : ''}}>Activo</option>
-                                        <option {{ $ficha->Estado =='Inactivo' ? 'selected' : ''}}>Inactivo</option>
+                                        <option {{ $ficha->estado =='Activo' ? 'selected' : ''}}>Activo</option>
+                                        <option {{ $ficha->estado =='Inactivo' ? 'selected' : ''}}>Inactivo</option>
                                     </select>
                                     @error('estado')   {{$message}}    @enderror
                                 </div>
@@ -284,10 +284,10 @@
 <!---------------------------------------------->
 <!---DELETE-->
 <!---------------------------------------------->
-<div id="DeleteFicha{{$ficha->IdFicha}}" class="modal fade" tabindex="-1" role="dialog"
+<div id="DeleteFicha{{$ficha->id}}" class="modal fade" tabindex="-1" role="dialog"
     aria-labelledby="fill-danger-modalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form method="post" action="{{url('fichas/'.$ficha->IdFicha)}}">
+        <form method="post" action="{{url('fichas/'.$ficha->id)}}">
             @method('DELETE')
             @csrf
 
@@ -304,7 +304,7 @@
                 <p>Seguro desea eliminar este elemento ?</p>
             </div>
 
-            <input type="text" name="url" value="{{  'fichas/'.$ficha->IdFicha  }}" hidden>
+            <input type="text" name="url" value="{{  'fichas/'.$ficha->id  }}" hidden>
 
             <!--BTNS-->
             <div class="modal-footer">

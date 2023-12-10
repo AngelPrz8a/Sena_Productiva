@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rol extends Model
 {
+    use HasFactory;
     //Vincular MODEL - TABLE (Mysql)
     protected $table = "rol";
 

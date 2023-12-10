@@ -10,9 +10,9 @@
 @section('bread')
 <li class="breadcrumb-item"><a href="{{  url('fichas')  }}">Fichas</a>
 </li>
-<li class="breadcrumb-item"><a href="{{  url('fichas/'.$ficha->IdFicha)  }}">  {{  $ficha->NumeroFicha  }}  </a>
+<li class="breadcrumb-item"><a href="{{  url('fichas/'.$ficha->id)  }}">  {{  $ficha->numero  }}  </a>
 </li>
-<li class="breadcrumb-item"><a href="{{  url('fichas/'.$ficha->IdFicha.'/aprendices' )  }}"> Aprendices  </a>
+<li class="breadcrumb-item"><a href="{{  url('fichas/'.$ficha->id.'/aprendices' )  }}"> Aprendices  </a>
 </li>
 @endsection
 
@@ -47,13 +47,13 @@
                     <tbody>
                         @foreach ($aprendices as $aprendiz)
                         <tr>
-                            <td>{{  $aprendiz->usuarios()->Nombre  }} {{  $aprendiz->usuarios()->Apellido  }}</td>
+                            <td>{{  $aprendiz->usuarios()->nombre  }} {{  $aprendiz->usuarios()->apellido  }}</td>
                             <td>
                                 @if( $aprendiz->empresas() != null || $aprendiz->empresas() != '' )
-                                    {{  $aprendiz->empresas()->Nombre  }}
-                                    <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditEmpresa{{  $aprendiz->empresas()->IdEmpresa  }}">
+                                    {{--  $aprendiz->empresas()->nombre  --}}
+                                    {{-- <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditEmpresa{{  $aprendiz->empresas()->id  }}">
                                         <i class="far fa-edit"></i>
-                                    </button>
+                                    </button> --}}
 
                                 @else
                                     {{  'Sin Empresa'  }}

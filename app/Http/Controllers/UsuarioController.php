@@ -19,7 +19,7 @@ class UsuarioController extends Controller
 
         $paginate = 25;
         return view('usuarios.index')
-        ->with('usuarios', Usuario::paginate($paginate))
+        ->with('usuarios', User::paginate($paginate))
         ;
 
     }
@@ -47,10 +47,10 @@ class UsuarioController extends Controller
         $newUsuario->save();
 
         //consulta el id del rol si es el mismo al traido
-        $selectrol = Rol::where('tipoRol', '=', $request->input('rol') )->first()->id ;
+        $selectrol = Rol::where('tipo', '=', $request->input('rol') )->first()->id ;
 
         $newUsuRol = new UsuarioRol();
-        $newUsuRol->id_usuario = $newUsuario->IdUsuario;//trae el id del usuario creado
+        $newUsuRol->id_usuario = $newUsuario->id;//trae el id del usuario creado
         $newUsuRol->id_rol = $selectrol; //rol del formulario
         $newUsuRol->save();
 
@@ -91,9 +91,9 @@ class UsuarioController extends Controller
         $usuario->save();
 
         //consulta el id del rol si es el mismo al traido
-        $selectrol = Rol::where('tipoRol', '=', $request->input('rol') )->first()->id ;
+        $selectrol = Rol::where('tipo', '=', $request->input('rol') )->first()->id ;
 
-        $newUsuRol = UsuarioRol::where('id_usuario', '=', $usuario->IdUsuario)->first();
+        $newUsuRol = UsuarioRol::where('id_usuario', '=', $usuario->id)->first();
         $newUsuRol->id_rol = $selectrol;
         $newUsuRol->save();
 
@@ -106,7 +106,7 @@ class UsuarioController extends Controller
 //
     public function destroy(/*Usuario*/ $usuario)
     {
-        $usuario = Usuario::find($usuario);
+        $usuario = User::find($usuario);
         $usuario->delete();
 
         return redirect('usuarios')

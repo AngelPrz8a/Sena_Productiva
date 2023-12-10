@@ -84,7 +84,7 @@
 
                     <!--ID_FICHA-->
                     @if(  isset($ficha)  )
-                    <input type="hidden" name="id_ficha" value="{{  $ficha->IdFicha  }}">
+                    <input type="hidden" name="id_ficha" value="{{  $ficha->id  }}">
                     @else
                     <input type="hidden" name="id_ficha" value="{{  $id_ficha  }}">
                     @endif

@@ -31,7 +31,7 @@
 
 
 <!---SEGUN EL ROL, SI NO ES APRENDIZ VISUALIZA A TODAS LAS EMPRESAS Y APRENDICES-->
-@if(Auth::user()->rol()->first()->tipoRol != 'Aprendiz')
+@if(Auth::user()->rol()->first()->tipo != 'Aprendiz')
 
 
 
@@ -56,17 +56,17 @@
                         @foreach ($empresas as $empresa)
                         <tr>
 
-                            <td>{{  $empresa->Nombre  }}</td>
-                            <td>{{  $empresa->NombreInmediato  }}</td>
-                            <td>{{  $empresa->EmailInmediato  }}</td>
-                            <td>{{  $empresa->TelefonoInmediato  }}</td>
+                            <td>{{  $empresa->nombre  }}</td>
+                            <td>{{  $empresa->nombre_jefe_inmediato  }}</td>
+                            <td>{{  $empresa->email_jefe_inmediato  }}</td>
+                            <td>{{  $empresa->telefono_jefe_inmediato  }}</td>
                             <td>Aprendiz</td>
 
                             <td>
                                 <!--------------------------------------------->
                                 <!---LLAMA MODAL PARA EDITAR-->
                                 <!--------------------------------------------->
-                                <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditEmpresa{{  $empresa->IdEmpresa  }}">
+                                <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditEmpresa{{  $empresa->id  }}">
                                     <i class="fas fa-edit"></i>
                                 </button>
 
@@ -96,7 +96,7 @@
 
             <div class="card-body">
 
-                <h3 class="card-title">Empresa : {{  $empresa->Nombre  }}</h3>
+                <h3 class="card-title">Empresa : {{  $empresa->nombre  }}</h3>
 
                 <!-- -->
                 <div class="row">
@@ -109,7 +109,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <h4 class="card-text"
-                            data-toggle="tooltip" title="Nombre">  {{  $empresa->Nombre  }}  </h4>
+                            data-toggle="tooltip" title="Nombre">  {{  $empresa->nombre  }}  </h4>
                         </div>
                     </div>
                 </div>
@@ -118,13 +118,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <h4 class="card-text"
-                            data-toggle="tooltip" title="Razon Social">  {{  $empresa->RazonSocial  }}  </h4>
+                            data-toggle="tooltip" title="Razon Social">  {{  $empresa->razonSocial  }}  </h4>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <h4 class="card-text"
-                            data-toggle="tooltip" title="Telefono">  {{  $empresa->Telefono  }}  </h4>
+                            data-toggle="tooltip" title="Telefono">  {{  $empresa->telefono  }}  </h4>
                         </div>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <h4 class="card-text"
-                            data-toggle="tooltip" title="Direccion">  {{  $empresa->Direccion  }}  </h4>
+                            data-toggle="tooltip" title="Direccion">  {{  $empresa->direccion  }}  </h4>
                         </div>
                     </div>
                 </div>
@@ -144,13 +144,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <h4 class="card-text"
-                            data-toggle="tooltip" title="Nombre Jefe">  {{  $empresa->NombreInmediato  }}  </h4>
+                            data-toggle="tooltip" title="Nombre Jefe">  {{  $empresa->nombre_jefe_inmediato  }}  </h4>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <h4 class="card-text"
-                            data-toggle="tooltip" title="Apellido Jefe">  {{  $empresa->ApellidoInmediato  }}  </h4>
+                            data-toggle="tooltip" title="Apellido Jefe">  {{  $empresa->apellido_jefe_inmediato  }}  </h4>
                         </div>
                     </div>
                 </div>
@@ -160,13 +160,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <h4 class="card-text"
-                            data-toggle="tooltip" title="Email Jefe">  {{  $empresa->EmailInmediato  }}  </h4>
+                            data-toggle="tooltip" title="Email Jefe">  {{  $empresa->email_jefe_inmediato  }}  </h4>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <h4 class="card-text"
-                            data-toggle="tooltip" title="Telefono Jefe">  {{  $empresa->TelefonoInmediato  }}  </h4>
+                            data-toggle="tooltip" title="Telefono Jefe">  {{  $empresa->telefono_jefe_inmediato  }}  </h4>
                         </div>
                     </div>
                 </div>
@@ -175,7 +175,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <h4 class="card-text"
-                            data-toggle="tooltip" title="Cargo Jefe">  {{  $empresa->CargoInmediato  }}  </h4>
+                            data-toggle="tooltip" title="Cargo Jefe">  {{  $empresa->cargo_jefe_inmediato  }}  </h4>
                         </div>
                     </div>
                 </div>
@@ -187,7 +187,7 @@
                 <!--------------------------------------------->
                 <!---LLAMA MODAL PARA EDITAR-->
                 <!--------------------------------------------->
-                <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditEmpresa{{  $empresa->IdEmpresa  }}">
+                <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditEmpresa{{  $empresa->id  }}">
                     <i class="far fa-edit"></i>
                 </button>
 

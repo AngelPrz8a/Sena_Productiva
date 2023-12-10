@@ -16,13 +16,13 @@ class EmpresaController extends Controller
     public function index()
     {
         //Visualiza todas las empresas, sino es aprendiz
-        if (Auth::user()->rol()->first()->tipoRol != 'Aprendiz') {
+        if (Auth::user()->rol()->first()->tipo != 'Aprendiz') {
             return view('empresas.index')
             ->with('empresas', Empresa::all());
 
             //vializa la empresa del aprendiz
         }else{
-            $aprendiz = Aprendiz::where('id_usuario','=',Auth::user()->IdUsuario )->first();
+            $aprendiz = Aprendiz::where('id_usuario','=',Auth::user()->id )->first();
             $empresa = $aprendiz->empresas();
             return view('empresas.index')
             ->with(  'empresa',   $empresa );
@@ -37,20 +37,20 @@ class EmpresaController extends Controller
     {
         $new = new Empresa();
         $new->NIT = $request->input('nit');
-        $new->Nombre = $request->input('nombre');
-        $new->Telefono = $request->input('telefono');
-        $new->Direccion = $request->input('direccion');
-        $new->RazonSocial = $request->input('razonSocial');
-        $new->NombreInmediato = $request->input('nombreJefe');
-        $new->ApellidoInmediato = $request->input('apellidoJefe');
-        $new->TelefonoInmediato = $request->input('telefonoJefe');
-        $new->EmailInmediato = $request->input('emailJefe');
-        $new->CargoInmediato = $request->input('cargoJefe');
+        $new->nombre = $request->input('nombre');
+        $new->telefono = $request->input('telefono');
+        $new->direccion = $request->input('direccion');
+        $new->razonSocial = $request->input('razonSocial');
+        $new->nombreInmediato = $request->input('nombreJefe');
+        $new->apellidoInmediato = $request->input('apellidoJefe');
+        $new->telefonoInmediato = $request->input('telefonoJefe');
+        $new->emailInmediato = $request->input('emailJefe');
+        $new->cargoInmediato = $request->input('cargoJefe');
         $new->save();
 
-        $usuario = Auth::user()->IdUsuario;
+        $usuario = Auth::user()->id;
         $aprendiz_empresa = Aprendiz::where('id_usuario','=',$usuario)->first();
-        $aprendiz_empresa->id_empresa = $new->IdEmpresa;
+        $aprendiz_empresa->id_empresa = $new->id;
         $aprendiz_empresa->save();
 
         return redirect('empresas')

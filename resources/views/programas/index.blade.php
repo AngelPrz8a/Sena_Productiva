@@ -24,7 +24,7 @@
 <!--------------------------------------------->
 <!---MOSTRARA AL COORDINADOR Y ADMINISTRADOR TODOS LOS PROGRAMAS AL CONTRARIO SOLO ALGUNOS-->
 <!--------------------------------------------->
-@if( Auth::user()->rol()->first()->tipoRol == 'Administrador' ||  Auth::user()->rol()->first()->tipoRol == 'Coordinador' )
+@if( Auth::user()->rol()->first()->tipo == 'Administrador' ||  Auth::user()->rol()->first()->tipo == 'Coordinador' )
 
 <!--------------------------------------------->
 <!---LLAMA MODAL PARA CREAR-->
@@ -49,17 +49,17 @@
 
             <div class="card-body">
 
-                <h4 class="card-title">{{  $programa->Nombre  }}</h4>
-                <p class="card-text">{{  $programa->Nivel  }}</p>
-                <p>{{$programa->centro()->Nombre}}</p>
+                <h4 class="card-title">{{  $programa->nombre  }}</h4>
+                <p class="card-text">{{  $programa->nivel  }}</p>
+                <p>{{$programa->centro()->nombre}}</p>
 
                 <p class="card-text">
-                    @if($programa->Estado == 'Activo')
-                        <span class="badge badge-pill badge-success">{{  $programa->Estado  }}</span>
-                    @elseif($programa->Estado == 'Inactivo')
-                        <span class="badge badge-pill badge-secondary">{{  $programa->Estado  }}</span>
+                    @if($programa->estado == 'Activo')
+                        <span class="badge badge-pill badge-success">{{  $programa->estado  }}</span>
+                    @elseif($programa->estado == 'Inactivo')
+                        <span class="badge badge-pill badge-secondary">{{  $programa->estado  }}</span>
                     @else
-                        <span class="badge badge-pill badge-info">{{  $programa->Estado  }}</span>
+                        <span class="badge badge-pill badge-info">{{  $programa->estado  }}</span>
                     @endif
                 </p>
 
@@ -70,7 +70,7 @@
 
                     <!--------------------------------------------->
                     <!---URL PARA VER-->
-                    <a href="{{  url('programas/'.$programa->IdPrograma ) }}">
+                    <a href="{{  url('programas/'.$programa->id ) }}">
                     <button type="button" class="btn btn-primary btn-circle">
                         <i class="fas fa-info"></i>
                     </button>
@@ -79,7 +79,7 @@
                     <!--------------------------------------------->
                     <!---LLAMA MODAL PARA EDITAR-->
                     <!--------------------------------------------->
-                    <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditPrograma{{$programa->IdPrograma}}">
+                    <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditPrograma{{$programa->id}}">
                         <i class="fas fa-edit"></i>
                     </button>
 
@@ -87,7 +87,7 @@
                      <!--------------------------------------------->
                     <!---LLAMA MODAL PARA ELIMINAR-->
                     <!--------------------------------------------->
-                    <button type="button" class="btn btn-danger btn-circle"  data-toggle="modal" data-target="#DeletePrograma{{$programa->IdPrograma}}">
+                    <button type="button" class="btn btn-danger btn-circle"  data-toggle="modal" data-target="#DeletePrograma{{$programa->id}}">
                         <i class=" fas fa-trash-alt"></i>
                     </button>
 
@@ -125,17 +125,17 @@
 
             <div class="card-body">
 
-                <h4 class="card-title">{{  $programa->Nombre  }}</h4>
-                <p class="card-text">{{  $programa->Nivel  }}</p>
-                <p>{{  $programa->centro()->Nombre  }}</p>
+                <h4 class="card-title">{{  $programa->nombre  }}</h4>
+                <p class="card-text">{{  $programa->nivel  }}</p>
+                <p>{{  $programa->centro()->nombre  }}</p>
 
                 <p class="card-text">
-                    @if($programa->Estado == 'Activo')
-                        <span class="badge badge-pill badge-success">{{  $programa->Estado  }}</span>
-                    @elseif($programa->Estado == 'Inactivo')
-                        <span class="badge badge-pill badge-secondary">{{  $programa->Estado  }}</span>
+                    @if($programa->estado == 'Activo')
+                        <span class="badge badge-pill badge-success">{{  $programa->estado  }}</span>
+                    @elseif($programa->estado == 'Inactivo')
+                        <span class="badge badge-pill badge-secondary">{{  $programa->estado  }}</span>
                     @else
-                        <span class="badge badge-pill badge-info">{{  $programa->Estado  }}</span>
+                        <span class="badge badge-pill badge-info">{{  $programa->estado  }}</span>
                     @endif
                 </p>
 
@@ -146,7 +146,7 @@
 
                     <!--------------------------------------------->
                     <!---URL PARA VER-->
-                    <a href="{{  url('programas/'.$programa->IdPrograma ) }}">
+                    <a href="{{  url('programas/'.$programa->id ) }}">
                     <button type="button" class="btn btn-primary btn-circle">
                         <i class="fas fa-info"></i>
                     </button>

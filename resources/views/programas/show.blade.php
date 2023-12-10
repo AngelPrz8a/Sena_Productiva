@@ -5,7 +5,7 @@
 
 <!--TITULO MIGAJAS DE PAN-->
 @section('title-bread')
-    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">  {{   $programa->Nombre  }}  </h4>
+    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">  {{   $programa->nombre  }}  </h4>
 @endsection
 
 <!--MIGAJAS DE PAN-->
@@ -16,7 +16,7 @@
 </li>
 
 <li class="breadcrumb-item">
-    <a href="{{url('programas/'.$programa->IdPrograma)}}">  {{  $programa->Nombre  }}  </a>
+    <a href="{{url('programas/'.$programa->id)}}">  {{  $programa->nombre  }}  </a>
 </li>
 
 
@@ -39,7 +39,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
 
-                        <input type="text" value="{{ $programa->Nombre }}"  name="nombre" class="form-control"
+                        <input type="text" value="{{ $programa->nombre }}"  name="nombre" class="form-control"
                         placeholder="Nombre" data-toggle="tooltip" title="Nombre" readonly>
 
                     </div>
@@ -49,7 +49,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
 
-                        <input type="text" value="{{ $programa->Nivel }}"  name="nivel" class="form-control"
+                        <input type="text" value="{{ $programa->nivel }}"  name="nivel" class="form-control"
                         placeholder="Nivel" data-toggle="tooltip" title="Nivel" readonly>
 
                     </div>
@@ -62,7 +62,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
 
-                        <input type="text" value="{{ $programa->Estado }}"  name="estado" class="form-control"
+                        <input type="text" value="{{ $programa->estado }}"  name="estado" class="form-control"
                         placeholder="Estado" data-toggle="tooltip" title="Estado" readonly>
 
                     </div>
@@ -73,7 +73,7 @@
                     <div class="form-group">
 
 
-                        <input type="text" value="{{  $programa->centro()->Nombre  }}"  name="centro" class="form-control"
+                        <input type="text" value="{{  $programa->centro()->nombre  }}"  name="centro" class="form-control"
                         placeholder="Centro" data-toggle="tooltip" title="Centro" readonly>
 
 
@@ -89,7 +89,7 @@
         <!--------------------------------------------->
         <!---LLAMA MODAL PARA EDITAR-->
         <!--------------------------------------------->
-        <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditPrograma{{$programa->IdPrograma}}">
+        <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditPrograma{{$programa->id}}">
             <i class="far fa-edit"></i>
         </button>
 
@@ -110,7 +110,7 @@
 <!--------------------------------------------->
 <!---MOSTRARA AL COORDINADOR Y ADMINISTRADOR TODOS LOS PROGRAMAS AL CONTRARIO SOLO ALGUNOS-->
 <!--------------------------------------------->
-@if( Auth::user()->rol()->first()->tipoRol == 'Administrador' || Auth::user()->rol()->first()->tipoRol == 'Coordinador'  )
+@if( Auth::user()->rol()->first()->tipo == 'Administrador' || Auth::user()->rol()->first()->tipo == 'Coordinador'  )
 
 
 <!--------------------------------------------->
@@ -131,27 +131,27 @@
         <div class="card">
 
             <div class="card-body">
-                <h4 class="card-title">{{$ficha->NumeroFicha}}</h4>
+                <h4 class="card-title">{{$ficha->numero}}</h4>
                 <p class="card-text">
 
                     {{  $ficha->momento()  }}
 
 
-                    / {{$ficha->programa()->Nombre}}
+                    / {{$ficha->programa()->nombre}}
                 </p>
                 <p>
                     @if( $ficha->instructor() )
-                        {{  $ficha->instructor()->Nombre  }} {{  $ficha->instructor()->Apellido  }}
+                        {{  $ficha->instructor()->nombre  }} {{  $ficha->instructor()->apellido  }}
                     @else
                         <span class="badge badge-danger">{{  'Sin Instructor'  }}</span>
                     @endif
 
-                    @if($ficha->Estado == 'Activo')
-                        <span class="badge badge-pill badge-success">{{  $ficha->Estado  }}</span>
-                    @elseif($ficha->Estado == 'Inactivo')
-                        <span class="badge badge-pill badge-secondary">{{  $ficha->Estado  }}</span>
+                    @if($ficha->estado == 'Activo')
+                        <span class="badge badge-pill badge-success">{{  $ficha->estado  }}</span>
+                    @elseif($ficha->estado == 'Inactivo')
+                        <span class="badge badge-pill badge-secondary">{{  $ficha->estado  }}</span>
                     @else
-                        <span class="badge badge-pill badge-info">{{  $ficha->Estado  }}</span>
+                        <span class="badge badge-pill badge-info">{{  $ficha->estado  }}</span>
                     @endif
                 </p>
             </div>
@@ -161,7 +161,7 @@
                     <!--------------------------------------------->
                     <!---URL PARA VER-->
                     <!--------------------------------------------->
-                    <a href="{{url('fichas/'.$ficha->IdFicha )}}">
+                    <a href="{{url('fichas/'.$ficha->id )}}">
                         <button type="button" class="btn btn-primary btn-circle">
                             <i class="fas fa-info"></i>
                         </button>
@@ -170,14 +170,14 @@
                     <!--------------------------------------------->
                     <!---LLAMA MODAL PARA EDITAR-->
                     <!--------------------------------------------->
-                    <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditFicha{{$ficha->IdFicha}}">
+                    <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditFicha{{$ficha->id}}">
                         <i class="far fa-edit"></i>
                     </button>
 
                     <!--------------------------------------------->
                     <!---LLAMA MODAL PARA ELIMINAR-->
                     <!--------------------------------------------->
-                    <button type="button" class="btn btn-danger btn-circle"  data-toggle="modal" data-target="#DeleteFicha{{$ficha->IdFicha}}">
+                    <button type="button" class="btn btn-danger btn-circle"  data-toggle="modal" data-target="#DeleteFicha{{$ficha->id}}">
                         <i class=" fas fa-trash-alt"></i>
                     </button>
 
@@ -204,27 +204,27 @@
 <!--------------------------------------------------------------->
 <div class="row">
     <div class="card-columns">
-        @foreach ( Auth::user()->instructor()->fichasporprograma($programa->IdPrograma) as $ficha)
+        @foreach ( Auth::user()->instructor()->fichasporprograma($programa->id) as $ficha)
 
         <div class="col-md-20">
         <div class="card">
 
             <div class="card-body">
-                <h4 class="card-title">{{$ficha->NumeroFicha}}</h4>
+                <h4 class="card-title">{{$ficha->numero}}</h4>
                 <p class="card-text">
 
                     {{  $ficha->momento()  }}
 
 
-                    / {{$ficha->programa()->Nombre}}
+                    / {{$ficha->programa()->nombre}}
                 </p>
                 <p>
-                    @if($ficha->Estado == 'Activo')
-                        <span class="badge badge-pill badge-success">{{  $ficha->Estado  }}</span>
-                    @elseif($ficha->Estado == 'Inactivo')
-                        <span class="badge badge-pill badge-secondary">{{  $ficha->Estado  }}</span>
+                    @if($ficha->estado == 'Activo')
+                        <span class="badge badge-pill badge-success">{{  $ficha->estado  }}</span>
+                    @elseif($ficha->estado == 'Inactivo')
+                        <span class="badge badge-pill badge-secondary">{{  $ficha->estado  }}</span>
                     @else
-                        <span class="badge badge-pill badge-info">{{  $ficha->Estado  }}</span>
+                        <span class="badge badge-pill badge-info">{{  $ficha->estado  }}</span>
                     @endif
                 </p>
             </div>
@@ -234,7 +234,7 @@
                     <!--------------------------------------------->
                     <!---URL PARA VER-->
                     <!--------------------------------------------->
-                    <a href="{{url('fichas/'.$ficha->IdFicha )}}">
+                    <a href="{{url('fichas/'.$ficha->id )}}">
                         <button type="button" class="btn btn-primary btn-circle">
                             <i class="fas fa-info"></i>
                         </button>
@@ -243,14 +243,14 @@
                     <!--------------------------------------------->
                     <!---LLAMA MODAL PARA EDITAR-->
                     <!--------------------------------------------->
-                    <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditFicha{{$ficha->IdFicha}}">
+                    <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditFicha{{$ficha->id}}">
                         <i class="far fa-edit"></i>
                     </button>
 
                     <!--------------------------------------------->
                     <!---LLAMA MODAL PARA ELIMINAR-->
                     <!--------------------------------------------->
-                    <button type="button" class="btn btn-danger btn-circle"  data-toggle="modal" data-target="#DeleteFicha{{$ficha->IdFicha}}">
+                    <button type="button" class="btn btn-danger btn-circle"  data-toggle="modal" data-target="#DeleteFicha{{$ficha->id}}">
                         <i class=" fas fa-trash-alt"></i>
                     </button>
 

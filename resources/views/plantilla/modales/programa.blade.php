@@ -76,7 +76,7 @@
 
                                     @if(  isset($centro) != null || isset($centro) != '' )
 
-                                    <input type="text" value="{{$centro->IdCentro}}"  name="centro" class="form-control"
+                                    <input type="text" value="{{$centro->id}}"  name="centro" class="form-control"
                                     placeholder="Centro" data-toggle="tooltip" title="Centro" hidden>
 
 
@@ -88,7 +88,7 @@
                                     <select name="centro" class="form-control"
                                      data-toggle="tooltip" title="Centro">
                                           @foreach (App\Models\Centro::all() as $c)
-                                            <option value="{{ $c->IdCentro }}">{{  $c->Nombre  }}</option>
+                                            <option value="{{ $c->id }}">{{  $c->nombre  }}</option>
                                           @endforeach
                                           @error('centro')
                                             {{$message}}
@@ -133,7 +133,7 @@
 <!---------------------------------------------->
 <!---EDIT-->
 <!---------------------------------------------->
-    <div id="EditPrograma{{$programa->IdPrograma}}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="EditPrograma{{$programa->id}}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -149,7 +149,7 @@
 
                 <div class="col-12">
                     <!--FORM-->
-                    <form method="POST" action="{{  url('programas/'.$programa->IdPrograma) }}">
+                    <form method="POST" action="{{  url('programas/'.$programa->id) }}">
                         @method('PUT')
                         @csrf
                         <div class="form-body">
@@ -160,7 +160,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
 
-                                    <input type="text" value="{{ $programa->Nombre }}"  name="nombre" class="form-control"
+                                    <input type="text" value="{{ $programa->nombre }}"  name="nombre" class="form-control"
                                     placeholder="Nombre" data-toggle="tooltip" title="Nombre">
                                     @error('nombre')
                                     {{$message}}
@@ -176,9 +176,9 @@
                                     <select id="" name="nivel" class="form-control"
                                     data-toggle="tooltip" title="Nivel">
                                         <option value="">Seleccione...</option>
-                                        <option {{ $programa->Nivel=='Tecnólogo' ? 'selected' : ''}}>Tecnólogo</option>
-                                        <option {{ $programa->Nivel=='Técnico' ? 'selected' : ''}}>Técnico</option>
-                                        <option {{ $programa->Nivel=='Auxiliar' ? 'selected' : ''}}>Auxiliar</option>
+                                        <option {{ $programa->nivel=='Tecnólogo' ? 'selected' : ''}}>Tecnólogo</option>
+                                        <option {{ $programa->nivel=='Técnico' ? 'selected' : ''}}>Técnico</option>
+                                        <option {{ $programa->nivel=='Auxiliar' ? 'selected' : ''}}>Auxiliar</option>
                                     </select>
                                     @error('nivel')    {{$message}}        @enderror
 
@@ -195,8 +195,8 @@
                                     <select id="" name="estado" class="form-control"
                                     data-toggle="tooltip" title="Estado">
                                         <option value="">Seleccione...</option>
-                                        <option {{ $programa->Estado=='Activo' ? 'selected' : ''}}>Activo</option>
-                                        <option {{ $programa->Estado=='Inactivo' ? 'selected' : ''}}>Inactivo</option>
+                                        <option {{ $programa->estado=='Activo' ? 'selected' : ''}}>Activo</option>
+                                        <option {{ $programa->estado=='Inactivo' ? 'selected' : ''}}>Inactivo</option>
                                     </select>
                                     @error('estado')    {{$message}}        @enderror
 
@@ -212,7 +212,7 @@
                                     <!---Si trae $centro-->
                                     <!---------------------------------------------->
                                     @if(  isset($centro) != null || isset($centro) != ''  )
-                                        <input type="text" value="{{$centro->IdCentro}}"  name="centro" class="form-control"
+                                        <input type="text" value="{{$centro->id}}"  name="centro" class="form-control"
                                         placeholder="Centro" data-toggle="tooltip" title="Centro" hidden>
                                     @else
                                     <!--------------------------------------------->
@@ -221,7 +221,7 @@
                                         <select name="centro" class="form-control"
                                         data-toggle="tooltip" title="Centro"  data-toggle="tooltip" title="Centro">
                                             @foreach (App\Models\Centro::all() as $c)
-                                                <option {{ $programa->centro()->IdCentro == $c->IdCentro ? 'selected' : ''  }} value="{{ $c->IdCentro }}">{{  $c->Nombre  }}</option>
+                                                <option {{ $programa->centro()->id == $c->id ? 'selected' : ''  }} value="{{ $c->id }}">{{  $c->nombre  }}</option>
                                             @endforeach
                                         </select>
                                         @error('centro')
@@ -262,10 +262,10 @@
 <!---------------------------------------------->
 <!---DELETE-->
 <!---------------------------------------------->
-<div id="DeletePrograma{{$programa->IdPrograma}}" class="modal fade" tabindex="-1" role="dialog"
+<div id="DeletePrograma{{$programa->id}}" class="modal fade" tabindex="-1" role="dialog"
     aria-labelledby="fill-danger-modalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form method="post" action="{{url('programas/'.$programa->IdPrograma)}}">
+        <form method="post" action="{{url('programas/'.$programa->id)}}">
             @method('DELETE')
             @csrf
 

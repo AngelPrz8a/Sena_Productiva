@@ -9,13 +9,13 @@
 <!--MIGAJAS DE PAN-->
 @section('bread')
 
-@if(  Auth::user()->rol()->first()->tipoRol != 'Aprendiz'   )
+@if(  Auth::user()->rol()->first()->tipo != 'Aprendiz'   )
 
 <li class="breadcrumb-item"><a href="{{  url('fichas')  }}">Fichas</a>
 </li>
-<li class="breadcrumb-item"><a href="{{  url('fichas/'.$ficha->IdFicha )  }}"> {{  $ficha->NumeroFicha  }} </a>
+<li class="breadcrumb-item"><a href="{{  url('fichas/'.$ficha->id )  }}"> {{  $ficha->numero  }} </a>
 </li>
-<li class="breadcrumb-item"><a href=" {{  url('fichas/'.$ficha->IdFicha.'/entregables' ) }}"> Entregables  </a>
+<li class="breadcrumb-item"><a href=" {{  url('fichas/'.$ficha->id.'/entregables' ) }}"> Entregables  </a>
 </li>
 
 @else
@@ -31,7 +31,7 @@
 @section('contenido')
 
 
-@if(  Auth::user()->rol()->first()->tipoRol != 'Aprendiz'   )
+@if(  Auth::user()->rol()->first()->tipo != 'Aprendiz'   )
 
 <!--------------------------------------------->
 <!---LLAMA MODAL PARA CREACION-->
@@ -52,7 +52,7 @@
         <div class="card">
 
             <div class="card-body">
-                <h4 class="card-title">{{$entregable->Titulo  }}</h4>
+                <h4 class="card-title">{{$entregable->titulo  }}</h4>
             </div>
             <div class="card-footer">
                 <div class="row">
@@ -60,7 +60,7 @@
                     <!--------------------------------------------->
                     <!---URL PARA VER-->
                     <!--------------------------------------------->
-                    <a href="{{url('fichas/'.$entregable->ficha()->IdFicha.'/entregables/'.$entregable->IdEntregables )}}">
+                    <a href="{{url('fichas/'.$entregable->ficha()->id.'/entregables/'.$entregable->id )}}">
                         <button type="button" class="btn btn-primary btn-circle">
                             <i class="fas fa-info"></i>
                         </button>
@@ -69,7 +69,7 @@
                     <!--------------------------------------------->
                     <!---LLAMA MODAL PARA EDITAR-->
                     <!--------------------------------------------->
-                    <a href="{{url('entregables/'.$entregable->IdEntregables.'/edit' )}}">
+                    <a href="{{url('entregables/'.$entregable->id.'/edit' )}}">
                         <button type="button" class="btn btn-warning btn-circle">
                             <i class="fas fa-edit"></i>
                         </button>
@@ -101,7 +101,7 @@
         <div class="card">
 
             <div class="card-body">
-                <h4 class="card-title">{{$entregable->Titulo  }}</h4>
+                <h4 class="card-title">{{$entregable->titulo  }}</h4>
             </div>
 
         </div>

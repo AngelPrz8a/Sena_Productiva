@@ -16,10 +16,10 @@ class ReunionAprendizController extends Controller
 //
     public function index()
     {
-        if( Auth::user()->rol()->first()->tipoRol == 'Aprendiz'   ){
+        if( Auth::user()->rol()->first()->tipo == 'Aprendiz'   ){
             return view('reunionAprendiz.index')
             ->with('reuniones', Auth::user()->aprendiz()->reuniones() );
-        }else if( Auth::user()->rol()->first()->tipoRol == 'Instructor'){
+        }else if( Auth::user()->rol()->first()->tipo == 'Instructor'){
             return view('reunionAprendiz.index')
             ->with('reuniones', Auth::user()->instructor()->reuniones() );
         }
@@ -45,9 +45,9 @@ se muestran todas las reuniones
 */
     public function show()
     {
-        if( Auth::user()->rol()->first()->tipoRol == 'Aprendiz'   ){
+        if( Auth::user()->rol()->first()->tipo == 'Aprendiz'   ){
             $reunionAprendiz =  Auth::user()->aprendiz()->reuniones();
-        }else if( Auth::user()->rol()->first()->tipoRol == 'Instructor'){
+        }else if( Auth::user()->rol()->first()->tipo == 'Instructor'){
             $reunionAprendiz =  Auth::user()->instructor()->reuniones();
         }
 

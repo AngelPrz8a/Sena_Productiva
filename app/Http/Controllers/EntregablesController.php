@@ -20,11 +20,15 @@ class EntregablesController extends Controller
     public function index($id_ficha)
     {
 
-        if (Auth::user()->rol()->first()->tipoRol == 'Instructor') {
+        if (Auth::user()->rol()->first()->tipo == 'Instructor') {
             return view('entregables.index')
             ->with('entregables', Auth::user()->instructor()->entregable($id_ficha))
             ->with('ficha', Ficha::find($id_ficha))
             ;
+        }elseif(Auth::user()->rol()->first()->tipo == 'Administrador'){
+            return view('entregables.index')
+            ->with('entregables', Ficha::find($id_ficha)->instructor()->entregable($id_ficha) )
+            ->with('id_ficha', $id_ficha);
         }else{
             return view('entregables.index')
             ->with('entregables', Auth::user()->aprendiz()->instructor()->entregable($id_ficha) )

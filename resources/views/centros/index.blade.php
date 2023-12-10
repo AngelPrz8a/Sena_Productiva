@@ -62,11 +62,11 @@
             <div class="carousel-caption d-none d-md-block">
                 <div style="color:black;">
                     <h3>
-                    <a href="{{url('centros/'.$centro->IdCentro)}}">
-                        {{$centro->Nombre}}
+                    <a href="{{url('centros/'.$centro->id)}}">
+                        {{$centro->nombre}}
                     </a>
                     </h3>
-                    <p>{{$centro->Ciudad}} / {{$centro->Region}}</p>
+                    <p>{{$centro->ciudad}} / {{$centro->region}}</p>
                 </div>
             </div>
         </div>
@@ -105,20 +105,20 @@
         <div class="card">
 
             <div class="card-body">
-                <h4 class="card-title">{{$centro->Nombre}}</h4>
-                <p class="card-text"> {{$centro->Ciudad}} / {{$centro->Region}}</p>
+                <h4 class="card-title">{{$centro->nombre}}</h4>
+                <p class="card-text"> {{$centro->ciudad}} / {{$centro->region}}</p>
 
-                @if($centro->Estado == 'Activo')
-                    <span class="badge badge-pill badge-success"> {{$centro->Estado}}</span>
+                @if($centro->estado == 'Activo')
+                    <span class="badge badge-pill badge-success"> {{$centro->estado}}</span>
                 @else
-                    <span class="badge badge-pill badge-secondary"> {{$centro->Estado}}</span>
+                    <span class="badge badge-pill badge-secondary"> {{$centro->estado}}</span>
                 @endif
             </div>
             <div class="card-footer">
                 <div class="row">
 
                     <!--ver-->
-                    <a href="{{url('centros/'.$centro->IdCentro)}}">
+                    <a href="{{url('centros/'.$centro->id)}}">
                     <button type="button" class="btn btn-primary btn-circle">
                         <i class="fas fa-info"></i>
                     </button>
@@ -127,14 +127,14 @@
                     <!--------------------------------------------->
                     <!---LLAMA MODAL PARA EDITAR-->
                     <!--------------------------------------------->
-                    <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditCentro{{$centro->IdCentro}}">
+                    <button type="button" class="btn btn-warning btn-circle"  data-toggle="modal" data-target="#EditCentro{{$centro->id}}">
                         <i class="far fa-edit"></i>
                     </button>
 
                      <!--------------------------------------------->
                     <!---LLAMA MODAL PARA ELIMINAR-->
                     <!--------------------------------------------->
-                    <button type="button" class="btn btn-danger btn-circle"  data-toggle="modal" data-target="#DeleteCentro{{$centro->IdCentro}}">
+                    <button type="button" class="btn btn-danger btn-circle"  data-toggle="modal" data-target="#DeleteCentro{{$centro->id}}">
                         <i class=" fas fa-trash-alt"></i>
                     </button>
 

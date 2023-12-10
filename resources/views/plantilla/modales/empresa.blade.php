@@ -169,7 +169,7 @@
 <!---------------------------------------------->
 <!---EDIT-->
 <!---------------------------------------------->
-<div id="EditEmpresa{{  $empresa->IdEmpresa  }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="EditEmpresa{{  $empresa->id  }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -181,7 +181,7 @@
 
             <div class="col-12">
                 <!--FORM-->
-                <form method="POST" action="{{ url('empresas/'.$empresa->IdEmpresa) }}">
+                <form method="POST" action="{{ url('empresas/'.$empresa->id) }}">
                     @method('PUT')
                     @csrf
                     <div class="form-body">
@@ -199,7 +199,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" value="{{ $empresa->Nombre  }}"  name="nombre" class="form-control"
+                                    <input type="text" value="{{ $empresa->nombre  }}"  name="nombre" class="form-control"
                                     placeholder="Nombre" data-toggle="tooltip" title="Nombre">
                                     @error('nombre')
                                     {{$message}}
@@ -213,7 +213,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" value="{{ $empresa->Telefono }}"  name="telefono" class="form-control"
+                                    <input type="text" value="{{ $empresa->telefono }}"  name="telefono" class="form-control"
                                     placeholder="Telefono" data-toggle="tooltip" title="Telefono">
                                     @error('telefono')
                                     {{$message}}
@@ -222,7 +222,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" value="{{ $empresa->Direccion }}"  name="direccion" class="form-control"
+                                    <input type="text" value="{{ $empresa->direccion }}"  name="direccion" class="form-control"
                                     placeholder="Direccion" data-toggle="tooltip" title="Direccion">
                                     @error('direccion')
                                     {{$message}}
@@ -236,7 +236,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" value="{{ $empresa->RazonSocial }}"  name="razonSocial" class="form-control"
+                                    <input type="text" value="{{ $empresa->razonSocial }}"  name="razonSocial" class="form-control"
                                     placeholder="Razon Social" data-toggle="tooltip" title="Razon Social">
                                     @error('razonSocial')
                                     {{$message}}
@@ -251,7 +251,7 @@
                          <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" value="{{ $empresa->NombreInmediato }}"  name="nombreJefe" class="form-control"
+                                    <input type="text" value="{{ $empresa->nombre_jefe_inmediato }}"  name="nombreJefe" class="form-control"
                                     placeholder="Nombre Jefe" data-toggle="tooltip" title="Nombre Jefe">
                                     @error('nombreJefe')
                                     {{$message}}
@@ -260,7 +260,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" value="{{  $empresa->ApellidoInmediato }}"  name="apellidoJefe" class="form-control"
+                                    <input type="text" value="{{  $empresa->apellido_jefe_inmediato }}"  name="apellidoJefe" class="form-control"
                                     placeholder="Apellido Jefe" data-toggle="tooltip" title="Apellido Jefe">
                                     @error('apellidoJefe')
                                     {{$message}}
@@ -274,7 +274,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" value="{{  $empresa->TelefonoInmediato }}"  name="telefonoJefe" class="form-control"
+                                    <input type="text" value="{{  $empresa->telefono_jefe_inmediato }}"  name="telefonoJefe" class="form-control"
                                     placeholder="Telefono Jefe" data-toggle="tooltip" title="Telefono Jefe">
                                     @error('telefonoJefe')
                                     {{$message}}
@@ -283,7 +283,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" value="{{  $empresa->EmailInmediato }}"  name="emailJefe" class="form-control"
+                                    <input type="text" value="{{  $empresa->email_jefe_inmediato }}"  name="emailJefe" class="form-control"
                                     placeholder="Email Jefe" data-toggle="tooltip" title="Email Jefe">
                                     @error('emailJefe')
                                     {{$message}}
@@ -297,7 +297,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" value="{{  $empresa->CargoInmediato }}"  name="cargoJefe" class="form-control"
+                                    <input type="text" value="{{  $empresa->cargo_jefe_inmediato }}"  name="cargoJefe" class="form-control"
                                     placeholder="Cargo Jefe" data-toggle="tooltip" title="Razon Social">
                                     @error('cargoJefe')
                                     {{$message}}

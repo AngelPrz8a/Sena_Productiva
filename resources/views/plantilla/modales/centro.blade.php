@@ -108,7 +108,7 @@
     <!---------------------------------------------->
     <!---EDIT-->
     <!---------------------------------------------->
- <div id="EditCentro{{$centro->IdCentro}}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+ <div id="EditCentro{{$centro->id}}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -124,7 +124,7 @@
 
             <div class="col-12">
                 <!--FORM-->
-                <form method="POST" action="{{ url('centros/' . $centro->IdCentro) }}">
+                <form method="POST" action="{{ url('centros/' . $centro->id) }}">
                     @method('PUT')
                     @csrf
                     <div class="form-body">
@@ -133,7 +133,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text"  value="{{ $centro->Nombre }}"  name="nombre" class="form-control"
+                                    <input type="text"  value="{{ $centro->nombre }}"  name="nombre" class="form-control"
                                     placeholder="Nombre" data-toggle="tooltip" title="Nombre">
                                     @error('nombre')
                                     {{$message}}
@@ -148,8 +148,8 @@
                                 <div class="form-group">
                                     <select name="estado" class="form-control"
                                     data-toggle="tooltip" title="estado">
-                                        <option {{$centro->Estado=='Activo' ? 'selected' : ''}}>Activo</option>
-                                        <option {{$centro->Estado=='Inactivo' ? 'selected' : ''}}>Inactivo</option>
+                                        <option {{$centro->estado=='Activo' ? 'selected' : ''}}>Activo</option>
+                                        <option {{$centro->estado=='Inactivo' ? 'selected' : ''}}>Inactivo</option>
                                     </select>
 
                                     @error('estado')
@@ -163,7 +163,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text"  value="{{ $centro->Sede }}"  name="sede" class="form-control"
+                                    <input type="text"  value="{{ $centro->sede }}"  name="sede" class="form-control"
                                         placeholder="Sede" data-toggle="tooltip" title="Sede">
                                         @error('sede')
                                         {{$message}}
@@ -172,7 +172,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" value="{{ $centro->Ciudad }}" name="ciudad" class="form-control"
+                                    <input type="text" value="{{ $centro->ciudad }}" name="ciudad" class="form-control"
                                         placeholder="Ciudad" data-toggle="tooltip" title="Ciudad">
                                         @error('ciudad')
                                         {{$message}}
@@ -186,7 +186,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text"  value="{{ $centro->Direccion }}" name="direccion" class="form-control"
+                                    <input type="text"  value="{{ $centro->direccion }}" name="direccion" class="form-control"
                                         placeholder="Dirección" data-toggle="tooltip" title="Dirección">
                                         @error('direccion')
                                         {{$message}}
@@ -195,7 +195,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" value="{{ $centro->Region }}" name="region" class="form-control"
+                                    <input type="text" value="{{ $centro->region }}" name="region" class="form-control"
                                         placeholder="Región" data-toggle="tooltip" title="Región">
                                         @error('region')
                                         {{$message}}
@@ -238,10 +238,10 @@
 <!---------------------------------------------->
 <!---DELETE-->
 <!---------------------------------------------->
-<div id="DeleteCentro{{$centro->IdCentro}}" class="modal fade" tabindex="-1" role="dialog"
+<div id="DeleteCentro{{$centro->id}}" class="modal fade" tabindex="-1" role="dialog"
 aria-labelledby="fill-danger-modalLabel" aria-hidden="true">
 <div class="modal-dialog">
-    <form method="post" action="{{url('centros/'.$centro->IdCentro)}}">
+    <form method="post" action="{{url('centros/'.$centro->id)}}">
         @method('DELETE')
         @csrf
 

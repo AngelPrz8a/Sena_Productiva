@@ -10,25 +10,27 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Instructor extends Model
 {
+    use HasFactory;
     //Vincular MODEL - TABLE (Mysql)
     protected $table = "instructor";
     //Establecer la PK de la entidad (por defecto :ArtistId)
-    protected $primaryKey = "IdInstructor";
+    protected $primaryKey = "id";
     //Omitir Campos de AUDITORIA
     public $timestamps = false;
 
 
-    public function usuarios(){
-        return $this->hasMany('App\Models\User', 'IdUsuario', 'id_usuario')->get();
+    public function usuarios():HasOne{
+        return $this->hasOne(User::class, 'id', 'id_usuario');
     }
 
     public function centro(){
         return $this->hasOne(
             Centro::class,
-            'IdCentro',
+            'id',
             'id_centro'
         )->get();
     }
@@ -37,13 +39,13 @@ class Instructor extends Model
         $array = [];
         foreach( DB::select(
                 'select ficha.* from ficha
-                inner join instructorficha on instructorficha.id_ficha = ficha.IdFicha
-                INNER JOIN instructor on instructorficha.id_instructor = instructor.IdInstructor
-                where instructor.IdInstructor = ?',
-                [$this->IdInstructor]
+                inner join instructor_ficha on instructor_ficha.id_ficha = ficha.id
+                INNER JOIN instructor on instructor_ficha.id_instructor = instructor.id
+                where instructor.id = ?',
+                [$this->id]
                 )
             as $sql){
-                array_push($array, Ficha::find($sql->IdFicha));
+                array_push($array, Ficha::find($sql->id));
             }
         return $array;
     }
@@ -51,8 +53,8 @@ class Instructor extends Model
     public function fichaSinInstructor(){
         $fichas = DB::select(
             'SELECT ficha.* FROM ficha
-            left join instructorficha on instructorficha.id_ficha = ficha.IdFicha
-            where instructorficha.id_ficha is null'
+            left join instructor_ficha on instructor_ficha.id_ficha = ficha.id
+            where instructor_ficha.id_ficha is null'
         );
 
         return $fichas;
@@ -63,14 +65,14 @@ class Instructor extends Model
 
         foreach( DB::SELECT(
             'select programa.* from programa
-            inner join ficha on ficha.Id_programa = programa.IdPrograma
-            INNER JOIN instructorficha on instructorficha.id_ficha = ficha.IdFicha
-            INNER JOIN instructor on instructor.IdInstructor = instructorficha.id_instructor
-            where instructor.IdInstructor = ?
-            GROUP by programa.Nombre, programa.IdPrograma, programa.Nivel, programa.Estado',
-            [$this->IdInstructor]
+            inner join ficha on ficha.id_programa = programa.id
+            INNER JOIN instructor_ficha on instructor_ficha.id_ficha = ficha.id
+            INNER JOIN instructor on instructor.id = instructor_ficha.id_instructor
+            where instructor.id = ?
+            GROUP by programa.nombre, programa.id, programa.nivel, programa.estado',
+            [$this->id]
         ) as $sql ){
-            array_push($array, Programa::find($sql->IdPrograma));
+            array_push($array, Programa::find($sql->id));
         }
 
         return $array;
@@ -80,13 +82,13 @@ class Instructor extends Model
         $array = [];
         foreach( DB::SELECT(
             'SELECT * from ficha
-            inner join instructorficha on instructorficha.id_ficha = ficha.IdFicha
-            INNER join instructor on instructor.IdInstructor = instructorficha.id_instructor
-            inner join programa on programa.IdPrograma = ficha.Id_programa
-            where instructor.IdInstructor = ? AND programa.IdPrograma = ?',
-            [$this->IdInstructor, $id_programa]
+            inner join instructor_ficha on instructor_ficha.id_ficha = ficha.id
+            INNER join instructor on instructor.id = instructor_ficha.id_instructor
+            inner join programa on programa.id = ficha.id_programa
+            where instructor.id = ? AND programa.id = ?',
+            [$this->id, $id_programa]
         ) as $sql){
-            array_push($array, Ficha::find($sql->IdFicha) );
+            array_push($array, Ficha::find($sql->id) );
         }
         return $array;
     }
@@ -94,11 +96,11 @@ class Instructor extends Model
     public function reuniones(){
         $array = [];
         foreach(DB::SELECT(
-            'select reunionaprendiz.* from reunionaprendiz
-            inner join instructor on instructor.IdInstructor = reunionaprendiz.id_instructor
-            WHERE instructor.IdInstructor = ?
-            order by reunionaprendiz.start asc',
-            [$this->IdInstructor]
+            'select reunion_aprendiz.* from reunion_aprendiz
+            inner join instructor on instructor.id = reunion_aprendiz.id_instructor
+            WHERE instructor.id = ?
+            order by reunion_aprendiz.start asc',
+            [$this->id]
         ) as $sql){
             array_push($array, $sql);
         }
@@ -109,12 +111,12 @@ class Instructor extends Model
         $array = [];
         foreach( DB::SELECT(
             'select usuario.*, aprendiz.* from aprendiz
-            inner join usuario on usuario.IdUsuario = aprendiz.id_usuario
-            inner join ficha on ficha.IdFicha = aprendiz.id_ficha
-            inner join instructorficha on instructorficha.id_ficha = ficha.IdFicha
-            inner join instructor on instructor.IdInstructor = instructorficha.id_instructor
-            where instructor.IdInstructor = ?',
-            [$this->IdInstructor]
+            inner join usuario on usuario.id = aprendiz.id_usuario
+            inner join ficha on ficha.id = aprendiz.id_ficha
+            inner join instructor_ficha on instructor_ficha.id_ficha = ficha.id
+            inner join instructor on instructor.id = instructor_ficha.id_instructor
+            where instructor.id = ?',
+            [$this->id]
         ) as $sql){
             array_push(  $array, $sql  );
         }
@@ -126,12 +128,12 @@ class Instructor extends Model
         foreach(DB::SELECT(
             'select entregables.*
             from entregables
-            inner JOIN ficha on ficha.IdFicha = entregables.id_ficha
-            where ficha.IdFicha = ?',
+            inner JOIN ficha on ficha.id = entregables.id_ficha
+            where ficha.id = ?',
             [$id_ficha]
         )
         as $sql){
-            array_push($array, Entregables::find($sql->IdEntregables) );
+            array_push($array, Entregables::find($sql->id) );
         }
         return $array;
     }

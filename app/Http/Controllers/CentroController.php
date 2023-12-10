@@ -39,12 +39,12 @@ class CentroController extends Controller
     public function store(StoreCentro $request)
     {
         $nuevocentro = new Centro();
-        $nuevocentro ->Nombre = $request->input("nombre");
-        $nuevocentro ->Sede = $request->input("sede");
-        $nuevocentro ->Ciudad= $request->input("ciudad");
-        $nuevocentro ->Direccion= $request->input("direccion");
-        $nuevocentro ->Region= $request->input("region");
-        $nuevocentro ->Estado = 'Activo';
+        $nuevocentro ->nombre = $request->input("nombre");
+        $nuevocentro ->sede = $request->input("sede");
+        $nuevocentro ->ciudad= $request->input("ciudad");
+        $nuevocentro ->direccion= $request->input("direccion");
+        $nuevocentro ->region= $request->input("region");
+        $nuevocentro ->estado = 'Activo';
 
         $nuevocentro ->save();
 
@@ -88,16 +88,14 @@ class CentroController extends Controller
      * @param  \App\Models\Centro  $centro
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCentro $request, /*Centro*/ $centro)
+    public function update(UpdateCentro $request, Centro $centro)
     {
-        $c = $centro;
-        $centro = Centro::find($c);
-        $centro->Nombre = $request->input("nombre");
-        $centro->Sede = $request->input("sede");
-        $centro->Ciudad= $request->input("ciudad");
-        $centro->Direccion= $request->input("direccion");
-        $centro->Region= $request->input("region");
-        $centro ->Estado= $request->input('estado');
+        $centro->nombre = $request->input("nombre");
+        $centro->sede = $request->input("sede");
+        $centro->ciudad= $request->input("ciudad");
+        $centro->direccion= $request->input("direccion");
+        $centro->region= $request->input("region");
+        $centro->estado= $request->input('estado');
 
         $centro->save();
         return redirect('centros')
