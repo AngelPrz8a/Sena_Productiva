@@ -20,7 +20,13 @@ To configure and improve the degree project at SENA in 2020, its purpose was to 
 5. Run `php artisan key:generate` to generate an application key.
 6. Run `php artisan migrate` to create the tables in your database.
 7. Run `php artisan db:seed` to fill the database with test data.
-  
+
+## Screenshots
+![screenshot_1](https://github.com/AngelPrz8a/Sena_Productiva/blob/master/public/images/screenshot_1.png)
+![screenshot_1](https://github.com/AngelPrz8a/Sena_Productiva/blob/master/public/images/screenshot_2.png)
+![screenshot_1](https://github.com/AngelPrz8a/Sena_Productiva/blob/master/public/images/screenshot_3.png)
+![screenshot_1](https://github.com/AngelPrz8a/Sena_Productiva/blob/master/public/images/screenshot_4.png)
+
 ## Links
 
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://angelprz8a.github.io/Portafolio/)
