@@ -26,12 +26,12 @@ class DatabaseSeeder extends Seeder
         Rol::factory()->create(["tipo"=>"Aprendiz"]);
         Rol::factory()->create(["tipo"=>"Instructor"]);
         Rol::factory()->create(["tipo"=>"Administrador"]);
-        //Ficha::factory(10)->create();
+        Ficha::factory(10)->create();
         Centro::factory(3)->create();
-        //Instructor::factory(5)->create();
-        //InstructorFicha::factory(5)->create(); 
-        //Aprendiz::factory(30)->create(); 
-        //UsuarioRol::factory(35)->create();
+        Instructor::factory(5)->create();
+        InstructorFicha::factory(5)->create(); 
+        Aprendiz::factory(30)->create(); 
+        UsuarioRol::factory(35)->create();
 
         /**
          * 30 aprendices - 30 usuarios
